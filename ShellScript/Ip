@@ -1,0 +1,9 @@
+#!/bin/bash
+#end=seuemail@prove.com.br
+wget "http://whatismyip.com"
+grep "IP Is" index.html > myip
+cat myip
+#/usr/sbin/sendmail $end < myip
+rm myip
+rm index.html
+

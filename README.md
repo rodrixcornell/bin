@@ -1,4 +1,4 @@
 bin
 ===
 
-home user bin
+home user bin shell script
