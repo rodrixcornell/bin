@@ -1,0 +1,4 @@
+bin
+===
+
+home user bin
