@@ -56,6 +56,8 @@ rar a -m5 -idp -y /opt/bkp/${origin}__Skype.rar ~/Skype
 cp /opt/bkp/${origin}__Skype.rar ~/Copy/bkp
 rar a -m5 -idp -y /opt/bkp/${origin}__projects.rar ~/projects
 cp /opt/bkp/${origin}__projects.rar ~/Copy/bkp
+rar a -m5 -idp -y /opt/bkp/${origin}__projects-java.rar ~/projects-java
+cp /opt/bkp/${origin}__projects-java.rar ~/Copy/bkp
 rar a -m5 -idp -y /opt/bkp/${origin}__workspace.rar ~/workspace
 cp /opt/bkp/${origin}__workspace.rar ~/Copy/bkp
 rar a -m5 -idp -y /opt/bkp/${origin}__public_html.rar ~/public_html
