@@ -49,6 +49,7 @@ cp /opt/bkp/${origin}__mysqldump.sql.tgz ~/Copy/bkp
 tar -czvf /opt/bkp/${origin}__bin.tgz ~/bin --exclude=$HOME/bin/adt-bundle* --exclude=$HOME/bin/AptanaStudio* --exclude=$HOME/bin/eclipse* --exclude=$HOME/bin/FreeNet* --exclude=$HOME/bin/netbeans* --exclude=$HOME/bin/smartgit* --exclude=$HOME/bin/sqldeveloper* --exclude=$HOME/bin/tor* --exclude=$HOME/bin/Zend* --exclude=$HOME/bin/cria* --exclude=$HOME/bin/bin* --exclude=$HOME/bin/t50*
 cp /opt/bkp/${origin}__bin.tgz ~/Copy/bkp
 tar -czvf /opt/bkp/${origin}__config.tgz ~/.bitcasa* ~/.config* ~/.easytag ~/.gconf* ~/.gnupg* ~/.icon* ~/.filezilla* ~/.mozilla* ~/.opera ~/.purple ~/.Skype* ~/.skype* ~/.smestorage* ~/.SMEStorage* ~/.ssh ~/.synaptic ~/.thunderbird* ~/.bash* ~/bash* ~/.git* ~/.profile* ~/.Xmodmap* ~/.face* ~/.wgetrc ~/.local/share/applications
+cp /opt/bkp/${origin}__config.tgz ~/Copy/bkp
 tar -czvf /opt/bkp/${origin}__etc.tgz /etc
 
 #rar a -rr -r -v1g -y /opt/bkp/${origin}_pastas.rar -x.* ~/bin/*.*sh ~/bin/*.*py ~/bin/*profile ~/bin/tor* ~/bin/sql* ~/Imagens ~/Aptana\ Studio\ 3\ Workspace/ ~/Projects ~/ProgramasRFB ~/public_html /usr/share/backgrounds /etc
@@ -66,7 +67,7 @@ find ~/Imagens -name '*contest' -exec rm -rfv {} \;
 rar a -m5 -idp -y /opt/bkp/${origin}__Pastas.rar ~/Área\ de\ Trabalho/ ~/Documentos ~/Imagens ~/ProgramasRFB ~/Projects ~/workspace
 #rar a -m5 -idp -y /opt/bkp/${origin}__SpiderOakHive.rar ~/SpiderOak\ Hive
 #rar a -m5 -idp -y /opt/bkp/${origin}__GoogleDrive.rar ~/Google\ Drive
-rar a -m5 -idp -y /opt/bkp/${origin}__UbuntuOne.rar ~/Ubuntu\ One
+#rar a -m5 -idp -y /opt/bkp/${origin}__UbuntuOne.rar ~/Ubuntu\ One
 #rar a -m5 -idp -y /opt/bkp/${origin}__Dropbox.rar ~/Dropbox
 #rar a -m5 -idp -y /opt/bkp/${origin}__Copy.rar ~/Copy
 
