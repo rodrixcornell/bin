@@ -1,0 +1,34 @@
+
+# Java
+export J2SDKDIR=/usr/lib/jvm/java-7-oracle
+export J2REDIR=$J2SDKDIR/jre
+export PATH=$PATH:$J2SDKDIR/bin:$J2SDKDIR/db/bin:$J2REDIR/bin
+export JAVA_HOME=$J2SDKDIR
+export DERBY_HOME=$J2SDKDIR/db
+# Java ClassPath
+CLASSPATH=$CLASSPATH:$JAVA_HOME/lib/tools.jar
+CLASSPATH=$CLASSPATH:$ORACLE_HOME/lib/ojdbc7.jar
+CLASSPATH=$CLASSPATH:$HOME/lib/mysql-connector-java-5.1.31-bin.jar
+CLASSPATH=$CLASSPATH:$HOME/lib/postgresql-9.3-1102.jdbc41.jar
+CLASSPATH=$CLASSPATH:$HOME/lib/dom4j-1.6.1.jar
+export CLASSPATH
+
+# Oracle
+#export NLS_LANG=AMERICAN_AMERICA.UTF8
+export NLS_LANG='BRAZILIAN PORTUGUESE_BRAZIL.WE8MSWIN1252'
+#export ORACLE_SID
+#export ORACLE_BASE
+export ORACLE_HOME=/usr/lib/oracle/12.1/client
+export PATH=$PATH:$ORACLE_HOME/bin
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$ORACLE_HOME/lib
+export SQLPATH=$SQLPATH:$ORACLE_HOME/lib
+
+# Zend Framework 1
+ZEND_HOME=~/projects/zf
+PATH=$PATH:$ZEND_HOME/bin
+export ZEND_HOME PATH
+
+# yii Framework
+YII_HOME=~/projects/yiiRoot/framework/
+PATH=$PATH:$YII_HOME
+export YIII_HOME PATH

@@ -1,0 +1,26 @@
+# No Proxy 
+export no_proxy="local, host, localhost, 127.0.0.1, 10.10.*, 172.19.*"
+
+# Proxy Sefaz
+#export https_proxy=https://10.10.2.119:3128/
+#export http_proxy=http://10.10.2.119:3128/
+#export ftp_proxy=ftp://10.10.2.119:3128/
+#export socks_proxy=socks://10.10.2.119:3128/
+
+# Proxy Ifam
+#export https_proxy=https://10.10.0.20:8080/
+#export http_proxy=http://10.10.0.20:8080/
+#export ftp_proxy=ftp://10.10.0.20:8080/
+#export socks_proxy=socks://10.10.0.20:8080/
+
+# Proxy Ifam com senha
+#export https_proxy=https://201210990032:aluno123@10.10.0.20:8080/
+#export http_proxy=http://201210990032:aluno123@10.10.0.20:8080/
+#export ftp_proxy=ftp://201210990032:aluno123@10.10.0.20:8080/
+#export socks_proxy=socks://201210990032:aluno123@10.10.0.20:8080/
+
+# Proxy Semad
+#export https_proxy=https://172.19.10.1:3128/
+#export http_proxy=http://172.19.10.1:3128/
+#export ftp_proxy=ftp://172.19.10.1:3128/
+#export socks_proxy=socks://172.19.10.1:3128/
