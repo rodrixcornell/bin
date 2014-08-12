@@ -20,17 +20,12 @@ else
 fi
 
 #killall dropbox CopyAgent firefox chrome opera skype pidgin iptux #teamviewerd
-#cd ~/grive/ && grive && cd ~
+#cd ~/grive/ && grive
+
 cd ~
 
 echo Checa repositórios git
 check_git.sh
-
-cat .bash_history > /opt/bkp/${origin}__history.txt
-cat .bash_history > ~/Copy/bkp/${origin}__history.txt
-
-export > /opt/bkp/${origin}__export.txt
-export > ~/Copy/bkp/${origin}__export.txt
 
 cd ~
 
@@ -40,6 +35,16 @@ sudo find /etc/ -name '*~' -exec rm {} \;
 sudo find /etc/ -name '*save' -exec rm {} \;
 #sudo find / -name '*~' -exec echo {} \;
 #sudo find / -name '*~' -exec rm {} \;
+
+cd ~
+
+cat .bash_history > /opt/bkp/${origin}__history.txt
+cat .bash_history > ~/Copy/bkp/${origin}__history.txt
+
+export > /opt/bkp/${origin}__export.txt
+export > ~/Copy/bkp/${origin}__export.txt
+
+cd ~
 
 mysqldump --all-databases -u root --password=xkpptrock1990 > /opt/bkp/${origin}__mysqldump.sql
 #tar -czvf /opt/bkp/${origin}__mysqldump.sql.tgz /opt/bkp/${origin}__mysqldump.sql
@@ -84,11 +89,16 @@ cp /usr/share/backgrounds ~/Imagens
 find ~/Imagens -name '*xml' -exec rm -rfv {} \;
 find ~/Imagens -name '*contest' -exec rm -rfv {} \;
 rar a -m5 -idp -y /opt/bkp/${origin}__Pastas.rar ~/Área\ de\ Trabalho/ ~/Documentos ~/Imagens ~/ProgramasRFB ~/Projects ~/workspace
-#rar a -m5 -idp -y /opt/bkp/${origin}__SpiderOakHive.rar ~/SpiderOak\ Hive
-#rar a -m5 -idp -y /opt/bkp/${origin}__GoogleDrive.rar ~/Google\ Drive
-#rar a -m5 -idp -y /opt/bkp/${origin}__UbuntuOne.rar ~/Ubuntu\ One
-#rar a -m5 -idp -y /opt/bkp/${origin}__Dropbox.rar ~/Dropbox
-#rar a -m5 -idp -y /opt/bkp/${origin}__Copy.rar ~/Copy
+
+rar a -m5 -idp -y /opt/bkp/${origin}__SpiderOakHive.rar ~/SpiderOak\ Hive
+
+rar a -m5 -idp -y /opt/bkp/${origin}__GoogleDrive.rar ~/Google\ Drive
+
+rar a -m5 -idp -y /opt/bkp/${origin}__UbuntuOne.rar ~/Ubuntu\ One
+
+rar a -m5 -idp -y /opt/bkp/${origin}__Dropbox.rar ~/Dropbox
+
+rar a -m5 -idp -y /opt/bkp/${origin}__Copy.rar ~/Copy
 
 #dropbox start -i &
 #CopyAgent &
