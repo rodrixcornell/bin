@@ -1,10 +1,10 @@
-
 # Java
 export J2SDKDIR=/usr/lib/jvm/java-7-oracle
 export J2REDIR=$J2SDKDIR/jre
 export PATH=$PATH:$J2SDKDIR/bin:$J2SDKDIR/db/bin:$J2REDIR/bin
 export JAVA_HOME=$J2SDKDIR
 export DERBY_HOME=$J2SDKDIR/db
+
 # Java ClassPath
 CLASSPATH=$CLASSPATH:$JAVA_HOME/lib/tools.jar
 CLASSPATH=$CLASSPATH:$ORACLE_HOME/lib/ojdbc7.jar
@@ -15,20 +15,31 @@ export CLASSPATH
 
 # Oracle
 #export NLS_LANG=AMERICAN_AMERICA.UTF8
-export NLS_LANG='BRAZILIAN PORTUGUESE_BRAZIL.WE8MSWIN1252'
+#export NLS_LANG="BRAZILIAN PORTUGUESE_BRAZIL.WE8MSWIN1252"
+export NLS_LANG="BRAZILIAN PORTUGUESE_BRAZIL.UTF8"
+export ORACLE_HOME=/usr/lib/oracle/12.1/client64
 #export ORACLE_SID
 #export ORACLE_BASE
-export ORACLE_HOME=/usr/lib/oracle/12.1/client
+#export TNS_ADMIN=$ORACLE_HOME/network/admin
 export PATH=$PATH:$ORACLE_HOME/bin
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$ORACLE_HOME/lib
 export SQLPATH=$SQLPATH:$ORACLE_HOME/lib
 
 # Zend Framework 1
+#ZEND_PATH=/usr/local/zend
+#PATH=$PATH:$ZEND_PATH/bin:$ZEND_PATH/share/ZendFramework/bin:$ZEND_PATH/apache2/bin
+#LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$ZEND_PATH/lib
 ZEND_HOME=~/projects/zf
 PATH=$PATH:$ZEND_HOME/bin
-export ZEND_HOME PATH
+export ZEND_HOME PATH #LD_LIBRARY_PATH
 
 # yii Framework
-YII_HOME=~/projects/yiiRoot/framework/
-PATH=$PATH:$YII_HOME
-export YIII_HOME PATH
+#YII_HOME=~/projects/yiiRoot/framework/
+#PATH=$PATH:$YII_HOME
+#export YIII_HOME PATH
+
+# Komodo-Edit-8
+#PATH="$PATH:/opt/komodo_edit_8"
+
+# copy drive
+#PATH="$PATH:/opt/copy/x86_64"
