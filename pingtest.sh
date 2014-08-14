@@ -12,4 +12,10 @@ else
 	resp2="Proxy Down"
 fi
 
-echo ${resp1} \| ${resp2}
+if ping -c 1 -W 2 proxy5 > /dev/null; then
+	resp3="Proxy5 Up"
+else
+	resp3="Proxy5 Down"
+fi
+
+echo ${resp1} \| ${resp2} \| ${resp3}
