@@ -42,7 +42,7 @@ sudo find /etc/ -name '*save' -exec rm {} \;
 #sudo find / -name '*~' -exec rm {} \;
 
 mysqldump --all-databases -u root --password=xkpptrock1990 > /opt/bkp/${origin}__mysqldump.sql
-tar -czvf /opt/bkp/${origin}__mysqldump.sql.tgz /opt/bkp/${origin}__mysqldump.sql
+rar a -m5 -idp -y /opt/bkp/${origin}__mysqldump.sql.rar /opt/bkp/${origin}__mysqldump.sql
 rm /opt/bkp/${origin}__mysqldump.sql
 cp /opt/bkp/${origin}__mysqldump.sql.tgz ~/Copy/bkp
 
@@ -57,8 +57,8 @@ tar -czvf /opt/bkp/${origin}__etc.tgz /etc
 #rar a -rr -r -v1g -y /opt/bkp/${origin}_pastas.rar -x.* ~/bin/*.*sh ~/bin/*.*py ~/bin/*profile ~/bin/tor* ~/bin/sql* ~/Imagens ~/Aptana\ Studio\ 3\ Workspace/ ~/Projects ~/ProgramasRFB ~/public_html /usr/share/backgrounds /etc
 rar a -m5 -idp -y /opt/bkp/${origin}__Skype.rar ~/Skype
 cp /opt/bkp/${origin}__Skype.rar ~/Copy/bkp
-rar a -m5 -idp -y /opt/bkp/${origin}__projects.rar ~/projects
-cp /opt/bkp/${origin}__projects.rar ~/Copy/bkp
+rar a -m5 -idp -y /opt/bkp/${origin}__projects-php.rar ~/projects-php
+cp /opt/bkp/${origin}__projects-php.rar ~/Copy/bkp
 rar a -m5 -idp -y /opt/bkp/${origin}__projects-java.rar ~/projects-java
 cp /opt/bkp/${origin}__projects-java.rar ~/Copy/bkp
 rar a -m5 -idp -y /opt/bkp/${origin}__workspace.rar ~/workspace
