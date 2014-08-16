@@ -2,9 +2,9 @@ adt-bundle
 Bashrc
 bin
 oci8*
-<<<<<<< HEAD
+
 *save
-=======
+
 cria
 eclipse*
 netbeans*
@@ -18,4 +18,5 @@ composer*
 RELATORIO*
 new_installer_offline*
 repack*
->>>>>>> 96fee184e5a4f8f040411576a6050af45b56d633
+
+proxy_rc
