@@ -15,7 +15,7 @@ if [ ! -d /opt/bkp ]; then
     echo "Pasta Criada!"
 else
     echo "Pasta Já Existe!"
-#    sudo rm -rfv /opt/bkp/*
+    rm -rfv /opt/bkp/*
     rm -rfv ~/Copy/bkp/*
 fi
 
@@ -24,8 +24,8 @@ fi
 
 cd ~
 
-echo Checa repositórios git
-check_git.sh
+#echo Checa repositórios git
+#check_git.sh
 
 cd ~
 
@@ -70,16 +70,10 @@ cp /opt/bkp/${origin}__lib.tgz ~/Copy/bkp
 rar a -m5 -idp -y /opt/bkp/${origin}__Skype.rar ~/Skype
 cp /opt/bkp/${origin}__Skype.rar ~/Copy/bkp
 
-rar a -m5 -idp -y /opt/bkp/${origin}__projects.rar ~/projects
+rar a -m5 -idp -y /opt/bkp/${origin}__projects.rar ~/projects*
 cp /opt/bkp/${origin}__projects.rar ~/Copy/bkp
 
-rar a -m5 -idp -y /opt/bkp/${origin}__projects-php.rar ~/projects-php
-cp /opt/bkp/${origin}__projects-php.rar ~/Copy/bkp
-
-rar a -m5 -idp -y /opt/bkp/${origin}__projects-java.rar ~/projects-java
-cp /opt/bkp/${origin}__projects-java.rar ~/Copy/bkp
-
-rar a -m5 -idp -y /opt/bkp/${origin}__workspace.rar ~/workspace
+rar a -m5 -idp -y /opt/bkp/${origin}__workspace.rar ~/workspace*
 cp /opt/bkp/${origin}__workspace.rar ~/Copy/bkp
 
 rar a -m5 -idp -y /opt/bkp/${origin}__public_html.rar ~/public_html
@@ -96,7 +90,7 @@ rar a -m5 -idp -y /opt/bkp/${origin}__GoogleDrive.rar ~/Google\ Drive
 
 rar a -m5 -idp -y /opt/bkp/${origin}__UbuntuOne.rar ~/Ubuntu\ One
 
-rar a -m5 -idp -y /opt/bkp/${origin}__Dropbox.rar ~/Dropbox
+#rar a -m5 -idp -y /opt/bkp/${origin}__Dropbox.rar ~/Dropbox
 
 rar a -m5 -idp -y /opt/bkp/${origin}__Copy.rar ~/Copy
 

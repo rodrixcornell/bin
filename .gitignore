@@ -15,8 +15,9 @@ tor*
 
 ARQ*
 composer*
+composer.phar
 RELATORIO*
 new_installer_offline*
-repack*
+*repack*
 
 proxy_rc
