@@ -19,7 +19,7 @@ else
     rm -rfv ~/Copy/bkp/*
 fi
 
-#killall dropbox CopyAgent firefox chrome opera skype pidgin iptux #teamviewerd
+killall dropbox CopyAgent firefox chrome opera skype pidgin iptux #teamviewerd
 #cd ~/grive/ && grive
 
 cd ~
