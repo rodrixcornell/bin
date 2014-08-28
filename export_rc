@@ -1,17 +1,22 @@
 # Java
 export J2SDKDIR=/usr/lib/jvm/java-7-oracle
 export J2REDIR=$J2SDKDIR/jre
-export PATH=$PATH:$J2SDKDIR/bin:$J2SDKDIR/db/bin:$J2REDIR/bin
 export JAVA_HOME=$J2SDKDIR
+export JRE_HOME=$J2REDIR:J2SDKDIR
 export DERBY_HOME=$J2SDKDIR/db
+export PATH=$PATH:$J2SDKDIR/bin:$J2SDKDIR/db/bin:$J2REDIR/bin
 
 # Java ClassPath
 CLASSPATH=$CLASSPATH:$JAVA_HOME/lib/tools.jar
 CLASSPATH=$CLASSPATH:$ORACLE_HOME/lib/ojdbc7.jar
 CLASSPATH=$CLASSPATH:$HOME/lib/mysql-connector-java-5.1.31-bin.jar
 CLASSPATH=$CLASSPATH:$HOME/lib/postgresql-9.3-1102.jdbc41.jar
-CLASSPATH=$CLASSPATH:$HOME/lib/dom4j-1.6.1.jar
+#CLASSPATH=$CLASSPATH:$HOME/lib/dom4j-1.6.1.jar
 export CLASSPATH
+
+# Tomcat
+export CATALINA_HOME=$CATALINA_HOME:$HOME/apache-tomcat-7.0.41
+export PATH=$PATH:$CATALINA_HOME/bin
 
 # Oracle
 #export NLS_LANG=AMERICAN_AMERICA.UTF8
@@ -42,4 +47,4 @@ export ZEND_HOME PATH #LD_LIBRARY_PATH
 #PATH="$PATH:/opt/komodo_edit_8"
 
 # copy drive
-#PATH="$PATH:/opt/copy/x86_64"
+PATH="$PATH:/opt/copy/x86_64"
