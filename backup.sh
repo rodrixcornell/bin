@@ -19,7 +19,7 @@ else
     rm -rfv ~/Copy/bkp/*
 fi
 
-killall dropbox CopyAgent firefox chrome opera skype pidgin iptux #teamviewerd
+killall firefox chrome opera #dropbox CopyAgent skype pidgin iptux #teamviewerd
 #cd ~/grive/ && grive
 
 cd ~
@@ -52,7 +52,7 @@ rar a -m5 -idp -y /opt/bkp/${origin}__mysqldump.sql.rar /opt/bkp/${origin}__mysq
 rm /opt/bkp/${origin}__mysqldump.sql
 cp /opt/bkp/${origin}__mysqldump.sql.rar ~/Copy/bkp
 
-tar -czvf /opt/bkp/${origin}__config.tgz ~/.bitcasa* ~/.config* ~/.easytag ~/.gconf* ~/.gnupg* ~/.icon* ~/.filezilla* ~/.mozilla* ~/.opera ~/.purple ~/.Skype* ~/.skype* ~/.smestorage* ~/.SMEStorage* ~/.ssh ~/.synaptic ~/.thunderbird* ~/.bash* ~/bash* ~/.git* ~/.profile* ~/.Xmodmap* ~/.face* ~/.wgetrc ~/.local/share/applications
+tar -czvf /opt/bkp/${origin}__config.tgz ~/.bitcasa* ~/.config* ~/.easytag ~/.fonts ~/.gconf* ~/.gnupg* ~/.icon* ~/.filezilla* ~/.mozilla* ~/.opera ~/.purple ~/.Skype* ~/.skype* ~/.smestorage* ~/.SMEStorage* ~/.ssh ~/.synaptic ~/.thunderbird* ~/.bash* ~/bash* ~/.git* ~/.profile* ~/.Xmodmap* ~/.face* ~/.wgetrc ~/.local/share/applications
 #rar a -m5 -idp -y /opt/bkp/${origin}__config.rar ~/.bitcasa* ~/.config* ~/.easytag ~/.gconf* ~/.gnupg* ~/.icon* ~/.filezilla* ~/.mozilla* ~/.opera ~/.purple ~/.Skype* ~/.skype* ~/.smestorage* ~/.SMEStorage* ~/.ssh ~/.synaptic ~/.thunderbird* ~/.bash* ~/bash* ~/.git* ~/.profile* ~/.Xmodmap* ~/.face* ~/.wgetrc ~/.local/share/applications
 cp /opt/bkp/${origin}__config.tgz ~/Copy/bkp
 

@@ -1,4 +1,4 @@
 #!/bin/bash
 
-php -sS localhost:8000 -t $HOME/public_html
+sudo php -sS 0.0.0.0:80 -t $HOME/public_html
 
