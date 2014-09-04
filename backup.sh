@@ -30,9 +30,9 @@ killall dropbox CopyAgent #megasync meocloud-gui meocloudd
 killall skype pidgin #iptux #teamviewerd
 #cd ~/grive/ && grive
 
-cd ~
-echo "Checa repositórios Git Semad"
-check_git.sh
+#cd ~
+#echo "Checa repositórios Git Semad"
+#check_git.sh
 
 cd ~
 echo "Localizando Lixo"
