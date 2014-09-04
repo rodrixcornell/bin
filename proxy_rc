@@ -1,5 +1,9 @@
 # No Proxy
 export no_proxy="local, host, localhost, 127.0.0.1, 10.10.*, 172.19.*"
+export https_proxy=""
+export http_proxy=""
+export ftp_proxy=""
+export socks_proxy=""
 
 # Proxy Sefaz
 #export https_proxy=https://10.10.2.119:3128/
