@@ -26,7 +26,7 @@ else
 fi
 
 killall firefox chrome opera
-killall dropbox CopyAgent #megasync meocloud-gui meocloudd
+#killall dropbox CopyAgent #megasync meocloud-gui meocloudd
 killall skype pidgin #iptux #teamviewerd
 #cd ~/grive/ && grive
 
@@ -107,12 +107,12 @@ rar a -m5 -idp -y /opt/bkp/${origin}__GoogleDrive.rar ~/Google\ Drive
 rar a -m5 -idp -y /opt/bkp/${origin}__UbuntuOne.rar ~/Ubuntu\ One
 #rar a -m5 -idp -y /opt/bkp/${origin}__Dropbox.rar ~/Dropbox
 #rar a -m5 -idp -y /opt/bkp/${origin}__Copy.rar ~/Copy
-##rar a -m5 -idp -y /opt/bkp/${origin}__MEOCloud.rar ~/MEOCloud
+#rar a -m5 -idp -y /opt/bkp/${origin}__MEOCloud.rar ~/MEOCloud
 #rar a -m5 -idp -y /opt/bkp/${origin}__MEGA.rar ~/MEGA
 
 echo
-nohup dropbox start -i &
-nohup CopyAgent &
+#nohup dropbox start -i &
+#nohup CopyAgent &
 nohup skype &
 nohup pidgin &
 #nohup meocloud-gui &
