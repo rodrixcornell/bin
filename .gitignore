@@ -21,3 +21,5 @@ new_installer_offline*
 *repack*
 
 proxy_rc
+
+*.list

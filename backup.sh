@@ -61,6 +61,10 @@ rar a -m5 -idp -y /opt/bkp/${origin}__mysqldump.sql.rar /opt/bkp/${origin}__mysq
 rm /opt/bkp/${origin}__mysqldump.sql
 cp /opt/bkp/${origin}__mysqldump.sql.rar ~/Copy/bkp
 
+echo "Backup Configurações Oracle Client"
+rar a -m5 -idp -y /opt/bkp/${origin}__oracle_client.rar ~/oracle_client
+cp /opt/bkp/${origin}__oracle_client.rar ~/Copy/bkp
+
 echo "Backup Configurações"
 tar -czvf /opt/bkp/${origin}__config.tgz ~/.bitcasa* ~/.config* ~/.easytag* ~/.filezilla* ~/.fonts* ~/.gconf* ~/.gkrellm* ~/.gnome2/nautilus-scripts* ~/.gnupg* ~/.icon* ~/.local/share/applications* ~/.mozilla* ~/.purple* ~/.receitanet* ~/.Skype* ~/.skype* ~/.*torage* ~/.ssh* ~/.synaptic* ~/.themes* ~/.thunderbird* ~/.xchat2* ~/.youtube-dl-gui* ~/.bash* ~/bash* ~/.git* ~/.inputrc* ~/.pearrc* ~/.profile* ~/.sqlplus* ~/.Xmodmap* ~/.face* ~/.nanorc* ~/.wgetrc*
 #rar a -m5 -idp -y /opt/bkp/${origin}__config.rar ~/.bitcasa* ~/.config* ~/.easytag ~/.gconf* ~/.gnupg* ~/.icon* ~/.filezilla* ~/.mozilla* ~/.opera ~/.purple ~/.Skype* ~/.skype* ~/.smestorage* ~/.SMEStorage* ~/.ssh ~/.synaptic ~/.thunderbird* ~/.bash* ~/bash* ~/.git* ~/.profile* ~/.Xmodmap* ~/.face* ~/.wgetrc ~/.local/share/applications
