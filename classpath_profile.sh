@@ -1,5 +1,6 @@
 #!/bin/bash
 ## Java ClassPath
+#unset CLASSPATH
 if [ -e "$CLASSPATH" ]; then
 	if [ -z "$CLASSPATH" ]; then
 		export CLASSPATH="$HOME/lib/mysql-connector-java-5.1.6-bin.jar"

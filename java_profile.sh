@@ -1,6 +1,7 @@
 #!/bin/bash
 ## Java
 # jdk
+#unset J2SDKDIR JAVA_HOME J2REDIR JRE_HOME DERBY_HOME CLASSPATH
 if [ -d "/usr/lib/jvm/java-7-oracle" ]; then
 	if [ -e "$J2SDKDIR" ]; then
 		if [ -z "$J2SDKDIR" ]; then

@@ -1,4 +1,6 @@
 #!/bin/bash
+
+#unset ORACLE_HOME ORACLE_BASE LD_LIBRARY_PATH SQLPATH NLS_LANG NLS_CHARACTERSET NLS_NCHAR_CHARACTERSET NLS_DATE_FORMAT CLASSPATH TNS_ADMIN
 # Oracle 32
 if [ -d "/usr/lib/oracle/12.1/client" ]; then
 	export ORACLE_HOME="/usr/lib/oracle/12.1/client"

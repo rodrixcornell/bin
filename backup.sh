@@ -65,19 +65,6 @@ echo "Backup Configurações Oracle Client"
 rar a -m5 -idp -y /opt/bkp/${origin}__oracle_client.rar ~/oracle_client
 cp /opt/bkp/${origin}__oracle_client.rar ~/Copy/bkp
 
-echo "Backup Configurações"
-tar -czvf /opt/bkp/${origin}__config.tgz ~/.bitcasa* ~/.config* ~/.easytag* ~/.filezilla* ~/.fonts* ~/.gconf* ~/.gkrellm* ~/.gnome2/nautilus-scripts* ~/.gnupg* ~/.icon* ~/.local/share/applications* ~/.mozilla* ~/.purple* ~/.receitanet* ~/.Skype* ~/.skype* ~/.*torage* ~/.ssh* ~/.synaptic* ~/.themes* ~/.thunderbird* ~/.xchat2* ~/.youtube-dl-gui* ~/.bash* ~/bash* ~/.git* ~/.inputrc* ~/.pearrc* ~/.profile* ~/.sqlplus* ~/.Xmodmap* ~/.face* ~/.nanorc* ~/.wgetrc*
-#rar a -m5 -idp -y /opt/bkp/${origin}__config.rar ~/.bitcasa* ~/.config* ~/.easytag ~/.gconf* ~/.gnupg* ~/.icon* ~/.filezilla* ~/.mozilla* ~/.opera ~/.purple ~/.Skype* ~/.skype* ~/.smestorage* ~/.SMEStorage* ~/.ssh ~/.synaptic ~/.thunderbird* ~/.bash* ~/bash* ~/.git* ~/.profile* ~/.Xmodmap* ~/.face* ~/.wgetrc ~/.local/share/applications
-cp /opt/bkp/${origin}__config.tgz ~/Copy/bkp
-
-echo "Backup Pasta /etc"
-#tar -czvf /opt/bkp/${origin}__etc.tgz /etc
-rar a -m5 -idp -y /opt/bkp/${origin}__etc.rar /etc
-
-#echo "Backup Pasta ~/bin"
-#tar -czvf /opt/bkp/${origin}__bin.tgz ~/bin --exclude=$HOME/bin/adt-bundle* --exclude=$HOME/bin/AptanaStudio* --exclude=$HOME/bin/eclipse* --exclude=$HOME/bin/FreeNet* --exclude=$HOME/bin/netbeans* --exclude=$HOME/bin/smartgit* --exclude=$HOME/bin/sqldeveloper* --exclude=$HOME/bin/tor* --exclude=$HOME/bin/Zend* --exclude=$HOME/bin/cria* --exclude=$HOME/bin/bin* --exclude=$HOME/bin/t50*
-#cp /opt/bkp/${origin}__bin.tgz ~/Copy/bkp
-
 echo "Backup Pasta Java ~/lib"
 #tar -czvf /opt/bkp/${origin}__lib.tgz ~/lib
 rar a -m5 -idp -y /opt/bkp/${origin}__lib.rar ~/lib
@@ -113,6 +100,19 @@ rar a -m5 -idp -y /opt/bkp/${origin}__UbuntuOne.rar ~/Ubuntu\ One
 #rar a -m5 -idp -y /opt/bkp/${origin}__Copy.rar ~/Copy
 #rar a -m5 -idp -y /opt/bkp/${origin}__MEOCloud.rar ~/MEOCloud
 #rar a -m5 -idp -y /opt/bkp/${origin}__MEGA.rar ~/MEGA
+
+echo "Backup Pasta /etc"
+#tar -czvf /opt/bkp/${origin}__etc.tgz /etc
+rar a -m5 -idp -y /opt/bkp/${origin}__etc.rar /etc
+
+echo "Backup Configurações"
+tar -czvf /opt/bkp/${origin}__config.tgz ~/.bitcasa* ~/.config* ~/.easytag* ~/.filezilla* ~/.fonts* ~/.gconf* ~/.gkrellm* ~/.gnome2/nautilus-scripts* ~/.gnupg* ~/.icon* ~/.local/share/applications* ~/.mozilla* ~/.purple* ~/.receitanet* ~/.Skype* ~/.skype* ~/.*torage* ~/.ssh* ~/.synaptic* ~/.themes* ~/.thunderbird* ~/.xchat2* ~/.youtube-dl-gui* ~/.bash* ~/bash* ~/.git* ~/.inputrc* ~/.pearrc* ~/.profile* ~/.sqlplus* ~/.Xmodmap* ~/.face* ~/.nanorc* ~/.wgetrc*
+#rar a -m5 -idp -y /opt/bkp/${origin}__config.rar ~/.bitcasa* ~/.config* ~/.easytag ~/.gconf* ~/.gnupg* ~/.icon* ~/.filezilla* ~/.mozilla* ~/.opera ~/.purple ~/.Skype* ~/.skype* ~/.smestorage* ~/.SMEStorage* ~/.ssh ~/.synaptic ~/.thunderbird* ~/.bash* ~/bash* ~/.git* ~/.profile* ~/.Xmodmap* ~/.face* ~/.wgetrc ~/.local/share/applications
+cp /opt/bkp/${origin}__config.tgz ~/Copy/bkp
+
+#echo "Backup Pasta ~/bin"
+#tar -czvf /opt/bkp/${origin}__bin.tgz ~/bin --exclude=$HOME/bin/adt-bundle* --exclude=$HOME/bin/AptanaStudio* --exclude=$HOME/bin/eclipse* --exclude=$HOME/bin/FreeNet* --exclude=$HOME/bin/netbeans* --exclude=$HOME/bin/smartgit* --exclude=$HOME/bin/sqldeveloper* --exclude=$HOME/bin/tor* --exclude=$HOME/bin/Zend* --exclude=$HOME/bin/cria* --exclude=$HOME/bin/bin* --exclude=$HOME/bin/t50*
+#cp /opt/bkp/${origin}__bin.tgz ~/Copy/bkp
 
 echo
 #nohup dropbox start -i &
