@@ -61,6 +61,10 @@ rar a -m5 -idp -y /opt/bkp/${origin}__mysqldump.sql.rar /opt/bkp/${origin}__mysq
 rm /opt/bkp/${origin}__mysqldump.sql
 cp /opt/bkp/${origin}__mysqldump.sql.rar ~/MEOCloud/bkp
 
+echo "Backup SQLs do MySQL ou MariaDB"
+rar a -m5 -idp -y /opt/bkp/${origin}__workbench-mysql.rar ~/workbench-mysql
+cp /opt/bkp/${origin}__workbench-mysql.rar ~/MEOCloud/bkp
+
 echo "Backup Configurações Oracle Client"
 rar a -m5 -idp -y /opt/bkp/${origin}__oracle_client.rar ~/oracle_client
 cp /opt/bkp/${origin}__oracle_client.rar ~/MEOCloud/bkp
