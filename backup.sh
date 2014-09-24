@@ -14,7 +14,7 @@ if [ ! -d /opt/bkp ]; then
     echo "Pasta Criada em /opt"
 else
     echo "Pasta Já Existe em /opt"
-    rm -rfv /opt/bkp/*
+    #rm -rfv /opt/bkp/*
 fi
 
 if [ ! -d ~/MEOCloud/bkp ]; then

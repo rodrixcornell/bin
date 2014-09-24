@@ -106,5 +106,6 @@ alias kill_fox='killall firefox'
 alias sqlplus='rlwrap sqlplus'
 
 alias rar_m5='rar a -m5 -idp -y'
-alias chrome-beta-incognito='google-chrome-beta --incognito --proxy-server="http=172.19.10.5:3128;https=172.19.10.5:3128"'
-alias chrome-beta='google-chrome-beta --proxy-server="http=172.19.10.5:3128;https=172.19.10.5:3128"'
+alias chrome-beta-incognito='google-chrome-beta --incognito --proxy-server="http=172.19.10.20:3128;https=172.19.10.20:3128"'
+alias chrome-beta='google-chrome-beta --proxy-server="http=172.19.10.20:3128;https=172.19.10.20:3128"'
+alias youtube-dl-proxy='youtube-dl --proxy "http://172.19.10.20:3128/"'
