@@ -14,7 +14,7 @@ if [ ! -d /opt/bkp ]; then
     echo "Pasta Criada em /opt"
 else
     echo "Pasta Já Existe em /opt"
-    #rm -rfv /opt/bkp/*
+    rm -rfv /opt/bkp/${HOSTNAME}*
 fi
 
 if [ ! -d ~/MEOCloud/bkp ]; then
@@ -38,9 +38,9 @@ cd ~
 echo "Localizando Lixo"
 #find ~ -name '*~' -exec echo {} \;
 #find ~ -name '*~' -exec rm {} \;
-sudo find / -name '*~' -exec echo {} \;
+#sudo find / -name '*~' -exec echo {} \;
 sudo find / -name '*~' -exec rm {} \;
-sudo find / -name '*.save' -exec echo {} \;
+#sudo find / -name '*.save' -exec echo {} \;
 sudo find / -name '*.save' -exec rm {} \;
 #sudo find / -name '*~' -exec echo {} \;
 #sudo find / -name '*~' -exec rm {} \;
@@ -60,6 +60,15 @@ mysqldump --all-databases -u root --password=xkpptrock1990 > /opt/bkp/${origin}_
 rar a -m5 -idp -y /opt/bkp/${origin}__mysqldump.sql.rar /opt/bkp/${origin}__mysqldump.sql
 rm /opt/bkp/${origin}__mysqldump.sql
 cp /opt/bkp/${origin}__mysqldump.sql.rar ~/MEOCloud/bkp
+
+echo "Dump do MySQL ou MariaDB"
+rar a -m5 -idp -y /opt/bkp/${origin}__semad.sql.rar /opt/bkp/SEMAD.sql
+rm /opt/bkp/SEMAD.sql
+cp /opt/bkp/${origin}__semad.sql.rar ~/MEOCloud/bkp
+
+rar a -m5 -idp -y /opt/bkp/${origin}__mercattopmm.sql.rar /opt/bkp/MERCATTOPMM.sql
+rm /opt/bkp/MERCATTOPMM.sql
+cp /opt/bkp/${origin}__mercattopmm.sql.rar ~/MEOCloud/bkp
 
 echo "Backup SQLs do MySQL ou MariaDB"
 rar a -m5 -idp -y /opt/bkp/${origin}__workbench-mysql.rar ~/workbench-mysql
