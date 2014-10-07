@@ -31,21 +31,21 @@ alias pkill='sudo pkill -9'
 
 # PowerXpress options:
 #  --px-list-active-gpu
-#alias ati_pwrXpress='aticonfig --pxl'
+alias ati_pwrXpress='aticonfig --pxl'
 #      List current activated GPU
-#alias ati_on='sudo aticonfig --px-dgpu'
+alias ati_on='sudo aticonfig --px-dgpu'
 #      Activate discrete GPU (High-Performance mode), must re-start X to take effect
-#alias ati_off='sudo aticonfig --px-igpu'
+alias ati_off='sudo aticonfig --px-igpu'
 #      Activate integrated GPU (Power-Saving mode), must re-start X to take effect
 #
 # AMD Overdrive (TM) options:
 #  --od-gettemperature
-#alias ati_thermal='aticonfig --odgt'
+alias ati_thermal='aticonfig --odgt'
 #      Returns the temperature reported by any thermal sensors available on the adapter.
 #
 # Multiple display adapter options:
 #  --list-adapters
-#alias ati_adapters='aticonfig --lsa'
+alias ati_adapters='aticonfig --lsa'
 #      Lists all detected and supported display adapters. The default adapter (used when --adapter is not specified) will be indicated with a "*" next to it.
 #
 # ACPI Options:
@@ -53,7 +53,7 @@ alias pkill='sudo pkill -9'
 #      Enable/disable ACPI services. In the case of BIOS or kernel ACPI issues, ACPI services in the driver can be disabled through this option. The ACPI services are enabled by default.
 #  --acpi-display-switch=on|off
 #      Enable/disable display switching with ACPI methods on mobile platforms. This option is enabled by default.
-#alias thermal='echo; sensors; echo; hddtemp /dev/sda; echo; aticonfig --odgt'
+alias thermal2='echo; sensors; echo; hddtemp /dev/sda; echo; aticonfig --odgt'
 alias thermal='echo; sensors; echo; hddtemp /dev/sda; echo'
 alias nano='nano -c'
 alias nano_su='sudo nano'
