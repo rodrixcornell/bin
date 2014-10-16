@@ -14,15 +14,12 @@ if [ -e "$ORACLE_HOME" ]; then
 	export ORACLE_BASE="$ORACLE_HOME"
 
 	export PATH="$PATH:$ORACLE_HOME/bin"
-	if [ -e "$LD_LIBRARY_PATH" ]; then
-		if [ -z "$LD_LIBRARY_PATH" ]; then
-			export LD_LIBRARY_PATH="$ORACLE_HOME/lib"
-		else
-			export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$ORACLE_HOME/lib"
-		fi
-	else
+	if [ -z "$LD_LIBRARY_PATH" ]; then
 		export LD_LIBRARY_PATH="$ORACLE_HOME/lib"
+	else
+		export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$ORACLE_HOME/lib"
 	fi
+	
 	if [ -e "$SQLPATH" ]; then
 		if [ -z "$SQLPATH" ]; then
 			export SQLPATH="$ORACLE_HOME/lib"
@@ -47,4 +44,5 @@ fi
 # Oracle TNS
 if [ -d "$HOME/oracle_client/network/admin" ]; then
 	export TNS_ADMIN="$HOME/oracle_client/network/admin"
+	#export ORACLE_DICT="$HOME/oracle_client/dict.sql"
 fi

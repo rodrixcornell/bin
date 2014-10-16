@@ -42,8 +42,8 @@ echo "Localizando Lixo"
 sudo find / -name '*~' -exec rm {} \;
 #sudo find / -name '*.save' -exec echo {} \;
 sudo find / -name '*.save' -exec rm {} \;
-#sudo find / -name '*~' -exec echo {} \;
-#sudo find / -name '*~' -exec rm {} \;
+#sudo find / -name '.goutputstream-*' -exec echo {} \;
+sudo find / -name '.goutputstream-*' -exec rm {} \;
 
 cd ~
 echo "Copia do Bash Histórico"

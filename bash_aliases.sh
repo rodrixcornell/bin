@@ -12,6 +12,7 @@ alias aptpesquisa='sudo apt-cache search'
 alias vbox_compact='VBoxManage modifyhd --compact'
 alias vbox_set_uuid='VBoxManage internalcommands sethduuid'
 alias vbox_setup='sudo /etc/init.d/vboxdrv setup'
+alias vbox_convert_raw4vdi='VBoxManage convertfromraw --format VDI'
 
 alias eth0_tcptrack='sudo tcptrack -i eth0'
 #alias eth2_tcptrack='sudo tcptrack -i eth2'
@@ -53,8 +54,8 @@ alias ati_adapters='aticonfig --lsa'
 #      Enable/disable ACPI services. In the case of BIOS or kernel ACPI issues, ACPI services in the driver can be disabled through this option. The ACPI services are enabled by default.
 #  --acpi-display-switch=on|off
 #      Enable/disable display switching with ACPI methods on mobile platforms. This option is enabled by default.
-alias thermal2='echo; sensors; echo; hddtemp /dev/sda; echo; aticonfig --odgt'
-alias thermal='echo; sensors; echo; hddtemp /dev/sda; echo'
+alias thermal2='echo; sensors; hddtemp /dev/sda; echo; aticonfig --odgt'
+alias thermal='echo; sensors; hddtemp /dev/sda; echo'
 alias nano='nano -c'
 alias nano_su='sudo nano'
 alias find_su='sudo find'
@@ -103,10 +104,10 @@ alias gk=gitk
 
 alias kill_fox='killall firefox'
 
-alias sqlplus='rlwrap sqlplus'
+alias sqlplus='rlwrap -b "" -f $HOME/oracle_client/dict.sql sqlplus'
 
 alias rar_m5='rar a -m5 -idp -y'
-alias chrome-beta-incognito='google-chrome-beta --incognito --proxy-server="http=172.19.10.20:3128;https=172.19.10.20:3128"'
-alias chrome-beta='google-chrome-beta --proxy-server="http=172.19.10.20:3128;https=172.19.10.20:3128"'
+alias chrome-beta-incognito-proxy='google-chrome-beta --incognito --proxy-server="http=172.19.10.20:3128;https=172.19.10.20:3128"'
+alias chrome-beta-proxy='google-chrome-beta --proxy-server="http=172.19.10.20:3128;https=172.19.10.20:3128"'
 alias youtube-dl-proxy='youtube-dl --proxy "http://172.19.10.20:3128/"'
 alias youtube-dl-list='youtube-dl -a'
