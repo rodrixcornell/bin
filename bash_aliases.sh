@@ -7,6 +7,8 @@ alias apt-f-limpa='sudo rm /var/lib/apt/lists/* ; sudo rm /var/lib/apt/lists/par
 alias apt-f='sudo apt-get -f install ; sudo apt-get clean ; sudo apt-get update'
 alias add-apt-repository='add-apt-repository -y'
 alias aptpesquisa='sudo apt-cache search'
+alias aptinstall='sudo apt-get install'
+alias aptpurge='sudo apt-get purge'
 #alias nautilusQuit='nautilus -q; nautilus -q'
 
 alias vbox_compact='VBoxManage modifyhd --compact'
@@ -26,6 +28,7 @@ alias wlan0_speed='speedometer -tx wlan0 -rx wlan0'
 
 alias pkill='sudo pkill -9'
 
+#sudo t50 --flood --turbo -S  172.19.10.15 --dport=445
 #alias t50='t50 --flood --turbo --dport 80 53 443 12345 -S -s 10.10.0. --protocol TCP '
 #alias t50='sudo t50 --flood --turbo -S '
 #alias t50='sudo t50 --flood --turbo --dport 80 53 443 12345 -S -s 10.10.0. --protocol TCP '
@@ -89,8 +92,8 @@ alias wget-list='wget -i'
 alias canal='gksu software-properties-gtk'
 alias lshw-gtk='gksu lshw-gtk'
 
-alias alien-deb='sudo alien -dc; sudo chown 1000:1000 *deb'
-alias alien-rpm='sudo alien -rc; sudo chown 1000:1000 *rpm'
+alias alien-deb='sudo alien -d -c; sudo chown 1000:1000 *deb'
+alias alien-rpm='sudo alien -r -c; sudo chown 1000:1000 *rpm'
 
 #alias gkedit='sudo gedit'
 alias griVe='grive -V'
