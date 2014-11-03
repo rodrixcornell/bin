@@ -11,6 +11,9 @@
 #  . /etc/bash_completion.d/git
 #fi
 #complete -o bashdefault -o default -o nospace -F _git
+#complete -o bashdefault -o default -o nospace -F _git git
+#complete -o bashdefault -o default -o nospace -F _gitk gitk
+
 GIT_PS1_SHOWDIRTYSTATE=true
 
 color_prompt=yes
