@@ -62,11 +62,11 @@ rar a -m5 -idp -y /opt/bkp/${origin}__mysqldump.sql.rar /opt/bkp/${origin}__mysq
 mv /opt/bkp/${origin}__mysqldump.sql.rar ~/MEOCloud/bkp
 
 echo "Dump do MySQL ou MariaDB"
-rar a -m5 -idp -y /opt/bkp/${origin}__semad.sql.rar /opt/bkp/SEMAD.sql
+rar a -m5 -idp -y /opt/bkp/${origin}__semad.sql.rar /opt/bkp/SEMAD*.sql
 #rm /opt/bkp/SEMAD.sql
 mv /opt/bkp/${origin}__semad.sql.rar ~/MEOCloud/bkp
 
-rar a -m5 -idp -y /opt/bkp/${origin}__mercattopmm.sql.rar /opt/bkp/MERCATTOPMM.sql
+rar a -m5 -idp -y /opt/bkp/${origin}__mercattopmm.sql.rar /opt/bkp/MERCATTOPMM*.sql
 #rm /opt/bkp/MERCATTOPMM.sql
 mv /opt/bkp/${origin}__mercattopmm.sql.rar ~/MEOCloud/bkp
 
