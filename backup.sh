@@ -125,6 +125,7 @@ mv /opt/bkp/${origin}__config.tgz ~/MEOCloud/bkp
 echo "Backup Pasta /etc"
 #tar -czvf /opt/bkp/${origin}__etc.tgz /etc
 rar a -m5 -idp -y /opt/bkp/${origin}__etc.rar /etc
+mv /opt/bkp/${origin}__etc.rar ~/MEOCloud/bkp
 
 #echo "Backup Pasta ~/bin"
 #tar -czvf /opt/bkp/${origin}__bin.tgz ~/bin --exclude=$HOME/bin/adt-bundle* --exclude=$HOME/bin/AptanaStudio* --exclude=$HOME/bin/eclipse* --exclude=$HOME/bin/FreeNet* --exclude=$HOME/bin/netbeans* --exclude=$HOME/bin/smartgit* --exclude=$HOME/bin/sqldeveloper* --exclude=$HOME/bin/tor* --exclude=$HOME/bin/Zend* --exclude=$HOME/bin/cria* --exclude=$HOME/bin/bin* --exclude=$HOME/bin/t50*

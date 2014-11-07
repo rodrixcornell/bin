@@ -1,25 +1,27 @@
-adt-bundle
-Bashrc
-bin
-oci8*
+/adt-bundle
+/Bashrc
+/bin
+/oci8*
 
-*save
+/*save
 
-cria
-eclipse*
-netbeans*
-smartgit*
-sqldevelop*
-t50*
-tor*
+/cria
+/eclipse*
+/netbeans*
+/smartgit*
+/sqldevelop*
+/t50*
+/tor*
 
-ARQ*
-composer*
-composer.phar
-RELATORIO*
-new_installer_offline*
-*repack*
+/ARQ*
+/composer*
+/composer.phar
+/RELATORIO*
+/new_installer_offline*
+/*repack*
 
-proxy_rc
+/proxy_rc
 
-*.list
+/*.list
+
+/FreeNet
