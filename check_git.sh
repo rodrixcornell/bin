@@ -13,6 +13,11 @@ echo contaspublicas
 git checkout develop && git pull && git push && git checkout master && git pull && git push && git checkout develop
 
 echo
+cd ~/public_html/semad/contratos
+echo contratos
+git checkout develop && git pull && git push && git checkout master && git pull && git push && git checkout develop
+
+echo
 cd ~/public_html/semad/espi
 echo espi
 git checkout develop && git pull && git push && git checkout master && git pull && git push && git checkout develop
@@ -67,6 +72,7 @@ echo
 cd ~/public_html/semad/voyage
 echo voyage
 git checkout develop && git pull && git push && git checkout master && git pull && git push && git checkout develop
+
 echo
 cd ~
 
