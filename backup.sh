@@ -110,12 +110,20 @@ mv /opt/bkp/${origin}__Pastas.rar ~/MEOCloud/bkp
 
 echo "Backup Clouds"
 rar a -m5 -idp -y /opt/bkp/${origin}__SpiderOakHive.rar ~/SpiderOak\ Hive
+mv /opt/bkp/${origin}__SpiderOakHive.rar  ~/MEOCloud/bkp
+
 rar a -m5 -idp -y /opt/bkp/${origin}__GoogleDrive.rar ~/Google\ Drive
-#rar a -m5 -idp -y /opt/bkp/${origin}__UbuntuOne.rar ~/Ubuntu\ One
-#rar a -m5 -idp -y /opt/bkp/${origin}__Dropbox.rar ~/Dropbox
-#rar a -m5 -idp -y /opt/bkp/${origin}__Copy.rar ~/Copy
-#rar a -m5 -idp -y /opt/bkp/${origin}__MEOCloud.rar ~/MEOCloud
+mv /opt/bkp/${origin}__GoogleDrive.rar  ~/MEOCloud/bkp
+
+rar a -m5 -idp -y /opt/bkp/${origin}__UbuntuOne.rar ~/Ubuntu\ One
+mv /opt/bkp/${origin}__UbuntuOne.rar ~/MEOCloud/bkp
+
+rar a -m5 -idp -y /opt/bkp/${origin}__Copy.rar ~/Copy
+mv /opt/bkp/${origin}__Copy.rar ~/MEOCloud/bkp
+
 #rar a -m5 -idp -y /opt/bkp/${origin}__MEGA.rar ~/MEGA
+#rar a -m5 -idp -y /opt/bkp/${origin}__Dropbox.rar ~/Dropbox
+#rar a -m5 -idp -y /opt/bkp/${origin}__MEOCloud.rar ~/MEOCloud
 
 echo "Backup Configurações"
 tar -czvf /opt/bkp/${origin}__config.tgz ~/.bitcasa* ~/.config* ~/.easytag* ~/.filezilla* ~/.fonts* ~/.gconf* ~/.gkrellm* ~/.gnome2/nautilus-scripts* ~/.gnupg* ~/.icon* ~/.local/share/applications* ~/.mozilla* ~/.purple* ~/.receitanet* ~/.Skype* ~/.skype* ~/.*torage* ~/.ssh* ~/.synaptic* ~/.themes* ~/.thunderbird* ~/.xchat2* ~/.youtube-dl-gui* ~/.bash* ~/bash* ~/.git* ~/.inputrc* ~/.pearrc* ~/.profile* ~/.sqlplus* ~/.Xmodmap* ~/.face* ~/.nanorc* ~/.wgetrc*
