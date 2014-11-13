@@ -19,6 +19,9 @@ cd ~/Downloads/debs-packages-bkp
 rm *deb
 sh ~/bin/${origin}__repack.sh
 
+sudo chmod 1000:1000 -R ~/Downloads/debs-packages-bkp
+mv ~/Downloads/debs-packages-bkp ~/Downloads/${origin}__DEBs
+
 #rm -rf Packages
 #rm -rf Packages.gz
 
