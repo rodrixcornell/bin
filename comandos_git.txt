@@ -1,0 +1,17 @@
+Push
+	$ git push --porcelain --progress --recurse-submodules=check origin refs/heads/master:refs/heads/master
+	Total 0 (delta 0), reused 0 (delta 0)
+	* refs/heads/master:refs/heads/master [new branch]
+	$ git branch --set-upstream master origin/master
+	Branch master set up to track remote branch master from origin.
+Checkout Branch
+	$ git branch --no-track develop refs/remotes/origin/develop
+	$ git branch --set-upstream develop origin/develop
+	Branch develop set up to track remote branch develop from origin.
+	$ git checkout --quiet develop
+Clone
+	$ git clone -v --progress git@dev:/contratos_web.git /home/cabral/public_html/semad/contratos
+	Cloning into '/home/cabral/public_html/semad/contratos'...
+	remote: Total 920 (delta 290), reused 779 (delta 205)        
+	remote HEAD refers to nonexistent ref, unable to checkout.
+

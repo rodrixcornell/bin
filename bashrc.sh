@@ -14,6 +14,8 @@
 #complete -o bashdefault -o default -o nospace -F _git git
 #complete -o bashdefault -o default -o nospace -F _gitk gitk
 
+export no_proxy="local, host, localhost, 127.0.0.1, 10.10.*, 172.19.*"
+
 GIT_PS1_SHOWDIRTYSTATE=true
 
 color_prompt=yes
