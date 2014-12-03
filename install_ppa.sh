@@ -10,16 +10,16 @@ if [ ! -e /etc/apt/sources.list.bkp ] ; then
 	sudo cp /etc/apt/sources.list /etc/apt/sources.list.bkp
 fi
 
-sudo sh -c 'echo "deb http://archive.ubuntu.com/ubuntu $(lsb_release -sc) main restricted universe multiverse" > /etc/apt/sources.list'
-sudo sh -c 'echo "deb http://archive.ubuntu.com/ubuntu $(lsb_release -sc)-updates main restricted universe multiverse" >> /etc/apt/sources.list'
-sudo sh -c 'echo "deb http://archive.ubuntu.com/ubuntu $(lsb_release -sc)-backports main restricted universe multiverse" >> /etc/apt/sources.list'
-sudo sh -c 'echo "deb http://archive.ubuntu.com/ubuntu $(lsb_release -sc)-security main restricted universe multiverse" >> /etc/apt/sources.list'
-sudo sh -c 'echo "deb http://archive.ubuntu.com/ubuntu $(lsb_release -sc)-proposed restricted main multiverse universe" >> /etc/apt/sources.list'
-sudo sh -c 'echo "deb-src http://archive.ubuntu.com/ubuntu $(lsb_release -sc) main restricted universe multiverse" >> /etc/apt/sources.list'
-sudo sh -c 'echo "deb-src http://archive.ubuntu.com/ubuntu $(lsb_release -sc)-updates main restricted universe multiverse" >> /etc/apt/sources.list'
-sudo sh -c 'echo "deb-src http://archive.ubuntu.com/ubuntu $(lsb_release -sc)-backports main restricted universe multiverse" >> /etc/apt/sources.list'
-sudo sh -c 'echo "deb-src http://archive.ubuntu.com/ubuntu $(lsb_release -sc)-security main restricted universe multiverse" >> /etc/apt/sources.list'
-sudo sh -c 'echo "deb-src http://archive.ubuntu.com/ubuntu $(lsb_release -sc)-proposed restricted main multiverse universe" >> /etc/apt/sources.list'
+sudo sh -c 'echo "deb http://artfiles.org/ubuntu.com/  $(lsb_release -sc) main restricted universe multiverse" > /etc/apt/sources.list'
+sudo sh -c 'echo "deb http://artfiles.org/ubuntu.com/  $(lsb_release -sc)-updates main restricted universe multiverse" >> /etc/apt/sources.list'
+sudo sh -c 'echo "deb http://artfiles.org/ubuntu.com/  $(lsb_release -sc)-backports main restricted universe multiverse" >> /etc/apt/sources.list'
+sudo sh -c 'echo "deb http://artfiles.org/ubuntu.com/  $(lsb_release -sc)-security main restricted universe multiverse" >> /etc/apt/sources.list'
+sudo sh -c 'echo "deb http://artfiles.org/ubuntu.com/  $(lsb_release -sc)-proposed restricted main multiverse universe" >> /etc/apt/sources.list'
+sudo sh -c 'echo "deb-src http://artfiles.org/ubuntu.com/  $(lsb_release -sc) main restricted universe multiverse" >> /etc/apt/sources.list'
+sudo sh -c 'echo "deb-src http://artfiles.org/ubuntu.com/  $(lsb_release -sc)-updates main restricted universe multiverse" >> /etc/apt/sources.list'
+sudo sh -c 'echo "deb-src http://artfiles.org/ubuntu.com/  $(lsb_release -sc)-backports main restricted universe multiverse" >> /etc/apt/sources.list'
+sudo sh -c 'echo "deb-src http://artfiles.org/ubuntu.com/  $(lsb_release -sc)-security main restricted universe multiverse" >> /etc/apt/sources.list'
+sudo sh -c 'echo "deb-src http://artfiles.org/ubuntu.com/  $(lsb_release -sc)-proposed restricted main multiverse universe" >> /etc/apt/sources.list'
 
 ####
 echo 'Extras Ubuntu'
@@ -53,7 +53,7 @@ sudo apt-get update; sudo apt-get -f -y install fglrx-legacy fglrx-legacy-dev
 ###
 sudo apt-get install -y nautilus-open-terminal terminator
 
-sudo apt-get install -y preload hardinfo gkrellm lm-sensors i2c-tools hddtemp htop iftop iotop tcptrack speedometer curl nmap p7zip-full p7zip-rar rar dpkg-repack gpart gparted gufw tasksel vsftpd xclip mpg321 lame ntfs-3g
+sudo apt-get install -y terminator preload hardinfo gkrellm lm-sensors i2c-tools hddtemp htop iftop iotop tcptrack speedometer curl nmap p7zip-full p7zip-rar rar dpkg-repack gpart gparted gufw tasksel vsftpd xclip mpg321 lame ntfs-3g
 
 ####
 echo 'Alex Murray - PPA for indicator-sensors'
