@@ -14,12 +14,14 @@ if [ -e "$ORACLE_HOME" ]; then
 	export ORACLE_BASE="$ORACLE_HOME"
 
 	export PATH="$PATH:$ORACLE_HOME/bin"
-	if [ -z "$LD_LIBRARY_PATH" ]; then
-		export LD_LIBRARY_PATH="$ORACLE_HOME/lib"
-	else
-		export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$ORACLE_HOME/lib"
-	fi
-	
+	#if [ -z "$LD_LIBRARY_PATH" ]; then
+	#	export LD_LIBRARY_PATH="$ORACLE_HOME/lib"
+	#else
+	#	export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$ORACLE_HOME/lib"
+	#fi
+	export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$ORACLE_HOME/lib"
+
+
 	if [ -e "$SQLPATH" ]; then
 		if [ -z "$SQLPATH" ]; then
 			export SQLPATH="$ORACLE_HOME/lib"
