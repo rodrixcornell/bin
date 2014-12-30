@@ -24,8 +24,8 @@ sudo sh -c 'echo "deb-src http://artfiles.org/ubuntu.com/  $(lsb_release -sc)-pr
 ####
 echo 'Extras Ubuntu'
 
-sudo sh -c 'echo "deb http://extras.ubuntu.com/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/extras.ubuntu.list'
-sudo sh -c 'echo "deb-src http://extras.ubuntu.com/ubuntu $(lsb_release -sc) main" >> /etc/apt/sources.list.d/extras.ubuntu.list'
+sudo sh -c 'echo "deb http://extras.ubuntu.com/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/extras.list'
+sudo sh -c 'echo "deb-src http://extras.ubuntu.com/ubuntu $(lsb_release -sc) main" >> /etc/apt/sources.list.d/extras.list'
 
 ####
 echo 'Canonical Partner'
@@ -402,8 +402,8 @@ echo 'GetDeb Software Portal - http://www.getdeb.net/'
 cd ~/Downloads/
 wget -q http://archive.getdeb.net/install_deb/getdeb-repository_0.1-1~getdeb1_all.deb
 
-#wget -q -O- http://archive.getdeb.net/getdeb-archive.key | sudo apt-key add -
-#sudo sh -c 'echo "deb http://archive.getdeb.net/ubuntu precise-getdeb apps" > /etc/apt/sources.list.d/getdeb.list'
+wget -q -O- http://archive.getdeb.net/getdeb-archive.key | sudo apt-key add -
+sudo sh -c 'echo "deb http://archive.getdeb.net/ubuntu precise-getdeb apps" > /etc/apt/sources.list.d/getdeb.list'
 
 sudo apt-get install -y gnome-system-tools ghex glade wallch alacarte fbreader acroread ejecter gdebi ripperx easytag audacious audacity easymp3gain-gtk vlc subdownloader cheese skype pidgin chmsee synapse synaptic filezilla inkscape agave dia gimp bleachbit xchat trimage flashplugin-installer dconf-tools ubuntu-restricted-extras zsnes indicator-cpufreq tuxguitar tuxpaint tuxtype tuxmath
 

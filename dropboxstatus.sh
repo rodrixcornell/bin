@@ -1,0 +1,4 @@
+#!/bin/bash
+
+dropbox status
+

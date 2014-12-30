@@ -32,21 +32,21 @@ sudo sh -c 'echo "deb-src http://extras.ubuntu.com/ubuntu $(lsb_release -sc) mai
 ####
 echo 'Canonical Partner'
 
-sudo sh -c 'echo "deb http://archive.canonical.com/ubuntu $(lsb_release -sc) partner" > /etc/apt/sources.list.d/canonical.partner.list'
-sudo sh -c 'echo "deb http://archive.canonical.com/ubuntu $(lsb_release -sc)-updates partner" >> /etc/apt/sources.list.d/canonical.partner.list'
-sudo sh -c 'echo "deb http://archive.canonical.com/ubuntu $(lsb_release -sc)-backports partner" >> /etc/apt/sources.list.d/canonical.partner.list'
-sudo sh -c 'echo "deb http://archive.canonical.com/ubuntu $(lsb_release -sc)-security partner" >> /etc/apt/sources.list.d/canonical.partner.list'
-sudo sh -c 'echo "deb http://archive.canonical.com/ubuntu $(lsb_release -sc)-proposed partner" >> /etc/apt/sources.list.d/canonical.partner.list'
-sudo sh -c 'echo "deb http://archive.canonical.com/ubuntu $(lsb_release -sc) partner/debian-installer" >> /etc/apt/sources.list.d/canonical.partner.list'
-sudo sh -c 'echo "deb http://archive.canonical.com/ubuntu $(lsb_release -sc)-updates partner/debian-installer" >> /etc/apt/sources.list.d/canonical.partner.list'
-sudo sh -c 'echo "deb http://archive.canonical.com/ubuntu $(lsb_release -sc)-backports partner/debian-installer" >> /etc/apt/sources.list.d/canonical.partner.list'
-sudo sh -c 'echo "deb http://archive.canonical.com/ubuntu $(lsb_release -sc)-security partner/debian-installer" >> /etc/apt/sources.list.d/canonical.partner.list'
-sudo sh -c 'echo "deb http://archive.canonical.com/ubuntu $(lsb_release -sc)-proposed partner/debian-installer" >> /etc/apt/sources.list.d/canonical.partner.list'
-sudo sh -c 'echo "deb-src http://archive.canonical.com/ubuntu $(lsb_release -sc) partner" >> /etc/apt/sources.list.d/canonical.partner.list'
-sudo sh -c 'echo "deb-src http://archive.canonical.com/ubuntu $(lsb_release -sc)-updates partner" >> /etc/apt/sources.list.d/canonical.partner.list'
-sudo sh -c 'echo "deb-src http://archive.canonical.com/ubuntu $(lsb_release -sc)-backports partner" >> /etc/apt/sources.list.d/canonical.partner.list'
-sudo sh -c 'echo "deb-src http://archive.canonical.com/ubuntu $(lsb_release -sc)-security partner" >> /etc/apt/sources.list.d/canonical.partner.list'
-sudo sh -c 'echo "deb-src http://archive.canonical.com/ubuntu $(lsb_release -sc)-proposed partner" >> /etc/apt/sources.list.d/canonical.partner.list'
+sudo sh -c 'echo "deb http://archive.canonical.com/ubuntu $(lsb_release -sc) partner" > /etc/apt/sources.list.d/canonical_partner.list'
+sudo sh -c 'echo "deb http://archive.canonical.com/ubuntu $(lsb_release -sc)-updates partner" >> /etc/apt/sources.list.d/canonical_partner.list'
+sudo sh -c 'echo "deb http://archive.canonical.com/ubuntu $(lsb_release -sc)-backports partner" >> /etc/apt/sources.list.d/canonical_partner.list'
+sudo sh -c 'echo "deb http://archive.canonical.com/ubuntu $(lsb_release -sc)-security partner" >> /etc/apt/sources.list.d/canonical_partner.list'
+sudo sh -c 'echo "deb http://archive.canonical.com/ubuntu $(lsb_release -sc)-proposed partner" >> /etc/apt/sources.list.d/canonical_partner.list'
+sudo sh -c 'echo "deb http://archive.canonical.com/ubuntu $(lsb_release -sc) partner/debian-installer" >> /etc/apt/sources.list.d/canonical_partner.list'
+sudo sh -c 'echo "deb http://archive.canonical.com/ubuntu $(lsb_release -sc)-updates partner/debian-installer" >> /etc/apt/sources.list.d/canonical_partner.list'
+sudo sh -c 'echo "deb http://archive.canonical.com/ubuntu $(lsb_release -sc)-backports partner/debian-installer" >> /etc/apt/sources.list.d/canonical_partner.list'
+sudo sh -c 'echo "deb http://archive.canonical.com/ubuntu $(lsb_release -sc)-security partner/debian-installer" >> /etc/apt/sources.list.d/canonical_partner.list'
+sudo sh -c 'echo "deb http://archive.canonical.com/ubuntu $(lsb_release -sc)-proposed partner/debian-installer" >> /etc/apt/sources.list.d/canonical_partner.list'
+sudo sh -c 'echo "deb-src http://archive.canonical.com/ubuntu $(lsb_release -sc) partner" >> /etc/apt/sources.list.d/canonical_partner.list'
+sudo sh -c 'echo "deb-src http://archive.canonical.com/ubuntu $(lsb_release -sc)-updates partner" >> /etc/apt/sources.list.d/canonical_partner.list'
+sudo sh -c 'echo "deb-src http://archive.canonical.com/ubuntu $(lsb_release -sc)-backports partner" >> /etc/apt/sources.list.d/canonical_partner.list'
+sudo sh -c 'echo "deb-src http://archive.canonical.com/ubuntu $(lsb_release -sc)-security partner" >> /etc/apt/sources.list.d/canonical_partner.list'
+sudo sh -c 'echo "deb-src http://archive.canonical.com/ubuntu $(lsb_release -sc)-proposed partner" >> /etc/apt/sources.list.d/canonical_partner.list'
 
 ###
 sudo aptitude install -y nautilus-open-terminal terminator
@@ -149,8 +149,8 @@ sudo sh -c 'echo "deb-src http://ftp.ddg.lth.se/mariadb/repo/5.5/ubuntu $(lsb_re
 echo 'Installing Google Chrome'
 wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
 
-sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list'
-sudo sh -c 'echo "deb http://dl.google.com/linux/talkplugin/deb/ stable main" > /etc/apt/sources.list.d/google-talkplugin.list'
+sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google.list'
+sudo sh -c 'echo "deb http://dl.google.com/linux/talkplugin/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
 
 ####
 echo 'Installing Zend Server'
@@ -164,6 +164,9 @@ sudo sh -c 'echo "#deb http://repos.zend.com/zend-server/6.2/deb_ssl1.0 server n
 sudo sh -c 'echo "#deb http://repos.zend.com/zend-server/6.3/deb server non-free" >> /etc/apt/sources.list.d/zend.list'
 sudo sh -c 'echo "#deb http://repos.zend.com/zend-server/6.3/deb_ssl1.0 server non-free" >> /etc/apt/sources.list.d/zend.list'
 sudo sh -c 'echo "#deb http://repos.zend.com/zend-server/6.3/deb_apache2.4 server non-free" >> /etc/apt/sources.list.d/zend.list'
+sudo sh -c 'echo "#deb http://repos.zend.com/zend-server/7.0/deb server non-free" >> /etc/apt/sources.list.d/zend.list'
+sudo sh -c 'echo "#deb http://repos.zend.com/zend-server/7.0/deb_ssl1.0 server non-free" >> /etc/apt/sources.list.d/zend.list'
+sudo sh -c 'echo "#deb http://repos.zend.com/zend-server/7.0/deb_apache2.4 server non-free" >> /etc/apt/sources.list.d/zend.list'
 #sudo add-apt-repository "deb http://repos.zend.com/zend-server/deb server non-free"
 
 ### zend framework
@@ -196,7 +199,7 @@ cd ~/Downloads/
 #wget -c http://download.virtualbox.org/virtualbox/4.3.8/virtualbox-4.3_4.3.8-92456~Ubuntu~precise_i386.deb; sudo dpkg -i virtualbox-4.3_4.3.8-92456~Ubuntu~precise_i386.deb
 
 wget -q http://download.virtualbox.org/virtualbox/debian/oracle_vbox.asc -O- | sudo apt-key add -
-sudo sh -c 'echo "deb http://download.virtualbox.org/virtualbox/debian $(lsb_release -sc) contrib" > /etc/apt/sources.list.d/virtualbox.list'
+sudo sh -c 'echo "deb http://download.virtualbox.org/virtualbox/debian $(lsb_release -sc) non-free contrib" > /etc/apt/sources.list.d/virtualbox.list'
 
 ####
 echo 'GetDeb Software Portal - http://www.getdeb.net/'
@@ -205,6 +208,7 @@ cd ~/Downloads/
 
 wget -q -O- http://archive.getdeb.net/getdeb-archive.key | sudo apt-key add -
 sudo sh -c 'echo "deb http://archive.getdeb.net/ubuntu $(lsb_release -sc)-getdeb apps" > /etc/apt/sources.list.d/getdeb.list'
+sudo sh -c 'echo "deb http://archive.getdeb.net/ubuntu $(lsb_release -sc)-getdeb games" >> /etc/apt/sources.list.d/getdeb.list'
 
 #sudo apt-get install -y gnome-session-fallback gnome-system-tools ghex glade geany geany-plugins midori wallch alacarte fbreader acroread ejecter gdebi ripperx easytag audacious audacity easymp3gain-gtk vlc subdownloader cheese skype pidgin chmsee synapse synaptic filezilla inkscape agave dia gimp deluge bleachbit xchat trimage flashplugin-installer dconf-tools ubuntu-restricted-extras ubuntu-wallpapers* zsnes
 

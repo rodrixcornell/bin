@@ -2,4 +2,4 @@
 
 ATI=`aticonfig --odgt | grep -vi Default | awk '{print $5}'`
 
-echo ati $ATI °C
+echo 'ati'$ATI'°C'
