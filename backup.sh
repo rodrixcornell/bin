@@ -102,6 +102,7 @@ mv /opt/bkp/${origin}__public_html.rar ~/MEOCloud/bkp
 
 echo "Backup Pasta Pessoais"
 cp /usr/share/backgrounds ~/Imagens
+cp /usr/share/xfce4/backdrops ~/Imagens
 find ~/Imagens -name '*xml' -exec rm -rfv {} \;
 find ~/Imagens -name '*contest' -exec rm -rfv {} \;
 find ~/Imagens -name 'Thumbs*' -exec rm -rfv {} \;
@@ -144,8 +145,8 @@ mv /opt/bkp/${origin}__etc.rar ~/MEOCloud/bkp
 echo
 #nohup dropbox start -i &
 #nohup CopyAgent &
-nohup skype &
-nohup pidgin &
+#nohup skype &
+#nohup pidgin &
 #nohup meocloud-gui &
 #nohup megasync &
 #insync &
