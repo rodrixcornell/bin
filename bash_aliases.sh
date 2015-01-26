@@ -116,3 +116,6 @@ alias chrome-beta-incognito-proxy='google-chrome-beta --incognito --proxy-server
 alias chrome-beta-proxy='google-chrome-beta --proxy-server="http=172.19.10.20:3128;https=172.19.10.20:3128"'
 alias youtube-dl-proxy='youtube-dl --proxy "http://172.19.10.20:3128/"'
 alias youtube-dl-list='youtube-dl -a'
+
+alias php-web-server='php -elswS localhost:8000 -t '
+alias php-web-server_su='sudo php -elswS 0.0.0.0:80 -t '
