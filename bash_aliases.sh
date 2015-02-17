@@ -92,8 +92,8 @@ alias wget-list='wget -i'
 alias canal='gksu software-properties-gtk'
 alias lshw-gtk='gksu lshw-gtk'
 
-alias alien-deb='sudo alien -d -c; sudo chown 1000:1000 *deb'
-alias alien-rpm='sudo alien -r -c; sudo chown 1000:1000 *rpm'
+alias alien-deb='sudo alien --scripts -d; sudo chown 1000:1000 *deb'
+alias alien-rpm='sudo alien --scripts -r; sudo chown 1000:1000 *rpm'
 
 #alias gkedit='sudo gedit'
 alias griVe='grive -V'
@@ -117,5 +117,5 @@ alias chrome-beta-proxy='google-chrome-beta --proxy-server="http=172.19.10.20:31
 alias youtube-dl-proxy='youtube-dl --proxy "http://172.19.10.20:3128/"'
 alias youtube-dl-list='youtube-dl -a'
 
-alias php-web-server='php -elswS localhost:8000 -t '
-alias php-web-server_su='sudo php -elswS 0.0.0.0:80 -t '
+alias php-web-server='php -elswS localhost:8000'
+alias php-web-server_su='sudo php -elswS 0.0.0.0:80'

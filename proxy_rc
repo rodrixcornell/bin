@@ -1,5 +1,6 @@
 # No Proxy
-export no_proxy="local, host, localhost, 127.0.0.1, 10.10.*, 172.19.*"
+export no_proxy="local, host, localhost, 127.0.0.1, 10.10.*, 172.19.*, 192.168.*"
+export NO_PROXY=$no_proxy
 #export https_proxy=""
 #export http_proxy=""
 #export ftp_proxy=""
