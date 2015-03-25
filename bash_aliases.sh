@@ -119,3 +119,6 @@ alias youtube-dl-list='youtube-dl -a'
 
 alias php-web-server='php -elswS localhost:8000'
 alias php-web-server_su='sudo php -elswS 0.0.0.0:80'
+
+alias mysql-start='sudo service mysql start'
+alias mysql-stop='sudo service mysql stop'
