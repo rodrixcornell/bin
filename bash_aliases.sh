@@ -109,6 +109,7 @@ alias pull_push='git pull; git push'
 alias kill_fox='killall firefox'
 
 alias rman='rlwrap rman'
+alias rman='rlwrap -b "" mysql'
 alias sqlplus='rlwrap -b "" -f $HOME/oracle_client/dict.sql sqlplus'
 
 alias rar_m5='rar a -m5 -idp -y'
@@ -117,6 +118,7 @@ alias chrome-beta-proxy='google-chrome-beta --proxy-server="http=172.19.10.20:31
 alias youtube-dl-proxy='youtube-dl --proxy "http://172.19.10.20:3128/"'
 alias youtube-dl-list='youtube-dl -a'
 
+#alias php='php -elsw'
 alias php-web-server='php -elswS localhost:8000'
 alias php-web-server_su='sudo php -elswS 0.0.0.0:80'
 
