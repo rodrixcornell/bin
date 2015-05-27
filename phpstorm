@@ -1,0 +1,1 @@
+../app/PhpStorm-8.0.3/bin/phpstorm.sh
