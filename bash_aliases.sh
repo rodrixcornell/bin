@@ -109,7 +109,7 @@ alias pull_push='git pull; git push'
 alias kill_fox='killall firefox'
 
 alias rman='rlwrap rman'
-alias rman='rlwrap -b "" mysql'
+alias mysql='rlwrap -b "" mysql'
 alias sqlplus='rlwrap -b "" -f $HOME/oracle_client/dict.sql sqlplus'
 
 alias rar_m5='rar a -m5 -idp -y'
