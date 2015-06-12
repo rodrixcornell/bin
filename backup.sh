@@ -2,7 +2,8 @@
 sudo echo 'test sudo'
 data=`/bin/date +%Y%m%d_%H%M%S`
 machine=`/bin/uname -m`
-origin=${HOSTNAME}__${machine}__${data}
+release=`/bin/uname -r`
+origin=${HOSTNAME}-${machine}__${data}
 
 #echo $data
 #echo ${data}
