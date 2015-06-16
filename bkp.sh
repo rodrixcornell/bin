@@ -5,6 +5,6 @@ release=`/bin/uname -r`
 
 os=`cat /proc/version |awk '{print $4"-"$5}'`
 
-origin=${HOSTNAME}_${release}_${machine}_${data}
+origin=${HOSTNAME}_${machine}_${data}
 
 echo $origin
