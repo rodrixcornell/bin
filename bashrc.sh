@@ -15,7 +15,7 @@
 #complete -o bashdefault -o default -o nospace -F _gitk gitk
 
 #export no_proxy="local, host, localhost, 127.0.0.1, 10.10.*, 172.19.*, *.manaus.am.gov.br, .manaus.am.gov.br, manaus.am.gov.br, *manaus.am.gov.br, 172.19.10.0/23"
-export no_proxy="local, host, localhost, 127.0.0.1, 172.19.10.0/23"
+export no_proxy="local, host, localhost, .manaus.am.gov.br, .am.gov.br, 127.0.0.1, 172.19.10.0/23"
 #export https_proxy=http://172.19.10.20:3128/
 #export http_proxy=http://172.19.10.20:3128/
 #export ftp_proxy=http://172.19.10.20:3128/
@@ -39,6 +39,11 @@ xterm*|rxvt*)
 *)
     ;;
 esac
+
+# Oracle TNS
+if [ -d "$HOME/oracle_client/network/admin" ]; then
+	export TNS_ADMIN="$HOME/oracle_client/network/admin"
+fi
 
 # my include bashrc.sh if it exists
 #if [ -f ~/bin/bash_aliases.sh ]; then
