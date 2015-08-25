@@ -1,4 +1,4 @@
-#!/bin/bash
+﻿#!/bin/bash
 sudo echo 'test sudo'
 data=`/bin/date +%Y%m%d_%H%M%S`
 machine=`/bin/uname -m`
