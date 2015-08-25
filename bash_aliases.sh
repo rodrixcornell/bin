@@ -68,7 +68,7 @@ alias ati_adapters='aticonfig --lsa'
 #      Enable/disable display switching with ACPI methods on mobile platforms. This option is enabled by default.
 alias thermal2='echo; sensors; hddtemp /dev/sda; echo; aticonfig --odgt'
 alias thermal='echo; sensors; hddtemp /dev/sda; echo'
-alias nano='nano -cw'
+alias nano='nano -cimw'
 alias nano_su='sudo nano -c'
 alias find_su='sudo find'
 
