@@ -1,0 +1,81 @@
+Certificate:
+    Data:
+        Version: 3 (0x2)
+        Serial Number: 217 (0xd9)
+        Signature Algorithm: sha1WithRSAEncryption
+        Issuer: C=BR, ST=AM, L=MANAUS, O=PREFEITURA MUNICIPAL DE MANAUS, OU=NSI-SEMCTI, CN=VPN-CA/emailAddress=seguranca.semcti@pmm.am.gov.br
+        Validity
+            Not Before: Sep  2 20:23:00 2015 GMT
+            Not After : Aug 30 20:23:00 2025 GMT
+        Subject: C=BR, ST=AM, O=PREFEITURA MUNICIPAL DE MANAUS, OU=SEMCTI, CN=Cabral SEMAD/emailAddress=rodrigo.cabral@pmm.am.gov.br
+        Subject Public Key Info:
+            Public Key Algorithm: rsaEncryption
+            RSA Public Key: (2048 bit)
+                Modulus (2048 bit):
+                    00:a9:01:6b:f2:90:62:b6:a5:9e:c1:67:49:15:28:
+                    e3:16:02:8c:99:44:89:11:9d:37:b8:7c:5f:7b:e2:
+                    4c:83:7e:fb:34:92:66:4f:18:51:0a:e4:fe:27:f4:
+                    46:5f:b9:93:d0:e8:cf:d0:55:ca:dc:d1:bb:7c:a9:
+                    27:2e:cd:23:49:8e:1a:4a:72:43:f0:be:9e:19:c2:
+                    a6:86:bd:8c:ac:62:aa:1b:79:67:3a:23:b1:3c:e1:
+                    c5:ea:e7:6a:4e:8e:09:46:d3:70:e4:4c:aa:1d:9e:
+                    3a:75:8b:db:0e:66:37:14:15:bb:f9:b2:d8:39:bf:
+                    c1:13:1d:58:d1:de:49:70:3e:83:23:b3:b6:b4:6b:
+                    1e:47:fd:08:98:b4:e1:40:28:10:63:72:d5:71:2a:
+                    c9:70:82:01:d0:2d:81:e9:90:1a:f9:69:8d:e2:a0:
+                    77:c9:8c:5a:a6:3e:3c:2b:11:35:9b:61:21:46:8c:
+                    60:67:b1:6d:14:0d:7e:8a:c4:f4:e1:ff:bb:ea:31:
+                    0a:46:f1:5f:e2:69:4f:b7:a2:4d:34:8d:42:e2:0c:
+                    f4:8b:ce:e0:c7:86:6b:59:46:6d:36:4e:59:d7:0b:
+                    29:cc:1a:f7:8a:fe:10:6e:fa:0a:0d:db:99:ee:c3:
+                    2b:df:72:6b:3f:25:52:24:55:a2:25:e4:d7:59:8d:
+                    5e:f5
+                Exponent: 65537 (0x10001)
+        X509v3 extensions:
+            X509v3 Basic Constraints: 
+                CA:FALSE
+            Netscape Comment: 
+                OpenSSL Generated Certificate
+            X509v3 Subject Key Identifier: 
+                C3:37:02:3E:52:9B:30:91:4C:D4:F7:F8:3F:A1:56:68:43:BB:DF:FE
+            X509v3 Authority Key Identifier: 
+                keyid:49:3F:17:55:F6:40:E2:F6:89:AB:54:37:44:90:CB:5E:9B:22:E5:DC
+                DirName:/C=BR/ST=AM/L=MANAUS/O=PREFEITURA MUNICIPAL DE MANAUS/OU=NSI-SEMCTI/CN=VPN-CA/emailAddress=seguranca.semcti@pmm.am.gov.br
+                serial:AF:DD:11:3A:79:37:26:C9
+
+    Signature Algorithm: sha1WithRSAEncryption
+        6f:ba:6c:08:9a:1b:79:14:e2:f3:1c:2f:b5:77:b9:78:39:57:
+        39:09:97:5e:3f:2d:4a:f1:b8:07:87:f5:b2:d4:b2:45:66:ef:
+        c2:05:db:20:85:85:82:af:64:d3:88:60:0f:5d:19:cd:1e:1a:
+        e5:41:5d:94:3b:b5:7a:c0:b3:75:1e:75:b5:90:fb:d8:60:6d:
+        83:a0:de:c6:07:89:df:5b:10:44:95:57:13:67:c4:23:74:fe:
+        78:bf:1e:09:bb:8a:d8:04:24:d4:55:60:05:b9:5e:f6:86:65:
+        c7:b4:18:b0:6d:32:64:b0:0d:ee:ac:cd:a3:9a:a4:97:cf:3b:
+        c5:5c
+-----BEGIN CERTIFICATE-----
+MIIEfTCCA+agAwIBAgICANkwDQYJKoZIhvcNAQEFBQAwgakxCzAJBgNVBAYTAkJS
+MQswCQYDVQQIEwJBTTEPMA0GA1UEBxMGTUFOQVVTMScwJQYDVQQKEx5QUkVGRUlU
+VVJBIE1VTklDSVBBTCBERSBNQU5BVVMxEzARBgNVBAsTCk5TSS1TRU1DVEkxDzAN
+BgNVBAMTBlZQTi1DQTEtMCsGCSqGSIb3DQEJARYec2VndXJhbmNhLnNlbWN0aUBw
+bW0uYW0uZ292LmJyMB4XDTE1MDkwMjIwMjMwMFoXDTI1MDgzMDIwMjMwMFowgZgx
+CzAJBgNVBAYTAkJSMQswCQYDVQQIEwJBTTEnMCUGA1UEChMeUFJFRkVJVFVSQSBN
+VU5JQ0lQQUwgREUgTUFOQVVTMQ8wDQYDVQQLEwZTRU1DVEkxFTATBgNVBAMTDENh
+YnJhbCBTRU1BRDErMCkGCSqGSIb3DQEJARYccm9kcmlnby5jYWJyYWxAcG1tLmFt
+Lmdvdi5icjCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAKkBa/KQYral
+nsFnSRUo4xYCjJlEiRGdN7h8X3viTIN++zSSZk8YUQrk/if0Rl+5k9Doz9BVytzR
+u3ypJy7NI0mOGkpyQ/C+nhnCpoa9jKxiqht5ZzojsTzhxernak6OCUbTcORMqh2e
+OnWL2w5mNxQVu/my2Dm/wRMdWNHeSXA+gyOztrRrHkf9CJi04UAoEGNy1XEqyXCC
+AdAtgemQGvlpjeKgd8mMWqY+PCsRNZthIUaMYGexbRQNforE9OH/u+oxCkbxX+Jp
+T7eiTTSNQuIM9IvO4MeGa1lGbTZOWdcLKcwa94r+EG76Cg3bme7DK99yaz8lUiRV
+oiXk11mNXvUCAwEAAaOCAT0wggE5MAkGA1UdEwQCMAAwLAYJYIZIAYb4QgENBB8W
+HU9wZW5TU0wgR2VuZXJhdGVkIENlcnRpZmljYXRlMB0GA1UdDgQWBBTDNwI+Upsw
+kUzU9/g/oVZoQ7vf/jCB3gYDVR0jBIHWMIHTgBRJPxdV9kDi9omrVDdEkMtemyLl
+3KGBr6SBrDCBqTELMAkGA1UEBhMCQlIxCzAJBgNVBAgTAkFNMQ8wDQYDVQQHEwZN
+QU5BVVMxJzAlBgNVBAoTHlBSRUZFSVRVUkEgTVVOSUNJUEFMIERFIE1BTkFVUzET
+MBEGA1UECxMKTlNJLVNFTUNUSTEPMA0GA1UEAxMGVlBOLUNBMS0wKwYJKoZIhvcN
+AQkBFh5zZWd1cmFuY2Euc2VtY3RpQHBtbS5hbS5nb3YuYnKCCQCv3RE6eTcmyTAN
+BgkqhkiG9w0BAQUFAAOBgQBvumwImht5FOLzHC+1d7l4OVc5CZdePy1K8bgHh/Wy
+1LJFZu/CBdsghYWCr2TTiGAPXRnNHhrlQV2UO7V6wLN1HnW1kPvYYG2DoN7GB4nf
+WxBElVcTZ8QjdP54vx4Ju4rYBCTUVWAFuV72hmXHtBiwbTJksA3urM2jmqSXzzvF
+XA==
+-----END CERTIFICATE-----

@@ -102,6 +102,7 @@ alias wget='wget -c -t0'
 alias wget-limit='wget -c --limit-rate=15000'
 alias wget-site='wget -r -erobots=off'
 alias wget-list='wget -i'
+alias grep='grep -y --color=auto'
 alias canal='gksu software-properties-gtk'
 alias lshw-gtk='gksu lshw-gtk'
 
@@ -127,7 +128,7 @@ alias sqlplus='rlwrap -b "" -f $HOME/oracle_client/dict.sql sqlplus'
 
 alias rar_m5='rar a -m5 -idp -y'
 alias chrome-beta-incognito-proxy='google-chrome-beta --incognito --proxy-server="http=172.19.10.20:3128;https=172.19.10.20:3128"'
-alias chrome-beta-proxy='google-chrome-beta --proxy-server="http=172.19.10.20:3128;https=172.19.10.20:3128"'
+alias chrome-beta-proxy='google-chrome-beta --proxy-server="http=172.19.10.1:3128;https=172.19.10.1:3128"'
 alias youtube-dl-proxy='youtube-dl --proxy "http://172.19.10.20:3128/"'
 alias youtube-dl-list='youtube-dl -a'
 
