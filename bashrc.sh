@@ -14,11 +14,11 @@
 #complete -o bashdefault -o default -o nospace -F _git git
 #complete -o bashdefault -o default -o nospace -F _gitk gitk
 
-#export no_proxy="local, host, localhost, 127.0.0.1, 10.10.*, 172.19.*, *.manaus.am.gov.br, .manaus.am.gov.br, manaus.am.gov.br, *manaus.am.gov.br, 172.19.10.0/23"
-export no_proxy="local,host,localhost,127.0.0.1"
-#export https_proxy=http://172.19.10.20:3128/
-#export http_proxy=http://172.19.10.20:3128/
-#export ftp_proxy=http://172.19.10.20:3128/
+#export no_proxy="local,host,localhost,127.0.0.1,10.10.*,172.19.*,*.manaus.am.gov.br,.manaus.am.gov.br,172.19.10.0/23,192.168.56.0/24"
+#export no_proxy="local,host,localhost,127.0.0.1"
+#export https_proxy=http://172.19.10.1:3128
+#export http_proxy=http://172.19.10.1:3128
+#export ftp_proxy=http://172.19.10.1:3128
 
 export RLWRAP_EDITOR="nano %L"
 
