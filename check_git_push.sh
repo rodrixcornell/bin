@@ -34,6 +34,16 @@ git checkout develop && git push && git checkout master && git push && git check
 git checkout develop_tela && git push && git checkout master && git push && git checkout develop_tela
 
 echo
+cd ~/public_html/semad/gestaodoc
+echo gestaodoc
+git checkout develop && git push && git checkout master && git push && git checkout develop
+
+echo
+cd ~/public_html/semad/gestaonfe
+echo gestaonfe
+git checkout develop && git push && git checkout master && git push && git checkout develop
+
+echo
 cd ~/public_html/semad/imoveis
 echo imoveis
 git checkout develop && git push && git checkout master && git push && git checkout develop
@@ -49,6 +59,11 @@ echo juridico
 git checkout develop && git push && git checkout master && git push && git checkout develop
 
 echo
+cd ~/public_html/semad/novosge
+echo novosge
+git checkout develop && git push && git checkout master && git push && git checkout develop
+
+echo
 cd ~/public_html/semad/organizacional
 echo organizacional
 git checkout develop && git push && git checkout master && git push && git checkout develop
@@ -61,7 +76,22 @@ git checkout develop && git push && git checkout master && git push && git check
 echo
 cd ~/public_html/semad/ponto
 echo ponto
-git checkout developer && git push && git checkout master && git push && git checkout developer
+git checkout develop && git push && git checkout master && git push && git checkout develop
+
+echo
+cd ~/public_html/semad/sbpg
+echo sbpg
+git checkout develop && git push && git checkout master && git push && git checkout develop
+
+echo
+cd ~/public_html/semad/sbpg_ies_public
+echo sbpg_ies_public
+git checkout develop && git push && git checkout master && git push && git checkout develop
+
+echo
+cd ~/public_html/semad/sbpg_public
+echo sbpg_public
+git checkout develop && git push && git checkout master && git push && git checkout develop
 
 echo
 cd ~/public_html/semad/sishab

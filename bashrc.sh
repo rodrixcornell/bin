@@ -20,15 +20,20 @@
 #export http_proxy=http://172.19.10.1:3128
 #export ftp_proxy=http://172.19.10.1:3128
 
+export SQLPATH="$ORACLE_HOME"
+export TNS_ADMIN="$HOME/oracle_client/network/admin"
+
 export RLWRAP_EDITOR="nano %L"
 
 GIT_PS1_SHOWDIRTYSTATE=true
+
+#PROMPT_COMMAND="echo -n [$(date +%H:%M:%S)]"
 
 color_prompt=yes
 if [ "$color_prompt" = yes ]; then
 	PS1='${debian_chroot:+($debian_chroot)}\[\033[01;33m\]\h\[\033[00m\]@\[\033[01;32m\]\u\[\033[00m\]: \[\033[01;36m\]\w\n\[\033[31m\]$(__git_ps1 "(%s) ")\[\033[00m\]\[\033[07;37m\]->\[\033[00m\] '
 else
-    PS1='${debian_chroot:+($debian_chroot)}\h@\u: \w\n$(__git_ps1 "(%s) ")-> '
+	PS1='${debian_chroot:+($debian_chroot)}\h@\u: \w\n$(__git_ps1 "(%s) ")-> '
 fi
 unset color_prompt
 
