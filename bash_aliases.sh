@@ -115,8 +115,8 @@ alias grive-f='grive -f'
 alias grive-dry='grive --dry-run'
 ###############################################################################
 ### Git
-alias g=git
-alias gk=gitk
+alias g='git'
+alias gk='gitk'
 alias pull_push='git pull; git push'
 #complete -o bashdefault -o default -o nospace -F _git
 

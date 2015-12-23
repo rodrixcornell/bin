@@ -1,0 +1,1 @@
+../app/pycharm-community-5.0.2/bin/pycharm.sh
