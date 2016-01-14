@@ -79,6 +79,11 @@ echo ponto
 git checkout develop && git pull && git checkout master && git pull && git checkout develop
 
 echo
+cd ~/public_html/semad/ponto-e
+echo ponto-e
+git checkout develop && git pull && git checkout master && git pull && git checkout develop
+
+echo
 cd ~/public_html/semad/recebimento
 echo recebimento
 git checkout develop && git pull && git checkout master && git pull && git checkout develop
