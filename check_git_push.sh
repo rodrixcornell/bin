@@ -79,6 +79,11 @@ echo ponto
 git checkout develop && git push && git checkout master && git push && git checkout develop
 
 echo
+cd ~/public_html/semad/ponto-e
+echo ponto-e
+git checkout develop && git push && git checkout master && git push && git checkout develop
+
+echo
 cd ~/public_html/semad/sbpg
 echo sbpg
 git checkout develop && git push && git checkout master && git push && git checkout develop
