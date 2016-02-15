@@ -1,0 +1,5 @@
+git pull
+git checkout ratify
+git merge develop
+git push -u
+git push ratify

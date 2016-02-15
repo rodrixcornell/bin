@@ -71,6 +71,7 @@ alias thermal='echo; sensors; hddtemp /dev/sda; echo'
 alias nano='nano -cimw'
 alias nano_su='sudo nano -c'
 alias find_su='sudo find'
+alias mousepad_su='sudo mousepad'
 
 alias hell_halt='sudo init 0'
 alias hell_reboot='sudo init 6'
@@ -85,6 +86,7 @@ alias cls='clear'
 alias mv_su='sudo mv -fv'
 alias cp_su='sudo cp -rfv'
 alias rm_su='sudo rm -rfv'
+alias mkdir_su='sudo mkdir -p'
 alias mv='mv -fv'
 alias cp='cp -rfv'
 alias rm='rm -rfv'
@@ -117,7 +119,7 @@ alias grive-dry='grive --dry-run'
 ### Git
 alias g=git
 alias gk=gitk
-alias pull_push='git pull; git push'
+#alias pull_push='git pull; git push'
 #complete -o bashdefault -o default -o nospace -F _git
 
 alias kill_fox='killall firefox'
@@ -140,3 +142,5 @@ alias mysql-start='sudo service mysql start'
 alias mysql-stop='sudo service mysql stop'
 
 alias nmap_su='sudo nmap -A -vvvvv -sS -O'
+
+alias public_semad='cd public_html/semad/'

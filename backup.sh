@@ -40,11 +40,11 @@ echo "Localizando Lixo"
 #find ~ -name '*~' -exec echo {} \;
 #find ~ -name '*~' -exec rm {} \;
 #sudo find / -name '*~' -exec echo {} \;
-sudo find / -name '*~' -exec rm {} \;
+#sudo find / -name '*~' -exec rm {} \;
 #sudo find / -name '*.save' -exec echo {} \;
-sudo find / -name '*.save' -exec rm {} \;
+#sudo find / -name '*.save' -exec rm {} \;
 #sudo find / -name '.goutputstream-*' -exec echo {} \;
-sudo find / -name '.goutputstream-*' -exec rm {} \;
+#sudo find / -name '.goutputstream-*' -exec rm {} \;
 
 cd ~
 echo "Copia do Bash Histórico"
@@ -120,8 +120,8 @@ mv /opt/bkp/${origin}__GoogleDrive.rar  ~/MEOCloud/bkp
 rar a -m5 -idp -y /opt/bkp/${origin}__UbuntuOne.rar ~/Ubuntu\ One
 mv /opt/bkp/${origin}__UbuntuOne.rar ~/MEOCloud/bkp
 
-rar a -m5 -idp -y /opt/bkp/${origin}__Copy.rar ~/Copy
-mv /opt/bkp/${origin}__Copy.rar ~/MEOCloud/bkp
+#rar a -m5 -idp -y /opt/bkp/${origin}__Copy.rar ~/Copy
+#mv /opt/bkp/${origin}__Copy.rar ~/MEOCloud/bkp
 
 #rar a -m5 -idp -y /opt/bkp/${origin}__MEGA.rar ~/MEGA
 #rar a -m5 -idp -y /opt/bkp/${origin}__Dropbox.rar ~/Dropbox

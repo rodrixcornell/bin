@@ -1,0 +1,22 @@
+cd ../voyage
+mousepad .git/config
+
+git remote rm sta
+git checkout -f
+git checkout develop
+git checkout -b ratify
+git checkout ratify
+git push -u
+git remote add ratify deploy@cruxati:~/repositories/voyage_web
+#git branch --set-upstream-to=origin/ratify ratify
+git checkout -b develop
+git checkout develop
+git push -u
+git remote add develop deploy@daraa:~/repositories/voyage_web
+git checkout -f
+git checkout master
+git checkout -f
+git remote add master#1 deploy@liberdade:~/repositories/voyage_web
+git remote add master#2 deploy@apuau:~/repositories/voyage_web
+git checkout develop
+git flow init -f
