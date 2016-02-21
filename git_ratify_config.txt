@@ -3,3 +3,5 @@ git checkout ratify
 git merge develop
 git push -u
 git push ratify
+git deployhom
+git checkout develop

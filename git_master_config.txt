@@ -1,0 +1,7 @@
+git pull
+git checkout master
+git merge ratify
+git push
+git deployprod2
+#git deployprod1
+git checkout ratify
