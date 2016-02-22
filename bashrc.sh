@@ -45,6 +45,8 @@ xterm*|rxvt*)
     ;;
 esac
 
+[[ -s $HOME/.rvm/scripts/rvm ]] && source $HOME/.rvm/scripts/rvm
+
 # my include bashrc.sh if it exists
 #if [ -f ~/bin/bash_aliases.sh ]; then
 #    . ~/bin/bash_aliases.sh
