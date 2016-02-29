@@ -20,8 +20,8 @@
 #export http_proxy=http://172.19.10.1:3128
 #export ftp_proxy=http://172.19.10.1:3128
 
-export SQLPATH="$ORACLE_HOME"
-export TNS_ADMIN="$HOME/oracle_client/network/admin"
+#export SQLPATH="$ORACLE_HOME"
+#export TNS_ADMIN="$HOME/oracle_client/network/admin"
 
 export RLWRAP_EDITOR="nano %L"
 
@@ -45,7 +45,7 @@ xterm*|rxvt*)
     ;;
 esac
 
-[[ -s $HOME/.rvm/scripts/rvm ]] && source $HOME/.rvm/scripts/rvm
+#[[ -s $HOME/.rvm/scripts/rvm ]] && source $HOME/.rvm/scripts/rvm
 
 # my include bashrc.sh if it exists
 #if [ -f ~/bin/bash_aliases.sh ]; then
