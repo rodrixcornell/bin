@@ -108,13 +108,14 @@ alias grep='grep -y --color=auto'
 alias canal='gksu software-properties-gtk'
 alias lshw-gtk='gksu lshw-gtk'
 
-alias alien-deb='sudo alien --scripts -d; sudo chown 1000:1000 *deb'
-alias alien-rpm='sudo alien --scripts -r; sudo chown 1000:1000 *rpm'
+alias alien-deb='sudo alien --scripts --to-deb; sudo chown 1000:1000 *deb'
+alias alien-rpm='sudo alien --scripts --to-rpm; sudo chown 1000:1000 *rpm'
 
 #alias gkedit='sudo gedit'
 alias griVe='grive -V'
 alias grive-f='grive -f'
 alias grive-dry='grive --dry-run'
+
 ###############################################################################
 ### Git
 alias g=git
@@ -124,15 +125,15 @@ alias gk=gitk
 
 alias kill_fox='killall firefox'
 
-alias rman='rlwrap rman'
-alias mysql='rlwrap -b "" mysql'
-alias sqlplus='rlwrap -b "" -f $HOME/oracle_client/dict.sql sqlplus'
-
 alias rar_m5='rar a -m5 -idp -y'
 alias chrome-beta-incognito-proxy='google-chrome-beta --incognito --proxy-server="http=172.19.10.20:3128;https=172.19.10.20:3128"'
 alias chrome-beta-proxy='google-chrome-beta --proxy-server="http=172.19.10.1:3128;https=172.19.10.1:3128"'
 alias youtube-dl-proxy='youtube-dl --proxy "http://172.19.10.20:3128/"'
 alias youtube-dl-list='youtube-dl -a'
+
+alias rman='rlwrap rman'
+alias mysql='rlwrap -b "" mysql'
+#alias sqlplus='rlwrap -b "" -f $HOME/oracle_client/dict.sql sqlplus'
 
 #alias php='php -elsw'
 alias php-web-server='php -elswS localhost:8000'
@@ -143,4 +144,4 @@ alias mysql-stop='sudo service mysql stop'
 
 alias nmap_su='sudo nmap -A -vvvvv -sS -O'
 
-alias public_semad='cd public_html/semad/'
+#alias public_semad='cd public_html/semad/'
