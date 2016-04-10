@@ -9,8 +9,7 @@ cat ~/bin/${origin}_packages.list | awk '{ print "sudo dpkg-repack " $1 " && sud
 cat ~/bin/${origin}_packages.list | awk '{ print "sudo apt-get install -y --force-yes " $1 }' > ~/bin/${origin}_install.sh
 
 rm ~/bin/${origin}_packages.list
-chmod a+x ~/bin/${origin}_repack.sh
-chmod a+x ~/bin/${origin}_install.sh
+chmod a+x ~/bin/${origin}_*.sh
 
 sudo mkdir /opt/${origin}_DEBs
 sudo chown 1000:1000 -R /opt/${origin}_DEBs

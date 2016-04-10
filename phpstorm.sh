@@ -1,1 +1,0 @@
-../app/PhpStorm-139.1348/bin/phpstorm.sh
