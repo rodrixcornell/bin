@@ -12,13 +12,13 @@ cd ~
 
 if [ ! -d ~/bkp ];
 then
-    mkdir -p ~/bkp
+	mkdir -p ~/bkp
 fi
 
 cd ~/bkp
 
 if [ -n $1 ]
-then 
+then
 	echo
 	cd ~/public_html/semad/contaspublicas
 	echo contaspublicas > ~/bkp/${logs}__$1.txt
@@ -233,7 +233,7 @@ echo
 	cd ~/public_html/semad/voyage
 	echo voyage >> ~/bkp/${logs}.txt
 	git log --pretty=format:"%h; %s; %cd; %cn" --decorate --stat --since=5.weeks >> ~/bkp/${logs}.txt
-	
+
 	echo
 	cd ~/public_html/vo
 	echo vo >> ~/bkp/${logs}.txt
