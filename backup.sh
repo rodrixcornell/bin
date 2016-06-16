@@ -1,4 +1,4 @@
-﻿#!/bin/bash
+﻿#!/bin/sh
 sudo echo 'test sudo'
 data=`/bin/date +%Y%m%d_%H%M%S`
 machine=`/bin/uname -m`
@@ -28,7 +28,7 @@ fi
 
 killall firefox chrome opera
 #killall dropbox CopyAgent #megasync meocloud-gui meocloudd
-killall skype pidgin #iptux #teamviewerd
+#killall skype pidgin #iptux #teamviewerd
 #cd ~/grive/ && grive
 
 #cd ~
@@ -40,11 +40,11 @@ echo "Localizando Lixo"
 #find ~ -name '*~' -exec echo {} \;
 #find ~ -name '*~' -exec rm {} \;
 #sudo find / -name '*~' -exec echo {} \;
-sudo find / -name '*~' -exec rm {} \;
+sudo find / -name '*~' -exec rm -rf {} \;
 #sudo find / -name '*.save' -exec echo {} \;
-sudo find / -name '*.save' -exec rm {} \;
+sudo find / -name '*.save' -exec rm -rf {} \;
 #sudo find / -name '.goutputstream-*' -exec echo {} \;
-sudo find / -name '.goutputstream-*' -exec rm {} \;
+sudo find / -name '.goutputstream-*' -exec rm -rf {} \;
 
 cd ~
 echo "Copia do Bash Histórico"
@@ -77,6 +77,10 @@ rar a -m5 -idp -y /opt/bkp/${origin}__workbench-mysql.rar ~/workbench-mysql
 
 echo "Backup Configurações Oracle Client"
 rar a -m5 -idp -y /opt/bkp/${origin}__oracle_client.rar ~/oracle_client
+# mv /opt/bkp/${origin}__oracle_client.rar ~/MEOCloud/bkp
+
+#echo "Backup Configurações Oracle InstantClient"
+#rar a -m5 -idp -y /opt/bkp/${origin}__oracle_instantclient.rar /opt/oracle
 # mv /opt/bkp/${origin}__oracle_client.rar ~/MEOCloud/bkp
 
 echo "Backup Pasta Java ~/lib"
