@@ -29,11 +29,14 @@ GIT_PS1_SHOWDIRTYSTATE=true
 
 #PROMPT_COMMAND="echo -n [$(date +%H:%M:%S)]"
 
+#export PS1='${debian_chroot:+($debian_chroot)}\t \d \[\033[01;33m\][\h]\[\033[00m\]@ \[\033[01;32m\][\u]\[\033[00m\]: \[\033[01;36m\][\w]\n\[\033[31m\]$(__git_ps1 "(%s) ")\[\033[00m\]\[\033[07;37m\]->\[\033[00m\] '
+
 color_prompt=yes
 if [ "$color_prompt" = yes ]; then
-	PS1='${debian_chroot:+($debian_chroot)}\[\033[01;33m\]\h\[\033[00m\]@\[\033[01;32m\]\u\[\033[00m\]: \[\033[01;36m\]\w\n\[\033[31m\]$(__git_ps1 "(%s) ")\[\033[00m\]\[\033[07;37m\]->\[\033[00m\] '
+	#PS1='${debian_chroot:+($debian_chroot)}\[\033[01;33m\]\h\[\033[00m\]@\[\033[01;32m\]\u\[\033[00m\]: \[\033[01;36m\]\w\n\[\033[31m\]$(__git_ps1 "(%s) ")\[\033[00m\]\[\033[07;37m\]->\[\033[00m\] '
+	PS1='\[\033[44m\]${debian_chroot:+($debian_chroot)}[\t \d]\[\033[00m\] \[\033[01;34m\][term \l]\[\033[00m\] \[\033[01;33m\][\h]\[\033[00m\]@\[\033[01;32m\][\u]\[\033[00m\]:\[\033[01;36m\][\w]\[\033[00m\]\n\[\033[01;31m\]$(__git_ps1 "(%s) ")\[\033[00m\]\[\033[07;37m\]->\[\033[00m\] '
 else
-	PS1='${debian_chroot:+($debian_chroot)}\h@\u: \w\n$(__git_ps1 "(%s) ")-> '
+	PS1='${debian_chroot:+($debian_chroot)}\t \d [\h]@ [\u]: [\w]\n$(__git_ps1 "(%s) ")-> '
 fi
 unset color_prompt
 
