@@ -107,6 +107,7 @@ alias wget-list='wget -i'
 alias grep='grep -y --color=auto'
 alias canal='gksu software-properties-gtk'
 alias lshw-gtk='gksu lshw-gtk'
+alias hoje='date +%Y/%m/%d - %H:%M:%S:%N'
 
 alias alien-deb='sudo alien --scripts --to-deb; sudo chown 1000:1000 *deb'
 alias alien-rpm='sudo alien --scripts --to-rpm; sudo chown 1000:1000 *rpm'
