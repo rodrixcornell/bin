@@ -121,35 +121,40 @@ if [ "${FRAMEWORK}" = thupan ]; then
 
 	git reset
 	git checkout -f
-	git pull origin ${BRANCH}
+	git pull -u origin ${BRANCH}
+	git log -10 HEAD> public/log && echo>> public/log && echo Maquina e Data e Hora do Deploy:>> public/log && echo ${ORIGIN}>> public/log
 
-	if [[ -f ${FRAMEWORK}_${REPOSITORIES}_files_${DATA}.zip ]]; then unzip ${HOME}/bkp/${FRAMEWORK}_${REPOSITORIES}_files_${DATA}.zip; fi
+	if [ -f ${HOME}/bkp/${FRAMEWORK}_${REPOSITORIES}_files_${DATA}.zip ]; then unzip ${HOME}/bkp/${FRAMEWORK}_${REPOSITORIES}_files_${DATA}.zip; fi
 
-	then composer update
+	composer update
 fi
 
 if [ "${FRAMEWORK}" = vo ]; then
-	cd ${DIR_WWW}${SCHEMA}
+	cd ${DIR_WWW}${SCHEMA}/${FRAMEWORK}
 	zip -r ${FRAMEWORK}_${REPOSITORIES}_deploy_${DATA}.zip ${REPOSITORIES}
 	mv -fv ${FRAMEWORK}_${REPOSITORIES}_deploy_${DATA}.zip ${HOME}/bkp
 	cd ${REPOSITORIES}
-	if [ -d arquivo ]; then zip -r ${FRAMEWORK}_${REPOSITORIES}_deploy_arquivo_${DATA}.zip arquivo; fi
-	if [ -d arquivos ]; then zip -r ${FRAMEWORK}_${REPOSITORIES}_deploy_arquivos_${DATA}.zip arquivos; fi
-	mv -fv ${FRAMEWORK}_${REPOSITORIES}_deploy_*${DATA}.zip ${HOME}/bkp
+	if [ -d arquivo ]; then
+		zip -r ${FRAMEWORK}_${REPOSITORIES}_arquivo_${DATA}.zip arquivo
+		mv -fv ${FRAMEWORK}_${REPOSITORIES}_arquivo_${DATA}.zip ${HOME}/bkp
+	fi
+	if [ -d arquivos ]; then
+		zip -r ${FRAMEWORK}_${REPOSITORIES}_arquivos_${DATA}.zip arquivos
+		mv -fv ${FRAMEWORK}_${REPOSITORIES}_arquivos_${DATA}.zip ${HOME}/bkp
+	fi
 
 	git reset
 	git checkout -f
-	git pull origin ${BRANCH}
+	git pull -u origin ${BRANCH}
+	git log -10 HEAD> log && echo>> log && echo Maquina e Data e Hora do Deploy:>> log && echo ${ORIGIN}>> log
 
-	if [[ -f ${HOME}/bkp/${FRAMEWORK}_${REPOSITORIES}_arquivo_${DATA}.zip ]]; then unzip ${HOME}/bkp/${FRAMEWORK}_${REPOSITORIES}_arquivo_${DATA}.zip; fi
-	if [[ -f ${HOME}/bkp/${FRAMEWORK}_${REPOSITORIES}_arquivos_${DATA}.zip ]]; then unzip ${HOME}/bkp/${FRAMEWORK}_${REPOSITORIES}_arquivos_${DATA}.zip; fi
+	if [ -f ${HOME}/bkp/${FRAMEWORK}_${REPOSITORIES}_arquivo_${DATA}.zip ]; then unzip ${HOME}/bkp/${FRAMEWORK}_${REPOSITORIES}_arquivo_${DATA}.zip; fi
+	if [ -f ${HOME}/bkp/${FRAMEWORK}_${REPOSITORIES}_arquivos_${DATA}.zip ]; then unzip ${HOME}/bkp/${FRAMEWORK}_${REPOSITORIES}_arquivos_${DATA}.zip; fi
 
 	mkdir -p templates_c
 	chmod 775 -R templates_c
 	chgrp www-data -R templates_c
 fi
-
-git log -10 HEAD> log && echo>> log && echo Maquina e Data e Hora do Deploy:>> log && echo ${ORIGIN}>> log
 
 sudo service apache2 start
 ' >> post-receive && chmod +x post-receive
@@ -251,40 +256,51 @@ else
 				mv -fv ${FRAMEWORK}_${REPOSITORIES}_files_${DATA}.zip ${HOME}/bkp
 			fi
 			cd ${DIR_WWW}${SCHEMA}
-			rm -rfv ${FRAMEWORK}/${REPOSITORIES}
+			sudo rm -rfv ${FRAMEWORK}/${REPOSITORIES}
 		fi
 
 		cd ${DIR_WWW}${SCHEMA}
+		echo
+		echo Git Clone
 		git clone -b ${BRANCH} ${HOME}/repositories/${FRAMEWORK}/${REPOSITORIES} ${FRAMEWORK}/${REPOSITORIES}
 
 		cd ${FRAMEWORK}/${REPOSITORIES}
 		#git pull -u ${BRANCH}
 		composer update
 
-		if [[ -f ${FRAMEWORK}_${REPOSITORIES}_files_${DATA}.zip ]]; then unzip ${HOME}/bkp/${FRAMEWORK}_${REPOSITORIES}_files_${DATA}.zip; fi
+		if [[ -f ${HOME}/bkp/${FRAMEWORK}_${REPOSITORIES}_files_${DATA}.zip ]]; then unzip ${HOME}/bkp/${FRAMEWORK}_${REPOSITORIES}_files_${DATA}.zip; fi
 
 		cd ~
 	fi
 
 	if [[ "${FRAMEWORK}" = vo ]]; then
 		cd ${DIR_WWW}${SCHEMA}
-		if [[ -d ${REPOSITORIES} ]]; then
+		if [[ -d ${FRAMEWORK}/${REPOSITORIES} ]]; then
 			echo Backup ${REPOSITORIES} ${BRANCH} - ${ORIGIN}
-			cd ${DIR_WWW}${SCHEMA}
+			cd ${DIR_WWW}${SCHEMA}/${FRAMEWORK}
 			zip -r ${FRAMEWORK}_${REPOSITORIES}_${DATA}.zip ${REPOSITORIES}
 			mv -fv ${FRAMEWORK}_${REPOSITORIES}_${DATA}.zip ${HOME}/bkp
 			cd ${REPOSITORIES}
-			if [ -d arquivo ]; then zip -r ${FRAMEWORK}_${REPOSITORIES}_arquivo_${DATA}.zip arquivo; fi
-			if [ -d arquivos ]; then zip -r ${FRAMEWORK}_${REPOSITORIES}_arquivos_${DATA}.zip arquivos; fi
-			mv -fv ${FRAMEWORK}_${REPOSITORIES}_*${DATA}.zip ${HOME}/bkp
+			if [ -d arquivo ]; then
+				zip -r ${FRAMEWORK}_${REPOSITORIES}_arquivo_${DATA}.zip arquivo
+				mv -fv ${FRAMEWORK}_${REPOSITORIES}_arquivo_${DATA}.zip ${HOME}/bkp
+			fi
+			if [ -d arquivos ]; then
+				zip -r ${FRAMEWORK}_${REPOSITORIES}_arquivos_${DATA}.zip arquivos
+				mv -fv ${FRAMEWORK}_${REPOSITORIES}_arquivos_${DATA}.zip ${HOME}/bkp
+			fi
+
 			cd ${DIR_WWW}${SCHEMA}
-			rm -rfv ${REPOSITORIES}
+			#sudo find ${DIR_WWW} -iname '*.tpl.php' -exec rm -rf {} \;
+			sudo rm -rfv ${FRAMEWORK}/${REPOSITORIES}
 		fi
 
-		#cd ${DIR_WWW}${SCHEMA}
-		git clone -b ${BRANCH} ${HOME}/repositories/${FRAMEWORK}/${REPOSITORIES} ${REPOSITORIES}
+		cd ${DIR_WWW}${SCHEMA}
+		echo
+		echo Git Clone
+		git clone -b ${BRANCH} ${HOME}/repositories/${FRAMEWORK}/${REPOSITORIES} ${FRAMEWORK}/${REPOSITORIES}
 
-		cd ${REPOSITORIES}
+		cd ${FRAMEWORK}/${REPOSITORIES}
 		#git pull -u ${BRANCH}
 		mkdir -p templates_c && chmod 775 -R templates_c && chgrp www-data -R templates_c
 
