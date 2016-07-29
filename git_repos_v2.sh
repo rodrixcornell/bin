@@ -20,6 +20,7 @@ REPOS=${HOME}/repositories
 
 REPOSITORIES=''
 FRAMEWORK=''
+SCHEMA=''
 BRANCH=''
 
 MENSAGEM_USO="
@@ -30,19 +31,7 @@ Uso: $(basename "$0") [OPÇÕES]
 OPÇÕES:
   -r, --repositories Nome do repositorio a ser criado
   -f, --framework    Framework: vo, thupan, laravel & etc...
-
-  -h, --help         Mostra esta tela de ajuda e sai
-  -V, --version      Mostra a versão do programa e sai
-"
-
-MENSAGEM_USO.OLD="
-Escreva o nome do projeto sem '_web'
-
-Uso: $(basename "$0") [OPÇÕES]
-
-OPÇÕES:
-  -r, --repositories Nome do repositorio a ser criado
-  -f, --framework    Framework: vo, thupan, laravel & etc...
+  -s, --schema       Schema: semad, sistemaspmm ou ' ' = raiz
   -b, --branch       Branch: develop, ratify ou master
 
   -h, --help         Mostra esta tela de ajuda e sai
@@ -95,14 +84,13 @@ DATA=`/bin/date +%Y%m%d_%H%M%S_%N`
 #MACHINE=`/bin/uname -m`
 #ORIGIN=${HOSTNAME}_${MACHINE}_${DATA}
 ORIGIN=${HOSTNAME}_${DATA}
-DEPLOY_INICIO=`/bin/date +%H%M%S`
-DEPLOY_FIM=''
 
 DIR_WWW='${DIR_WWW}'
 REPOS=${HOME}/repositories
 
 REPOSITORIES='${REPOSITORIES}'
 FRAMEWORK='${FRAMEWORK}'
+SCHEMA='${SCHEMA}'
 BRANCH='${BRANCH}'
 
 echo
@@ -117,13 +105,12 @@ unset GIT_WORK_TREE
 sudo chmod g+w -R ${DIR_WWW}*
 sudo chgrp www-data -R ${DIR_WWW}*
 
-sudo service apache2 restart
+sudo service apache2 stop
 sudo find ${DIR_WWW} -iname '*.tpl.php' -exec rm -rf {} \;
 
-echo Backup ${DIR_WWW}/${FRAMEWORK}/${REPOSITORIES} ${BRANCH} - ${ORIGIN}
+echo Backup ${DIR_WWW}${SCHEMA}/${FRAMEWORK}/${REPOSITORIES} ${BRANCH} - ${ORIGIN}
 if [ "${FRAMEWORK}" = thupan ]; then
-	cd ${DIR_WWW}/${FRAMEWORK}
-	rm -rfv ${REPOSITORIES}/vendor
+	cd ${DIR_WWW}${SCHEMA}/${FRAMEWORK}
 	zip -r ${FRAMEWORK}_${REPOSITORIES}_deploy_${DATA}.zip ${REPOSITORIES}
 	mv -fv ${FRAMEWORK}_${REPOSITORIES}_deploy_${DATA}.zip ${HOME}/bkp
 	cd ${REPOSITORIES}
@@ -137,14 +124,13 @@ if [ "${FRAMEWORK}" = thupan ]; then
 	git pull -u origin ${BRANCH}
 	git log -10 HEAD> public/log && echo>> public/log && echo Maquina e Data e Hora do Deploy:>> public/log && echo ${ORIGIN}>> public/log
 
-	if [ -f ${HOME}/bkp/${FRAMEWORK}_${REPOSITORIES}_files_${DATA}.zip ]; then unzip -o ${HOME}/bkp/${FRAMEWORK}_${REPOSITORIES}_files_${DATA}.zip; fi
+	if [ -f ${HOME}/bkp/${FRAMEWORK}_${REPOSITORIES}_files_${DATA}.zip ]; then unzip ${HOME}/bkp/${FRAMEWORK}_${REPOSITORIES}_files_${DATA}.zip; fi
 
-	sudo composer self-update
 	composer update
 fi
 
 if [ "${FRAMEWORK}" = vo ]; then
-	cd ${DIR_WWW}/${FRAMEWORK}
+	cd ${DIR_WWW}${SCHEMA}/${FRAMEWORK}
 	zip -r ${FRAMEWORK}_${REPOSITORIES}_deploy_${DATA}.zip ${REPOSITORIES}
 	mv -fv ${FRAMEWORK}_${REPOSITORIES}_deploy_${DATA}.zip ${HOME}/bkp
 	cd ${REPOSITORIES}
@@ -162,21 +148,15 @@ if [ "${FRAMEWORK}" = vo ]; then
 	git pull -u origin ${BRANCH}
 	git log -10 HEAD> log && echo>> log && echo Maquina e Data e Hora do Deploy:>> log && echo ${ORIGIN}>> log
 
-	if [ -f ${HOME}/bkp/${FRAMEWORK}_${REPOSITORIES}_arquivo_${DATA}.zip ]; then unzip -o ${HOME}/bkp/${FRAMEWORK}_${REPOSITORIES}_arquivo_${DATA}.zip; fi
-	if [ -f ${HOME}/bkp/${FRAMEWORK}_${REPOSITORIES}_arquivos_${DATA}.zip ]; then unzip -o ${HOME}/bkp/${FRAMEWORK}_${REPOSITORIES}_arquivos_${DATA}.zip; fi
+	if [ -f ${HOME}/bkp/${FRAMEWORK}_${REPOSITORIES}_arquivo_${DATA}.zip ]; then unzip ${HOME}/bkp/${FRAMEWORK}_${REPOSITORIES}_arquivo_${DATA}.zip; fi
+	if [ -f ${HOME}/bkp/${FRAMEWORK}_${REPOSITORIES}_arquivos_${DATA}.zip ]; then unzip ${HOME}/bkp/${FRAMEWORK}_${REPOSITORIES}_arquivos_${DATA}.zip; fi
 
 	mkdir -p templates_c
 	chmod 775 -R templates_c
 	chgrp www-data -R templates_c
 fi
 
-sudo service apache2 restart
-
-DEPLOY_FIM=`/bin/date +%H%M%S`
-echo $DEPLOY_INICIO
-echo $DEPLOY_FIM
-echo $DEPLOY_FIM-$DEPLOY_INICIO|bc
-echo "segundos"
+sudo service apache2 start
 ' >> post-receive && chmod +x post-receive
 }
 
@@ -192,23 +172,22 @@ fi
 while test -n "$1"
 do
 	case "$1" in
-		-f | --framework)
-			shift
-			FRAMEWORK=$(echo "$1" | tr A-Z a-z)
-		;;
 		-r | --repositories)
 			shift
 			REPOSITORIES=$(echo "$1" | tr A-Z a-z)
 		;;
-
-#		-s | --schema)
-#			shift
-#			SCHEMA=$(echo "$1" | tr A-Z a-z)
-#		;;
-#		-b | --branch)
-#			shift
-#			BRANCH=$(echo "$1" | tr A-Z a-z)
-#		;;
+		-f | --framework)
+			shift
+			FRAMEWORK=$(echo "$1" | tr A-Z a-z)
+		;;
+		-s | --schema)
+			shift
+			SCHEMA=$(echo "$1" | tr A-Z a-z)
+		;;
+		-b | --branch)
+			shift
+			BRANCH=$(echo "$1" | tr A-Z a-z)
+		;;
 
 		-h | --help)
 			echo "$MENSAGEM_USO"
@@ -232,10 +211,11 @@ do
 done
 
 case "$HOSTNAME" in
-	php5) BRANCH="develop" ;;
-	daraa) BRANCH="develop" ;;
-	cruxati) BRANCH="ratify" ;;
-	apuau) BRANCH="master" ;;
+	php5) SCHEMA="" BRANCH="develop" ;;
+	daraa) SCHEMA="/semad" BRANCH="develop" ;;
+	cruxati) SCHEMA="/sistemaspmm" BRANCH="ratify" ;;
+	apuau) SCHEMA="/" BRANCH="master" ;;
+	liberdade) SCHEMA="/sistemaspmm" BRANCH="master" ;;
 	*) echo Opção inválida: $1 exit 1 ;;
 esac
 
@@ -264,11 +244,10 @@ else
 	fi
 
 	if [[ "${FRAMEWORK}" = thupan ]]; then
-		cd ${DIR_WWW}
+		cd ${DIR_WWW}${SCHEMA}
 		if [[ -d ${FRAMEWORK}/${REPOSITORIES} ]]; then
 			echo Backup ${FRAMEWORK}/${REPOSITORIES} ${BRANCH} - ${ORIGIN}
-			cd ${DIR_WWW}/${FRAMEWORK}
-			rm -rfv ${REPOSITORIES}/vendor
+			cd ${DIR_WWW}${SCHEMA}/${FRAMEWORK}
 			zip -r ${FRAMEWORK}_${REPOSITORIES}_${DATA}.zip ${REPOSITORIES}
 			mv -fv ${FRAMEWORK}_${REPOSITORIES}_${DATA}.zip ${HOME}/bkp
 			cd ${REPOSITORIES}
@@ -276,32 +255,29 @@ else
 				zip -r ${FRAMEWORK}_${REPOSITORIES}_files_${DATA}.zip public/files
 				mv -fv ${FRAMEWORK}_${REPOSITORIES}_files_${DATA}.zip ${HOME}/bkp
 			fi
-			cd ${DIR_WWW}
+			cd ${DIR_WWW}${SCHEMA}
 			sudo rm -rfv ${FRAMEWORK}/${REPOSITORIES}
 		fi
 
-		cd ${DIR_WWW}
+		cd ${DIR_WWW}${SCHEMA}
 		echo
 		echo Git Clone
 		git clone -b ${BRANCH} ${HOME}/repositories/${FRAMEWORK}/${REPOSITORIES} ${FRAMEWORK}/${REPOSITORIES}
 
 		cd ${FRAMEWORK}/${REPOSITORIES}
 		#git pull -u ${BRANCH}
-		#composer update
+		composer update
 
-		if [[ -f ${HOME}/bkp/${FRAMEWORK}_${REPOSITORIES}_files_${DATA}.zip ]]; then unzip -o ${HOME}/bkp/${FRAMEWORK}_${REPOSITORIES}_files_${DATA}.zip; fi
+		if [[ -f ${HOME}/bkp/${FRAMEWORK}_${REPOSITORIES}_files_${DATA}.zip ]]; then unzip ${HOME}/bkp/${FRAMEWORK}_${REPOSITORIES}_files_${DATA}.zip; fi
 
 		cd ~
-
-		cd ${DIR_WWW}/pmm/sistemas
-		ln -sf ${DIR_WWW}/${FRAMEWORK}/${REPOSITORIES}
 	fi
 
 	if [[ "${FRAMEWORK}" = vo ]]; then
-		cd ${DIR_WWW}
+		cd ${DIR_WWW}${SCHEMA}
 		if [[ -d ${FRAMEWORK}/${REPOSITORIES} ]]; then
 			echo Backup ${REPOSITORIES} ${BRANCH} - ${ORIGIN}
-			cd ${DIR_WWW}/${FRAMEWORK}
+			cd ${DIR_WWW}${SCHEMA}/${FRAMEWORK}
 			zip -r ${FRAMEWORK}_${REPOSITORIES}_${DATA}.zip ${REPOSITORIES}
 			mv -fv ${FRAMEWORK}_${REPOSITORIES}_${DATA}.zip ${HOME}/bkp
 			cd ${REPOSITORIES}
@@ -314,12 +290,12 @@ else
 				mv -fv ${FRAMEWORK}_${REPOSITORIES}_arquivos_${DATA}.zip ${HOME}/bkp
 			fi
 
-			cd ${DIR_WWW}
+			cd ${DIR_WWW}${SCHEMA}
 			#sudo find ${DIR_WWW} -iname '*.tpl.php' -exec rm -rf {} \;
 			sudo rm -rfv ${FRAMEWORK}/${REPOSITORIES}
 		fi
 
-		cd ${DIR_WWW}
+		cd ${DIR_WWW}${SCHEMA}
 		echo
 		echo Git Clone
 		git clone -b ${BRANCH} ${HOME}/repositories/${FRAMEWORK}/${REPOSITORIES} ${FRAMEWORK}/${REPOSITORIES}
@@ -328,13 +304,10 @@ else
 		#git pull -u ${BRANCH}
 		mkdir -p templates_c && chmod 775 -R templates_c && chgrp www-data -R templates_c
 
-		if [[ -f ${HOME}/bkp/${FRAMEWORK}_${REPOSITORIES}_arquivos_${DATA}.zip ]]; then unzip -o ${HOME}/bkp/${FRAMEWORK}_${REPOSITORIES}_arquivos_${DATA}.zip; fi
-		if [[ -f ${HOME}/bkp/${FRAMEWORK}_${REPOSITORIES}_arquivo_${DATA}.zip ]]; then unzip -o ${HOME}/bkp/${FRAMEWORK}_${REPOSITORIES}_arquivo_${DATA}.zip; fi
+		if [[ -f ${HOME}/bkp/${FRAMEWORK}_${REPOSITORIES}_arquivos_${DATA}.zip ]]; then unzip ${HOME}/bkp/${FRAMEWORK}_${REPOSITORIES}_arquivos_${DATA}.zip; fi
+		if [[ -f ${HOME}/bkp/${FRAMEWORK}_${REPOSITORIES}_arquivo_${DATA}.zip ]]; then unzip ${HOME}/bkp/${FRAMEWORK}_${REPOSITORIES}_arquivo_${DATA}.zip; fi
 
 		cd ~
-
-		cd ${DIR_WWW}/pmm/sistemas
-		ln -sf ${DIR_WWW}/${FRAMEWORK}/${REPOSITORIES}
 	fi
 fi
 
