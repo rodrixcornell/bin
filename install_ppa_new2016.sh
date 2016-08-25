@@ -4,7 +4,7 @@ mkdir /tmp/downloads
 cd /tmp/downloads
 
 ####
-echo 'Sources List $(lsb_release -ds) _Precise Pangolin_'
+echo 'Sources List $(lsb_release -ds)'
 
 if [ ! -e /etc/apt/sources.list.bkp ] ; then
 	sudo cp /etc/apt/sources.list /etc/apt/sources.list.bkp
@@ -12,15 +12,15 @@ fi
 
 sudo sh -c 'echo "#Sources List $(lsb_release -ds)" > /etc/apt/sources.list'
 sudo sh -c 'echo "deb http://artfiles.org/ubuntu.com/  $(lsb_release -sc) main restricted universe multiverse" >> /etc/apt/sources.list'
-sudo sh -c 'echo "deb http://artfiles.org/ubuntu.com/  $(lsb_release -sc)-updates main restricted universe multiverse" >> /etc/apt/sources.list'
-sudo sh -c 'echo "deb http://artfiles.org/ubuntu.com/  $(lsb_release -sc)-backports main restricted universe multiverse" >> /etc/apt/sources.list'
-sudo sh -c 'echo "deb http://artfiles.org/ubuntu.com/  $(lsb_release -sc)-security main restricted universe multiverse" >> /etc/apt/sources.list'
-sudo sh -c 'echo "deb http://artfiles.org/ubuntu.com/  $(lsb_release -sc)-proposed restricted main multiverse universe" >> /etc/apt/sources.list'
-sudo sh -c 'echo "deb-src http://artfiles.org/ubuntu.com/  $(lsb_release -sc) main restricted universe multiverse" >> /etc/apt/sources.list'
-sudo sh -c 'echo "deb-src http://artfiles.org/ubuntu.com/  $(lsb_release -sc)-updates main restricted universe multiverse" >> /etc/apt/sources.list'
-sudo sh -c 'echo "deb-src http://artfiles.org/ubuntu.com/  $(lsb_release -sc)-backports main restricted universe multiverse" >> /etc/apt/sources.list'
-sudo sh -c 'echo "deb-src http://artfiles.org/ubuntu.com/  $(lsb_release -sc)-security main restricted universe multiverse" >> /etc/apt/sources.list'
-sudo sh -c 'echo "deb-src http://artfiles.org/ubuntu.com/  $(lsb_release -sc)-proposed restricted main multiverse universe" >> /etc/apt/sources.list'
+sudo sh -c 'echo "deb http://archive.ubuntu.com/ubuntu $(lsb_release -sc)-updates main restricted universe multiverse" >> /etc/apt/sources.list'
+sudo sh -c 'echo "deb http://archive.ubuntu.com/ubuntu $(lsb_release -sc)-backports main restricted universe multiverse" >> /etc/apt/sources.list'
+sudo sh -c 'echo "deb http://archive.ubuntu.com/ubuntu $(lsb_release -sc)-security main restricted universe multiverse" >> /etc/apt/sources.list'
+sudo sh -c 'echo "deb http://archive.ubuntu.com/ubuntu $(lsb_release -sc)-proposed restricted main multiverse universe" >> /etc/apt/sources.list'
+sudo sh -c 'echo "deb-src http://archive.ubuntu.com/ubuntu $(lsb_release -sc) main restricted universe multiverse" >> /etc/apt/sources.list'
+sudo sh -c 'echo "deb-src http://archive.ubuntu.com/ubuntu $(lsb_release -sc)-updates main restricted universe multiverse" >> /etc/apt/sources.list'
+sudo sh -c 'echo "deb-src http://archive.ubuntu.com/ubuntu $(lsb_release -sc)-backports main restricted universe multiverse" >> /etc/apt/sources.list'
+sudo sh -c 'echo "deb-src http://archive.ubuntu.com/ubuntu $(lsb_release -sc)-security main restricted universe multiverse" >> /etc/apt/sources.list'
+sudo sh -c 'echo "deb-src http://archive.ubuntu.com/ubuntu $(lsb_release -sc)-proposed restricted main multiverse universe" >> /etc/apt/sources.list'
 
 ####
 echo 'Extras Ubuntu'
@@ -44,30 +44,10 @@ sudo sh -c 'echo "deb-src http://archive.canonical.com/ubuntu $(lsb_release -sc)
 
 sudo apt-get -y autoremove; sudo apt-get -y autoclean; sudo apt-get update; sudo apt-get -f -y dist-upgrade #; sudo apt-get -f install -y aptitude
 
-####
-echo 'Makson96 - fglrx'
-sudo add-apt-repository -y ppa:makson96/fglrx
-sudo apt-get update; sudo apt-get -f -y install fglrx-legacy fglrx-legacy-dev
-
 #jockey-gtk
 
 ###
-sudo apt-get install -y nautilus-open-terminal terminator
-
-sudo apt-get install -y terminator preload hardinfo gkrellm lm-sensors i2c-tools hddtemp htop iftop iotop tcptrack speedometer curl nmap p7zip-full p7zip-rar rar dpkg-repack gpart gparted gufw tasksel vsftpd xclip mpg321 lame ntfs-3g
-
-####
-echo 'Alex Murray - PPA for indicator-sensors'
-sudo add-apt-repository -y ppa:alexmurray/indicator-sensors
-sudo add-apt-repository -y ppa:alexmurray/indicator-sensors-daily
-
-sudo apt-get -y autoremove; sudo apt-get -y autoclean; sudo apt-get update; sudo apt-get -f install -y indicator-sensors gkrellm
-
-####
-echo 'Ding Zhou - Ubuntu Tweak Stable PPA'
-sudo add-apt-repository -y ppa:tualatrix/ppa
-
-sudo apt-get -y autoremove; sudo apt-get -y autoclean; sudo apt-get update; sudo apt-get -f install -y ubuntu-tweak compizconfig-settings-manager #myunity
+sudo apt install -y terminator preload hardinfo gkrellm lm-sensors i2c-tools hddtemp htop iftop iotop tcptrack speedometer curl nmap rar unzip unrar dpkg-repack gpart gparted gufw tasksel xclip mpg321 lame ntfs-3g
 
 ####
 echo 'atareao-team - atareao-team'
@@ -112,7 +92,7 @@ echo 'T. Scott Barnes - PPA named indicator-keylock-daily for T. Scott Barnes'
 sudo add-apt-repository -y ppa:tsbarnes/indicator-keylock
 sudo add-apt-repository -y ppa:tsbarnes/indicator-keylock-daily
 
-sudo apt-get -y autoremove; sudo apt-get -y autoclean; sudo apt-get update; sudo apt-get -f install -y indicator-keylock indicator-keylock-humanity
+sudo apt-get -y autoremove; sudo apt-get -y autoclean; sudo apt-get update; sudo apt -f install -y indicator-keylock indicator-keylock-humanity
 
 ####
 echo 'Florian Diesch - testing'
@@ -132,7 +112,7 @@ echo 'bilgee0629 - wildguppy'
 echo 'Alin Andrei - WebUpd8'
 sudo add-apt-repository -y ppa:nilarimogard/webupd8
 
-sudo apt-get -y autoremove; sudo apt-get -y autoclean; sudo apt-get update; sudo apt-get -f install -y audacious audacious-plugins grive pidgin-indicator pulseaudio-equalizer unity-reboot youtube-dl*
+sudo apt-get -y autoremove; sudo apt-get -y autoclean; sudo apt-get update; sudo apt install -y audacious grive pulseaudio-equalizer youtube-dl*
 
 ####
 echo 'WebUpd8 - Jupiter'

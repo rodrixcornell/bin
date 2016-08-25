@@ -4,13 +4,14 @@ mkdir /tmp/downloads
 cd /tmp/downloads
 
 ####
-echo 'Sources List Ubuntu 12.04 LTS _Precise Pangolin_'
+echo 'Sources List $(lsb_release -ds) _Precise Pangolin_'
 
 if [ ! -e /etc/apt/sources.list.bkp ] ; then
 	sudo cp /etc/apt/sources.list /etc/apt/sources.list.bkp
 fi
 
-sudo sh -c 'echo "deb http://archive.ubuntu.com/ubuntu $(lsb_release -sc) main restricted universe multiverse" > /etc/apt/sources.list'
+sudo sh -c 'echo "#Sources List $(lsb_release -ds)" > /etc/apt/sources.list'
+sudo sh -c 'echo "deb http://artfiles.org/ubuntu.com/  $(lsb_release -sc) main restricted universe multiverse" >> /etc/apt/sources.list'
 sudo sh -c 'echo "deb http://archive.ubuntu.com/ubuntu $(lsb_release -sc)-updates main restricted universe multiverse" >> /etc/apt/sources.list'
 sudo sh -c 'echo "deb http://archive.ubuntu.com/ubuntu $(lsb_release -sc)-backports main restricted universe multiverse" >> /etc/apt/sources.list'
 sudo sh -c 'echo "deb http://archive.ubuntu.com/ubuntu $(lsb_release -sc)-security main restricted universe multiverse" >> /etc/apt/sources.list'
