@@ -294,7 +294,7 @@ else
 		cd ~
 
 		cd ${DIR_WWW}/pmm/sistemas
-		ln -sf ${DIR_WWW}/${FRAMEWORK}/${REPOSITORIES}
+		ln -sf ${DIR_WWW}/${FRAMEWORK}/${REPOSITORIES}/public
 	fi
 
 	if [[ "${FRAMEWORK}" = vo ]]; then
