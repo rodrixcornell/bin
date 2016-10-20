@@ -109,8 +109,10 @@ alias canal='gksu software-properties-gtk'
 alias lshw-gtk='gksu lshw-gtk'
 alias hoje='date +%Y/%m/%d - %H:%M:%S:%N'
 
-alias alien-deb='sudo alien --scripts --to-deb; sudo chown 1000:1000 *deb'
-alias alien-rpm='sudo alien --scripts --to-rpm; sudo chown 1000:1000 *rpm'
+alias alien-deb='sudo alien --scripts --to-deb'
+#; sudo chown 1000:1000 *deb'
+alias alien-rpm='sudo alien --scripts --to-rpm'
+#; sudo chown 1000:1000 *rpm'
 
 #alias gkedit='sudo gedit'
 alias griVe='grive -V'
@@ -121,6 +123,7 @@ alias grive-dry='grive --dry-run'
 ### Git
 alias g=git
 alias gk=gitk
+alias gkraken='gitkraken -p . '
 #alias pull_push='git pull; git push'
 #complete -o bashdefault -o default -o nospace -F _git
 
