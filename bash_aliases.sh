@@ -1,14 +1,23 @@
 #!/bin/bash
 
-alias apttotal='sudo apt-get update && sudo apt-get -f -y dist-upgrade'
-alias apttualiza='sudo apt-get update && sudo apt-get -f -y upgrade'
-alias aptlimpa='sudo apt-get -y autoremove && sudo apt-get -y autoclean'
-alias apt-f-limpa='sudo rm /var/lib/apt/lists/* ; sudo rm /var/lib/apt/lists/partial/* ; sudo apt-get -f install ; sudo apt-get clean ; sudo apt-get update'
-alias apt-f='sudo apt-get -f install ; sudo apt-get clean ; sudo apt-get update'
+#alias apttotal='sudo apt-get update && sudo apt-get -f -y dist-upgrade'
+#alias apttualiza='sudo apt-get update && sudo apt-get -f -y upgrade'
+#alias aptlimpa='sudo apt-get -y autoremove && sudo apt-get -y autoclean'
+#alias apt-f-limpa='sudo rm /var/lib/apt/lists/* ; sudo rm /var/lib/apt/lists/partial/* ; sudo apt-get -f install ; sudo apt-get clean ; sudo apt-get update'
+#alias apt-f='sudo apt-get -f install ; sudo apt-get clean ; sudo apt-get update'
+#alias add-apt-repository='add-apt-repository -y'
+#alias aptpesquisa='sudo apt-cache search'
+#alias aptinstall='sudo apt-get install'
+#alias aptpurge='sudo apt-get purge'
+
 alias add-apt-repository='add-apt-repository -y'
-alias aptpesquisa='sudo apt-cache search'
-alias aptinstall='sudo apt-get install'
-alias aptpurge='sudo apt-get purge'
+alias apttotal='sudo apt update && sudo apt full-upgrade'
+alias apttualiza='sudo apt update && sudo apt upgrade'
+alias aptpesquisa='sudo apt search'
+alias aptlimpa='sudo apt-get -y autoremove && sudo apt-get -y autoclean'
+alias apt-f-limpa='sudo rm /var/lib/apt/lists/* ; sudo rm /var/lib/apt/lists/partial/* ; sudo apt-get -f install ; sudo apt-get clean ; sudo apt update'
+alias apt-f='sudo apt-get -f install ; sudo apt-get clean ; sudo apt update'
+
 #alias nautilusQuit='nautilus -q; nautilus -q'
 
 alias vbox_compact='VBoxManage modifyhd --compact'
@@ -107,7 +116,7 @@ alias wget-list='wget -i'
 alias grep='grep -y --color=auto'
 alias canal='gksu software-properties-gtk'
 alias lshw-gtk='gksu lshw-gtk'
-alias hoje='date +%Y/%m/%d - %H:%M:%S:%N'
+alias hoje='date "+%Y/%m/%d - %H:%M:%S.%N"'
 
 alias alien-deb='sudo alien --scripts --to-deb'
 #; sudo chown 1000:1000 *deb'
@@ -149,3 +158,12 @@ alias mysql-stop='sudo service mysql stop'
 alias nmap_su='sudo nmap -A -vvvvv -sS -O'
 
 #alias public_semad='cd public_html/semad/'
+
+alias ifconfig.me='curl ifconfig.me'
+alias ifconfig.me-all='curl ifconfig.me/all'
+alias ifconfig.co='curl ifconfig.co'
+alias ipecho.net='curl ipecho.net/plain; echo'
+alias icanhazip.com='curl icanhazip.com'
+alias ident.me='curl ident.me'
+#curl v4.ident.me
+#curl v6.ident.me
