@@ -158,6 +158,7 @@ alias mysql-stop='sudo service mysql stop'
 alias nmap_su='sudo nmap -A -vvvvv -sS -O'
 
 #alias public_semad='cd public_html/semad/'
+alias if.me='ifconfig | grep -i bcast | cut -d" " -f13'
 
 alias ifconfig.me='curl ifconfig.me'
 alias ifconfig.me-all='curl ifconfig.me/all'

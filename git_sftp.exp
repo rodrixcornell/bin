@@ -2,7 +2,7 @@
 
 #send "/bin/bash git_fetch.sh\r"
 
-#set timeout 20
+set timeout 5
 
 spawn ssh carius -l deploy
 expect "password:"

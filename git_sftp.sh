@@ -2,7 +2,7 @@
 
 #send "/bin/bash git_fetch.sh\r"
 
-#set timeout 20
+set timeout 5
 
 spawn ssh carius -l deploy
 expect "password:"
@@ -34,6 +34,13 @@ send "cd /home/deploy/rails/redmine && export RAILS_ENV=production && rake -f Ra
 expect "~$\r"
 send "exit\r"
 interact
+
+#sftp -prC deploy@carius <<EOF
+#put -r repos/
+#bye
+#EOF
+
+#ssh carius -l deploy 'cd /home/deploy/rails/redmine && export RAILS_ENV=production && rake -f Rakefile redmine:fetch_changesets && rake -f Rakefile redmine:send_reminders'
 
 # ssh pericuma -l deploy 'rm -rfv repos/*; mkdir -p repos'
 
