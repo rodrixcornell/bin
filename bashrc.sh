@@ -63,7 +63,7 @@ if [ "$color_prompt" = yes ]; then
     then echo "'$LIGHT_YELLOW'"$(__git_ps1 "(%s) ")
     # the state is clean, changes are commited
     else echo "'$LIGHT_GREEN'"$(__git_ps1 "(%s) ")
-    fi)'$CLEAN'-> '
+    fi)'$LIGHT_GRAY'-> '$CLEAN
 else
 	PS1='${debian_chroot:+($debian_chroot)}\t \d [\h]@ [\u]: [\w]\n$(__git_ps1 "(%s) ")-> '
 fi
