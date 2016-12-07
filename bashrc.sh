@@ -25,20 +25,20 @@
 
 export RLWRAP_EDITOR="nano %L"
 
+RED="\[\033[31m\]"
+LIGHT_RED="\[\033[01;31m\]"
+GREEN="\[\033[0;32m\]"
+LIGHT_GREEN="\[\033[01;32m\]"
 YELLOW="\[\033[0;33m\]"
 LIGHT_YELLOW="\[\033[01;33m\]"
 BLUE="\[\033[34m\]"
 LIGHT_BLUE="\[\033[01;34m\]"
 MAGENTA="\[\033[0;35m\]"
 LIGHT_MAGENTA="\[\033[01;35m\]"
-GRAY="\[\033[0;37m\]"
-LIGHT_GRAY="\[\033[01;37m\]"
 CYAN="\[\033[0;36m\]"
 LIGHT_CYAN="\[\033[01;36m\]"
-GREEN="\[\033[0;32m\]"
-LIGHT_GREEN="\[\033[01;32m\]"
-RED="\[\033[31m\]"
-LIGHT_RED="\[\033[01;31m\]"
+GRAY="\[\033[0;37m\]"
+LIGHT_GRAY="\[\033[01;37m\]"
 CLEAN="\[\033[00m\]"
 GIT_PS1_SHOWDIRTYSTATE=true
 export LS_OPTIONS='--color=auto'
@@ -56,12 +56,9 @@ if [ "$color_prompt" = yes ]; then
 	PS1='\[\033[44m\]${debian_chroot:+($debian_chroot)}[\t \d]'$CLEAN$LIGHT_BLUE' [term \l]'$LIGHT_YELLOW' \h]'$CLEAN'@'$LIGHT_GREEN'[\u]'$CLEAN':'$LIGHT_CYAN'[\w]\n'$CLEAN
 	PS1=$PS1'$(
     if [[ $(__git_ps1) =~ \*\)$ ]]
-    # a file has been modified but not added
     then echo "'$LIGHT_RED'"$(__git_ps1 "(%s) ")
     elif [[ $(__git_ps1) =~ \+\)$ ]]
-    # a file has been added, but not commited
     then echo "'$LIGHT_YELLOW'"$(__git_ps1 "(%s) ")
-    # the state is clean, changes are commited
     else echo "'$LIGHT_GREEN'"$(__git_ps1 "(%s) ")
     fi)'$LIGHT_GRAY'-> '$CLEAN
 else
