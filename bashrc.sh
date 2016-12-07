@@ -60,9 +60,9 @@ if [ "$color_prompt" = yes ]; then
     then echo "'$LIGHT_RED'"$(__git_ps1 "(%s) ")
     elif [[ $(__git_ps1) =~ \+\)$ ]]
     # a file has been added, but not commited
-    then echo "'$LIGHT_MAGENTA'"$(__git_ps1 "(%s) ")
+    then echo "'$LIGHT_YELLOW'"$(__git_ps1 "(%s) ")
     # the state is clean, changes are commited
-    else echo "'$YELLOW'"$(__git_ps1 "(%s) ")
+    else echo "'$LIGHT_GREEN'"$(__git_ps1 "(%s) ")
     fi)'$CLEAN'-> '
 else
 	PS1='${debian_chroot:+($debian_chroot)}\t \d [\h]@ [\u]: [\w]\n$(__git_ps1 "(%s) ")-> '
