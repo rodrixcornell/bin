@@ -34,9 +34,11 @@ cd ${HOME}/repos/vo/voyage.git && pwd && git fetch --all
 
 echo 'Git Fetch All Thupan!!!'
 cd ${HOME}/repos/thupan/administrativo.git && pwd && git fetch --all
+cd ${HOME}/repos/thupan/catalogacao.git && pwd && git fetch --all
 cd ${HOME}/repos/thupan/chamados.git && pwd && git fetch --all
 cd ${HOME}/repos/thupan/contratos.git && pwd && git fetch --all
 cd ${HOME}/repos/thupan/estagio.git && pwd && git fetch --all
+cd ${HOME}/repos/thupan/gpm.git && pwd && git fetch --all
 cd ${HOME}/repos/thupan/pmm-tube.git && pwd && git fetch --all
 cd ${HOME}/repos/thupan/ponto.git && pwd && git fetch --all
 cd ${HOME}/repos/thupan/sac.git && pwd && git fetch --all
