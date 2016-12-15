@@ -29,7 +29,8 @@ expect "password:"
 send "deploy\r"
 
 expect "~$\r"
-send "cd /home/deploy/rails/redmine && export RAILS_ENV=production && rake -f Rakefile redmine:fetch_changesets && rake -f Rakefile redmine:send_reminders\r"
+#send "cd /home/deploy/rails/redmine && export RAILS_ENV=production && rake -f Rakefile redmine:fetch_changesets && rake -f Rakefile redmine:send_reminders\r"
+send "cd /home/deploy/rails/redmine && export RAILS_ENV=production && rake -f Rakefile redmine:fetch_changesets\r"
 
 expect "~$\r"
 send "exit\r"
