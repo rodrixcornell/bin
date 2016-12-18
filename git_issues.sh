@@ -1,22 +1,28 @@
 #!/bin/bash
+umask 077
 
-TOKEN=
 INCLUDE=journals,children,relations,attachments,changesets,watchers
+
+if [ ! -d /tmp/${USER} ];
+	then mkdir -p /tmp/${USER}
+fi
+
 if [ -z "$1" ]
 	then ISSUE=''
-		#echo ${TOKEN} ${ISSUE}
+		echo ${API_KEY_REDMINE} ${ISSUE}
 		#curl "http://redmine.dsti.manaus.am.gov.br/issues"$(echo $ISSUE)".json?include="$(echo $INCLUDE)"&key="$(echo $TOKEN) | python -mjson.tool
-		curl "http://redmine.dsti.manaus.am.gov.br/issues"$(echo $ISSUE)".json?include="$(echo $INCLUDE)"&key="$(echo $TOKEN) > /tmp/issues.json
-		#cat /tmp/issues.json | python -mjson.tool
+		curl "http://redmine.dsti.manaus.am.gov.br/issues"$(echo $ISSUE)".json?include="$(echo $INCLUDE)"&key="$(echo $API_KEY_REDMINE) > /tmp/${USER}/issues.json
+		#cat /tmp/${USER}/issues.json | python -mjson.tool
 	else
 		ISSUE=$(echo "/$1")
-		curl "http://redmine.dsti.manaus.am.gov.br/issues"$(echo $ISSUE)".json?include="$(echo $INCLUDE)"&key="$(echo $TOKEN) > /tmp/$(echo $ISSUE).json
-		PARENT=$(cat /tmp/$(echo $ISSUE).json | jq '.issue.parent.id')
-		TRACKER=$(cat /tmp/$(echo $ISSUE).json | jq '.issue.tracker.id')
-		AUTHOR=$(cat /tmp/$(echo $ISSUE).json | jq '.issue.author.name' | sed 's/\"//g')
-		BRANCH=$(cat /tmp/$(echo $ISSUE).json | jq '.issue.custom_fields[] | select(.id==27) | .value' | sed 's/\"//g')
-		TESTAR=$(cat /tmp/$(echo $ISSUE).json | jq '.issue.custom_fields[] | select(.id==28) | .value' | sed 's/\"//g')
-		AMBIENTE=$(cat /tmp/$(echo $ISSUE).json | jq '.issue.custom_fields[] | select(.id==21) | .value[]' | sed 's/\"//g' | xargs -d'\n' | sed 's/\ /\, /g')
+		echo ${API_KEY_REDMINE} ${ISSUE}
+		curl "http://redmine.dsti.manaus.am.gov.br/issues"$(echo $ISSUE)".json?include="$(echo $INCLUDE)"&key="$(echo $API_KEY_REDMINE) > /tmp/${USER}/$(echo $ISSUE).json
+		PARENT=$(cat /tmp/${USER}/$(echo $ISSUE).json | jq '.issue.parent.id')
+		TRACKER=$(cat /tmp/${USER}/$(echo $ISSUE).json | jq '.issue.tracker.id')
+		AUTHOR=$(cat /tmp/${USER}/$(echo $ISSUE).json | jq '.issue.author.name' | sed 's/\"//g')
+		BRANCH=$(cat /tmp/${USER}/$(echo $ISSUE).json | jq '.issue.custom_fields[] | select(.id==27) | .value' | sed 's/\"//g')
+		TESTAR=$(cat /tmp/${USER}/$(echo $ISSUE).json | jq '.issue.custom_fields[] | select(.id==28) | .value' | sed 's/\"//g')
+		AMBIENTE=$(cat /tmp/${USER}/$(echo $ISSUE).json | jq '.issue.custom_fields[] | select(.id==21) | .value[]' | sed 's/\"//g' | xargs -d'\n' | sed 's/\ /\, /g')
 		echo -e "\r"
 		[[ ${PARENT} != null ]] && [[ -n ${BRANCH} ]] && echo -e "Merged branch ${BRANCH} into develop\n"
 		[[ ${TRACKER} = 38 ]] && echo "Tarefa pai #"${PARENT}
