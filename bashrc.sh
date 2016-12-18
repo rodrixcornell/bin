@@ -74,9 +74,16 @@ xterm*|rxvt*)
     ;;
 esac
 
+# Oracle SET
+export TNS_ADMIN=$HOME/network/admin
+export NLS_LANG=$($HOME/bin/nls_lang.sh)
+
 #[[ -s $HOME/.rvm/scripts/rvm ]] && source $HOME/.rvm/scripts/rvm
 
 # my include bashrc.sh if it exists
 #if [ -f ~/bin/bash_aliases.sh ]; then
 #    . ~/bin/bash_aliases.sh
 #fi
+
+export API_KEY_REDMINE="0e30db1356a0c996d89ca23554cac854c22e6e46"
+
