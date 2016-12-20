@@ -24,6 +24,7 @@ if [ -z "$1" ]
 		ASSIGNED_TO_ID=$(cat /tmp/${USER}/$(echo $ISSUE).json | jq '.issue.assigned_to.id')
 		curl "http://"$(echo $URL)"/users/"$(echo ${ASSIGNED_TO_ID})".json?include="$(echo $INCLUDE_USERS)"&key="$(echo $API_KEY_REDMINE) > /tmp/${USER}/$(echo ${ASSIGNED_TO_ID}).json
 
+		ISSUE_ID=$(cat /tmp/${USER}/$(echo $ISSUE).json | jq '.issue.id')
 		ASSIGNED_TO=$(cat /tmp/${USER}/$(echo $ISSUE).json | jq '.issue.assigned_to.name' | sed 's/\"//g')
 		PARENT=$(cat /tmp/${USER}/$(echo $ISSUE).json | jq '.issue.parent.id')
 		TRACKER=$(cat /tmp/${USER}/$(echo $ISSUE).json | jq '.issue.tracker.id')
@@ -32,11 +33,11 @@ if [ -z "$1" ]
 		TESTAR=$(cat /tmp/${USER}/$(echo $ISSUE).json | jq '.issue.custom_fields[] | select(.id==28) | .value' | sed 's/\"//g')
 		AMBIENTE=$(cat /tmp/${USER}/$(echo $ISSUE).json | jq '.issue.custom_fields[] | select(.id==21) | .value[]' | sed 's/\"//g' | xargs -d'\n' | sed 's/\ /\, /g')
 		echo -e "\r"
-		[[ ${PARENT} != null ]] && [[ -n ${BRANCH} ]] && echo -e "Merged branch ${BRANCH} into develop\n"
+		[[ ${PARENT} != null ]] && [[ -n ${BRANCH} ]] && echo -e "Deploy #${ISSUE_ID} @30m Merged branch ${BRANCH} into develop\n"
 		[[ ${TRACKER} = 38 ]] && echo "Tarefa pai #"${PARENT}
 		echo "Adicionado por "${AUTHOR}
 		[[ -n ${BRANCH} ]] && echo "Branch: "${BRANCH}
-		echo "Executar Teste? "$(if [ -n ${TESTAR} ]; then echo Sim; else echo Não; fi)
+		echo "Executar Teste? "$(if [ ${TESTAR} == 1 ]; then echo Sim; else echo Não; fi)
 		[[ -n ${AMBIENTE} ]] && echo "Ambiente: "${AMBIENTE}
 		echo -e "\r"
 
