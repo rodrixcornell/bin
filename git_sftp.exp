@@ -1,10 +1,10 @@
 #!/usr/bin/env expect
 
 #send "/bin/bash git_fetch.sh\r"
-set timeout 5
+set timeout 3
 
 ###
-send "echo carius\r"
+#send "echo carius\r"
 spawn ssh carius -l deploy
 expect "password:"
 send "deploy\r"
@@ -25,20 +25,20 @@ send "put -r repos/\r"
 send "bye\r"
 interact
 
-spawn ssh carius -l deploy
-expect "password:"
-send "deploy\r"
+#spawn ssh carius -l deploy
+#expect "password:"
+#send "deploy\r"
 
-expect "~$\r"
+#expect "~$\r"
 #send "cd /home/deploy/rails/redmine && export RAILS_ENV=production && rake -f Rakefile redmine:fetch_changesets && rake -f Rakefile redmine:send_reminders\r"
-send "cd /home/deploy/rails/redmine && export RAILS_ENV=production && rake -f Rakefile redmine:fetch_changesets\r"
+#send "cd /home/deploy/rails/redmine && export RAILS_ENV=production && rake -f Rakefile redmine:fetch_changesets\r"
 
-expect "~$\r"
-send "exit\r"
-interact
+#expect "~$\r"
+#send "exit\r"
+#interact
 
 ###
-send "echo pericuma\r"
+#send "echo pericuma\r"
 spawn ssh pericuma -l deploy
 expect "password:"
 send "deploy\r"
@@ -59,20 +59,20 @@ send "put -r repos/\r"
 send "bye\r"
 interact
 
-spawn ssh pericuma -l deploy
-expect "password:"
-send "deploy\r"
+#spawn ssh pericuma -l deploy
+#expect "password:"
+#send "deploy\r"
 
-expect "~$\r"
+#expect "~$\r"
 #send "cd /home/deploy/rails/redmine && export RAILS_ENV=production && rake -f Rakefile redmine:fetch_changesets && rake -f Rakefile redmine:send_reminders\r"
-send "cd /home/deploy/rails/redmine && export RAILS_ENV=production && rake -f Rakefile redmine:fetch_changesets\r"
+#send "cd /home/deploy/rails/redmine && export RAILS_ENV=production && rake -f Rakefile redmine:fetch_changesets\r"
 
-expect "~$\r"
-send "exit\r"
-interact
+#expect "~$\r"
+#send "exit\r"
+#interact
 
 ###
-send "echo parnamirim\r"
+#send "echo parnamirim\r"
 spawn ssh parnamirim -l deploy
 expect "password:"
 send "deploy\r"
@@ -93,17 +93,17 @@ send "put -r repos/\r"
 send "bye\r"
 interact
 
-spawn ssh parnamirim -l deploy
-expect "password:"
-send "deploy\r"
+#spawn ssh parnamirim -l deploy
+#expect "password:"
+#send "deploy\r"
 
-expect "~$\r"
+#expect "~$\r"
 #send "cd /home/deploy/rails/redmine && export RAILS_ENV=production && rake -f Rakefile redmine:fetch_changesets && rake -f Rakefile redmine:send_reminders\r"
-send "cd /home/deploy/rails/redmine && export RAILS_ENV=production && rake -f Rakefile redmine:fetch_changesets\r"
+#send "cd /home/deploy/rails/redmine && export RAILS_ENV=production && rake -f Rakefile redmine:fetch_changesets\r"
 
-expect "~$\r"
-send "exit\r"
-interact
+#expect "~$\r"
+#send "exit\r"
+#interact
 
 #sftp -prC deploy@carius <<EOF
 #put -r repos/
