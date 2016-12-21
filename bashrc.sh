@@ -53,14 +53,14 @@ export LSCOLORS=gxfxbEaEBxxEhEhBaDaCaD
 color_prompt=yes
 if [ "$color_prompt" = yes ]; then
 	#PS1='${debian_chroot:+($debian_chroot)}\[\033[01;33m\]\h\[\033[00m\]@\[\033[01;32m\]\u\[\033[00m\]: \[\033[01;36m\]\w\n\[\033[31m\]$(__git_ps1 "(%s) ")\[\033[00m\]\[\033[07;37m\]->\[\033[00m\] '
-	PS1='\[\033[44m\]${debian_chroot:+($debian_chroot)}[\t \d]'$CLEAN$LIGHT_BLUE' [term \l]'$LIGHT_YELLOW' \h]'$CLEAN'@'$LIGHT_GREEN'[\u]'$CLEAN':'$LIGHT_CYAN'[\w]\n'$CLEAN
+	PS1='\[\033[44m\]${debian_chroot:+($debian_chroot)}[\t \d]'$CLEAN$LIGHT_BLUE' [term \l]'$LIGHT_YELLOW' \h'$CLEAN'@'$LIGHT_GREEN'[\u]'$CLEAN':'$LIGHT_CYAN'[\w]\n'$CLEAN
 	PS1=$PS1'$(
-    if [[ $(__git_ps1) =~ \*\)$ ]]
-    then echo "'$LIGHT_RED'"$(__git_ps1 "(%s) ")
-    elif [[ $(__git_ps1) =~ \+\)$ ]]
-    then echo "'$LIGHT_YELLOW'"$(__git_ps1 "(%s) ")
-    else echo "'$LIGHT_GREEN'"$(__git_ps1 "(%s) ")
-    fi)'$LIGHT_GRAY'-> '$CLEAN
+	if [[ $(__git_ps1) =~ \*\)$ ]]
+	then echo "'$LIGHT_RED'"$(__git_ps1 "(%s) ")
+	elif [[ $(__git_ps1) =~ \+\)$ ]]
+	then echo "'$LIGHT_YELLOW'"$(__git_ps1 "(%s) ")
+	else echo "'$LIGHT_GREEN'"$(__git_ps1 "(%s) ")
+	fi)'$LIGHT_GRAY'-> '$CLEAN
 else
 	PS1='${debian_chroot:+($debian_chroot)}\t \d [\h]@ [\u]: [\w]\n$(__git_ps1 "(%s) ")-> '
 fi
@@ -68,15 +68,11 @@ unset color_prompt
 
 case "$TERM" in
 xterm*|rxvt*)
-    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\h@\u: \w\a\]$PS1"
-    ;;
+	PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\h@\u: \w\a\]$PS1"
+	;;
 *)
-    ;;
+	;;
 esac
-
-# Oracle SET
-export TNS_ADMIN=$HOME/network/admin
-export NLS_LANG=$($HOME/bin/nls_lang.sh)
 
 #[[ -s $HOME/.rvm/scripts/rvm ]] && source $HOME/.rvm/scripts/rvm
 
@@ -85,5 +81,13 @@ export NLS_LANG=$($HOME/bin/nls_lang.sh)
 #    . ~/bin/bash_aliases.sh
 #fi
 
+# Oracle SET
+if [[ "which sqlplus" ]]; then
+	export TNS_ADMIN=${HOME}/network/admin
+	export NLS_LANG=$($HOME/bin/nls_lang.sh)
+	[[ "which rlwrap" ]] && alias sqlplus='rlwrap -b "" -f ${HOME}/sql/dict.sql sqlplus'
+fi
+
+# Token Redmine
 export API_KEY_REDMINE="0e30db1356a0c996d89ca23554cac854c22e6e46"
 
