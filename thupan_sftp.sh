@@ -2,12 +2,17 @@
 
 cd $(pwd)
 
-echo $(
-    if [[ $(__git_ps1) =~ \*\)$ ]]
-    then echo "'$LIGHT_RED'"$(__git_ps1 "(%s) ")
-    elif [[ $(__git_ps1) =~ \+\)$ ]]
-    then echo "'$LIGHT_YELLOW'"$(__git_ps1 "(%s) ")
-    else echo "'$LIGHT_GREEN'"$(__git_ps1 "(%s) ")
-    fi)
+FRAMEWORK=$(cat .git/config |grep -i :thupan | cut -d/ -f2 | cut -d. -f1)
 
-echo $(__git_ps1 "%s")
+GIT_BRANCH=$(git branch -a 2>&- | grep "*" | sed -e "s/* //")
+
+if [[ ${FRAMEWORK} ]]; then
+	#statements
+	if [[ ${GIT_BRANCH} ]]; then
+		#statements
+		echo ${GIT_BRANCH}
+		echo $(cat .git/config | grep -i :thupan | cut -d/ -f 2)
+		echo $(cat .git/config | grep -i ${GIT_BRANCH} | grep -i fetch | column -tx | cut -d/ -f5)
+	fi
+fi
+
