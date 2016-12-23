@@ -136,8 +136,6 @@ alias gkraken='gitkraken -p . '
 #alias pull_push='git pull; git push'
 #complete -o bashdefault -o default -o nospace -F _git
 
-alias kill_fox='killall firefox'
-
 alias rar_m5='rar a -m5 -idp -y'
 alias chrome-beta-incognito-proxy='google-chrome-beta --incognito --proxy-server="http=172.19.10.20:3128;https=172.19.10.20:3128"'
 alias chrome-beta-proxy='google-chrome-beta --proxy-server="http=172.19.10.1:3128;https=172.19.10.1:3128"'
@@ -166,3 +164,9 @@ alias icanhazip.com='curl icanhazip.com'
 alias ident.me='curl ident.me'
 #curl v4.ident.me
 #curl v6.ident.me
+
+
+
+# KillAll
+alias kill_fox='killall firefox'
+alias kill_notes='killall xfce4-notes'
