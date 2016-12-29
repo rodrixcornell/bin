@@ -1,12 +1,12 @@
 #!/bin/bash
 umask 077
 
+#echo $0 $1 $# $* $@
 URL=redmine.dsti.manaus.am.gov.br
 
-#echo $0 $1 $# $* $@
-
 INCLUDE_USERS=memberships,groups
-INCLUDE_ISSUES=journals,children,relations,attachments,changesets,watchers
+INCLUDE_ISSUES=journals,children,,attachments,changesets,watchers
+INCLUDE_PROJECTS=trackers,issue_categories,enabled_modules
 
 if [ ! -d /tmp/${USER} ];
 	then mkdir -p /tmp/${USER}
@@ -16,9 +16,17 @@ if [ -z "$1" ]
 	then ISSUE=''
 		#echo ${API_KEY_REDMINE} ${ISSUE}
 		#curl "http://redmine.dsti.manaus.am.gov.br/issues"$(echo $ISSUE)".json?include="$(echo $INCLUDE)"&key="$(echo $TOKEN) | python -mjson.tool
-		curl "http://"$(echo $URL)"/issues"$(echo $ISSUE)".json?include="$(echo $INCLUDE_ISSUES)"&key="$(echo $API_KEY_REDMINE) | python -mjson.tool > /tmp/${USER}/issues.json
+		ISSUES=$(curl "http://"$(echo $URL)"/issues"$(echo $ISSUE)".json?include="$(echo $INCLUDE_ISSUES)"&key="$(echo $API_KEY_REDMINE))
+		echo $ISSUES | python -mjson.tool > /tmp/${USER}/issues.json
 		#cat /tmp/${USER}/issues.json | python -mjson.tool
-		for i in $(cat /tmp/${USER}/issues.json | jq '.issues[].id'); do git_issues.sh $i; done
+		for i in $(cat /tmp/${USER}/issues.json | jq '.issues[].id'); do
+			echo "Issue: #"$i
+			curl "http://"$(echo $URL)"/issues/"$i".json?include="$(echo $INCLUDE_ISSUES)"&key="$(echo $API_KEY_REDMINE) | python -mjson.tool > /tmp/${USER}/$(echo $ISSUE).json
+		done
+		for j in $(cat /tmp/${USER}/issues.json | jq '.issues[].project.id'); do
+			echo "Projetc: "$j
+			curl "http://"$(echo $URL)"/projects/"$j".json?include="$(echo $INCLUDE_PROJECTS)"&key="$(echo $API_KEY_REDMINE) | python -mjson.tool > /tmp/${USER}/p$j.json
+		done
 	else
 		ISSUE=$(echo "/$1")
 		#echo ${API_KEY_REDMINE} ${ISSUE}
