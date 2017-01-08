@@ -71,10 +71,20 @@ xterm*|rxvt*)
 	;;
 esac
 
+# NPM SET
+# if [[ "which npm" ]]; then
+# 	[[ "which rlwrap" ]] && alias mysql='rlwrap -b "" -f ${HOME}/sql/dict.sql mysql'
+# fi
+
 # RVM SET
 if [[ ! "${rvm_path}" ]]; then
 	[[ -s $HOME/.rvm/scripts/rvm ]] && source $HOME/.rvm/scripts/rvm
 	[[ -s /etc/profile.d/rvm.sh ]] && . /etc/profile.d/rvm.sh
+fi
+
+# MySQL SET
+if [[ "which mysql" ]]; then
+	[[ "which rlwrap" ]] && alias mysql='rlwrap -b "" -f ${HOME}/sql/dict.sql mysql'
 fi
 
 # Oracle SET
@@ -82,11 +92,6 @@ if [[ "which sqlplus" ]]; then
 	export TNS_ADMIN=${HOME}/network/admin
 	export NLS_LANG=$(${HOME}/bin/nls_lang.sh)
 	[[ "which rlwrap" ]] && alias sqlplus='rlwrap -b "" -f ${HOME}/sql/dict.sql sqlplus'
-fi
-
-# MySQL SET
-if [[ "which mysql" ]]; then
-	[[ "which rlwrap" ]] && alias mysql='rlwrap -b "" -f ${HOME}/sql/dict.sql mysql'
 fi
 
 # Token Redmine
