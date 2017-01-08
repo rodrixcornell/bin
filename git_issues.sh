@@ -5,7 +5,7 @@ umask 077
 URL=redmine.dsti.manaus.am.gov.br
 
 INCLUDE_USERS=memberships,groups
-INCLUDE_ISSUES=journals,children,,attachments,changesets,watchers
+INCLUDE_ISSUES=journals,children,relations,attachments,changesets,watchers
 INCLUDE_PROJECTS=trackers,issue_categories,enabled_modules
 
 if [ ! -d /tmp/${USER} ];
