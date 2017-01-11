@@ -5,9 +5,9 @@ while true; do
 	echo
 	echo "Quantidade: "$c" "$(date +%Y%m%d.%H%M%S.%N)
 	echo -e "Git Fetch #1 $(date +%Y%m%d.%H%M%S.%N)\r"
-	for i in $(cd ~ && ls -r */*git | grep -i : | sed "s/://"); do cd ~ && echo $(pwd)/$i && cd $(pwd)/$i && git fetch --all 2>&1; done
+	for i in $(cd ~ && ls -r */*git | grep -i : | sed "s/://"); do cd ~ && echo $(pwd)/$i && cd $(pwd)/$i && git fetch --all 2>&1 && git gc 2>&1; done
 	echo -e "Git Fetch #2 $(date +%Y%m%d.%H%M%S.%N)\r"
-	for i in $(cd ~ && ls -r */*/*git | grep -i : | sed "s/://"); do cd ~ && echo $(pwd)/$i && cd $(pwd)/$i && git fetch --all 2>&1; done
+	for i in $(cd ~ && ls -r */*/*git | grep -i : | sed "s/://"); do cd ~ && echo $(pwd)/$i && cd $(pwd)/$i && git fetch --all 2>&1 && git gc 2>&1; done
 	echo -e "SFTP Carius Repos $(date +%Y%m%d.%H%M%S.%N)\r"
 	cd ~
 	expect -c 'set timeout 3

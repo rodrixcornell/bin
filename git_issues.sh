@@ -28,9 +28,10 @@ if [ -z "$1" ]
 			curl "http://"$(echo $URL)"/projects/"$j".json?include="$(echo $INCLUDE_PROJECTS)"&key="$(echo $API_KEY_REDMINE) | python -mjson.tool > /tmp/${USER}/p$j.json
 		done
 	else
-		ISSUE=$(echo "/$1")
+		ISSUE=$(echo "$1")
 		#echo ${API_KEY_REDMINE} ${ISSUE}
-		curl "http://"$(echo $URL)"/issues"$(echo $ISSUE)".json?include="$(echo $INCLUDE_ISSUES)"&key="$(echo $API_KEY_REDMINE) | python -mjson.tool > /tmp/${USER}/$(echo $ISSUE).json
+		ISSUES=$(curl "http://"$(echo $URL)"/issues/"$(echo $ISSUE)".json?include="$(echo $INCLUDE_ISSUES)"&key="$(echo $API_KEY_REDMINE))
+		echo $ISSUES | python -mjson.tool > /tmp/${USER}/$(echo $ISSUE).json
 
 		ASSIGNED_TO_ID=$(cat /tmp/${USER}/$(echo $ISSUE).json | jq '.issue.assigned_to.id')
 		curl "http://"$(echo $URL)"/users/"$(echo ${ASSIGNED_TO_ID})".json?include="$(echo $INCLUDE_USERS)"&key="$(echo $API_KEY_REDMINE) > /tmp/${USER}/$(echo ${ASSIGNED_TO_ID}).json
