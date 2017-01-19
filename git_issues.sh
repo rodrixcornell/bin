@@ -12,6 +12,10 @@ if [ ! -d /tmp/${USER} ];
 	then mkdir -p /tmp/${USER}
 fi
 
+if [ -d .git ];
+	then GIT_BRANCH=$(git branch -a 2>&- | grep "*" | sed -e "s/* //")
+fi
+
 if [ -z "$1" ]
 	then ISSUE=''
 		#echo ${API_KEY_REDMINE} ${ISSUE}
@@ -49,7 +53,7 @@ if [ -z "$1" ]
 		UPDATED_ON=$(date -d $(cat /tmp/${USER}/$(echo $ISSUE).json | jq '.issue.updated_on' | sed 's/\"//g') "+%Y-%m-%d %H:%M:%S" 2>&- )
 		CLOSED_ON=$(date -d $(cat /tmp/${USER}/$(echo $ISSUE).json | jq '.issue.closed_on' | sed 's/\"//g') "+%Y-%m-%d %H:%M:%S" 2>&- )
 		echo -e "\r"
-		[[ ${PARENT} ]] && [[ ${BRANCH} ]] && echo -e "Deploy #${ISSUE_ID} @30m Merged branch ${BRANCH} into develop\n"
+		[[ ${PARENT} ]] && [[ ${BRANCH} ]] && echo -e "Deploy #${ISSUE_ID} @30m Merged branch ${BRANCH} into ${GIT_BRANCH}\n"
 		[[ ${TRACKER} = 38 ]] && echo "Tarefa pai #"${PARENT}
 		echo "Adicionado por "${AUTHOR}
 		[[ ${BRANCH} ]] && echo "Branch: "${BRANCH}
@@ -59,7 +63,8 @@ if [ -z "$1" ]
 
 		ASSIGNED_TO_MAIL=$(cat /tmp/${USER}/$(echo ${ASSIGNED_TO_ID}).json | jq '.user.mail' | sed 's/\"//g')
 
-		echo "Signed-off-by: ${ASSIGNED_TO_ID}: ${ASSIGNED_TO} <${ASSIGNED_TO_MAIL}>"
+		# echo "Signed-off-by: ${ASSIGNED_TO_ID}: ${ASSIGNED_TO} <${ASSIGNED_TO_MAIL}>"
+		[[ ${ASSIGNED_TO_MAIL} ]] && echo "Signed-off-by: ${ASSIGNED_TO} <${ASSIGNED_TO_MAIL}>" || echo "Signed-off-by: ${ASSIGNED_TO}"
 		echo -e "\r"
 
 		[[ ${CREATED_ON} ]] && echo "Criado: ${CREATED_ON}"
