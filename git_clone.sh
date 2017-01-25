@@ -24,8 +24,8 @@ for i in $(ssh git@git | grep vo/ | cut -f2-3);
 	#cd $(echo "$i" | sed "s/vo\///g")
 	# verção linux
 	echo "$i"
-	git clone -b develop git@git:"$i".git "$i"_git
-	cd "$i"_git
+	git clone -b develop git@git:"$i".git "$i"
+	cd "$i"
 	git_fetch.sh
 	cd -
 done
@@ -34,8 +34,8 @@ for i in $(ssh git@git | grep thupan/ | cut -f2-3);
 	do
 	cd "$PWD"
 	echo "$i"
-	git clone -b develop git@git:"$i".git "$i"_git
-	cd "$i"_git
+	git clone -b develop git@git:"$i".git "$i"
+	cd "$i"
 	git_fetch.sh
 	cd -
 done
