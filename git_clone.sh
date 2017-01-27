@@ -5,15 +5,9 @@
 #cd -
 
 PWD=$(pwd)
-#for i in $(ssh git@git | column -tx | tr / \\t | awk '{ if ($3 != "this") if ($4 == "") print $3; else print $3"/"$4; }');
-#	do
-#	cd "$PWD"
-#	echo "$i"
-#	git clone git@git:"$i".git "$i".git
-#	cd "$i"
-#	git_fetch.sh
-#	cd -
-#done
+#for i in $(ssh git@git | column -tx | tr / \\t | awk '{ if ($3 != "this") if ($4 == "") print $3; else print $3"/"$4; }'); do cd "$PWD"; echo "$i"; git clone git@git:"$i".git "$i"; cd "$i"; git_fetch.sh; cd -; done
+
+#for i in $(ssh git@git | column -tx | tr / \\t | awk '{ if ($3 != "this") if ($4 == "") print $3; else print $3"/"$4; }'); do cd "$PWD"; echo "$i"; git clone --mirror git@git:"$i".git "$i".git; done
 
 for i in $(ssh git@git | grep vo/ | cut -f2-3);
 	do
