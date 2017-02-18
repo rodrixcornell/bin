@@ -1,4 +1,6 @@
-/openVPN
+/openVPN*
+/vpnSemad*
+
 /adt-bundle
 /Bashrc
 /bin
