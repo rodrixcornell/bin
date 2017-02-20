@@ -10,7 +10,7 @@
 #
 
 umask 002
-DATA=`/bin/date +%Y%m%d_%H%M%S_%N`
+DATA=$(/bin/date +%Y%m%d.%H%M%S.%N)
 #MACHINE=`/bin/uname -m`
 #ORIGIN=${HOSTNAME}_${MACHINE}_${DATA}
 ORIGIN=${HOSTNAME}_${DATA}
@@ -35,7 +35,7 @@ OPÇÕES:
   -V, --version      Mostra a versão do programa e sai
 "
 
-MENSAGEM_USO.OLD="
+MENSAGEM_USO_OLD="
 Escreva o nome do projeto sem '_web'
 
 Uso: $(basename "$0") [OPÇÕES]
@@ -91,11 +91,11 @@ git_hooks ()
 	echo '#!/bin/sh
 
 umask 002
-DATA=`/bin/date +%Y%m%d_%H%M%S_%N`
+DATA=$(/bin/date +%Y%m%d.%H%M%S.%N)
 #MACHINE=`/bin/uname -m`
 #ORIGIN=${HOSTNAME}_${MACHINE}_${DATA}
 ORIGIN=${HOSTNAME}_${DATA}
-DEPLOY_INICIO=`/bin/date +%H%M%S`
+DEPLOY_INICIO=$(/bin/date +%H%M%S)
 DEPLOY_FIM=''
 
 DIR_WWW='${DIR_WWW}'
@@ -233,8 +233,9 @@ done
 
 case "$HOSTNAME" in
 	php5) BRANCH="develop" ;;
-	daraa) BRANCH="develop" ;;
+	paranoa) BRANCH="develop" ;;
 	cruxati) BRANCH="ratify" ;;
+	daraa) BRANCH="master" ;;
 	apuau) BRANCH="master" ;;
 	*) echo Opção inválida: $1 exit 1 ;;
 esac
@@ -283,7 +284,8 @@ else
 		cd ${DIR_WWW}
 		echo
 		echo Git Clone
-		git clone -b ${BRANCH} ${HOME}/repositories/${FRAMEWORK}/${REPOSITORIES} ${FRAMEWORK}/${REPOSITORIES}
+#		git clone -b ${BRANCH} ${HOME}/repositories/${FRAMEWORK}/${REPOSITORIES} ${FRAMEWORK}/${REPOSITORIES}
+		git clone ${HOME}/repositories/${FRAMEWORK}/${REPOSITORIES} ${FRAMEWORK}/${REPOSITORIES}
 
 		cd ${FRAMEWORK}/${REPOSITORIES}
 		#git pull -u ${BRANCH}
@@ -293,8 +295,14 @@ else
 
 		cd ~
 
-		cd ${DIR_WWW}/pmm/sistemas
-		ln -sf ${DIR_WWW}/${FRAMEWORK}/${REPOSITORIES}/public
+		echo ${DIR_WWW}
+		if [ -d ${DIR_WWW}/pmm/sistemas ]; then
+			cd ${DIR_WWW}/pmm/sistemas
+		else 
+			cd ${DIR_WWW}/pmm
+		fi
+		mkdir -p ${FRAMEWORK}
+		ln -sf ${DIR_WWW}/${FRAMEWORK}/${REPOSITORIES}/public ${FRAMEWORK}/${REPOSITORIES}
 	fi
 
 	if [[ "${FRAMEWORK}" = vo ]]; then
@@ -322,7 +330,8 @@ else
 		cd ${DIR_WWW}
 		echo
 		echo Git Clone
-		git clone -b ${BRANCH} ${HOME}/repositories/${FRAMEWORK}/${REPOSITORIES} ${FRAMEWORK}/${REPOSITORIES}
+#		git clone -b ${BRANCH} ${HOME}/repositories/${FRAMEWORK}/${REPOSITORIES} ${FRAMEWORK}/${REPOSITORIES}
+		git clone ${HOME}/repositories/${FRAMEWORK}/${REPOSITORIES} ${FRAMEWORK}/${REPOSITORIES}
 
 		cd ${FRAMEWORK}/${REPOSITORIES}
 		#git pull -u ${BRANCH}
@@ -333,7 +342,12 @@ else
 
 		cd ~
 
-		cd ${DIR_WWW}/pmm/sistemas
+		if [ -d ${DIR_WWW}/pmm/sistemas ]; then
+			cd ${DIR_WWW}/pmm/sistemas
+		else 
+			cd ${DIR_WWW}/pmm
+		fi
+		
 		ln -sf ${DIR_WWW}/${FRAMEWORK}/${REPOSITORIES}
 	fi
 fi
