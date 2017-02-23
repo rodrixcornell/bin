@@ -95,7 +95,7 @@ if [[ "which sqlplus" ]]; then
 fi
 
 # Token Redmine
-export API_KEY_REDMINE="0e30db1356a0c996d89ca23554cac854c22e6e46"
+export API_KEY_REDMINE="d47f7578450e0b0b2a9e8d6a458290871f5ad03a"
 
 # my include bashrc.sh if it exists
 #if [ -f ~/bin/bash_aliases.sh ]; then
