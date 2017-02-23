@@ -2,7 +2,7 @@
 umask 077
 
 #echo $0 $1 $# $* $@
-URL=redmine.dsti.manaus.am.gov.br
+URL=redmine-dsti.manaus.am.gov.br
 
 INCLUDE_USERS=memberships,groups
 INCLUDE_ISSUES=journals,children,relations,attachments,changesets,watchers
@@ -19,26 +19,26 @@ fi
 if [ -z "$1" ]
 	then ISSUE=''
 		#echo ${API_KEY_REDMINE} ${ISSUE}
-		#curl "http://redmine.dsti.manaus.am.gov.br/issues"$(echo $ISSUE)".json?include="$(echo $INCLUDE)"&key="$(echo $TOKEN) | python -mjson.tool
-		ISSUES=$(curl "http://"$(echo $URL)"/issues"$(echo $ISSUE)".json?include="$(echo $INCLUDE_ISSUES)"&key="$(echo $API_KEY_REDMINE))
+		#curl "https://redmine-dsti.manaus.am.gov.br/issues"$(echo $ISSUE)".json?include="$(echo $INCLUDE)"&key="$(echo $TOKEN) | python -mjson.tool
+		ISSUES=$(curl "https://"$(echo $URL)"/issues"$(echo $ISSUE)".json?include="$(echo $INCLUDE_ISSUES)"&key="$(echo $API_KEY_REDMINE))
 		echo $ISSUES | python -mjson.tool > /tmp/${USER}/issues.json
 		#cat /tmp/${USER}/issues.json | python -mjson.tool
 		for i in $(cat /tmp/${USER}/issues.json | jq '.issues[].id'); do
 			echo "Issue: #"$i
-			curl "http://"$(echo $URL)"/issues/"$i".json?include="$(echo $INCLUDE_ISSUES)"&key="$(echo $API_KEY_REDMINE) | python -mjson.tool > /tmp/${USER}/$(echo $ISSUE).json
+			curl "https://"$(echo $URL)"/issues/"$i".json?include="$(echo $INCLUDE_ISSUES)"&key="$(echo $API_KEY_REDMINE) | python -mjson.tool > /tmp/${USER}/$(echo $ISSUE).json
 		done
 		for j in $(cat /tmp/${USER}/issues.json | jq '.issues[].project.id'); do
 			echo "Projetc: "$j
-			curl "http://"$(echo $URL)"/projects/"$j".json?include="$(echo $INCLUDE_PROJECTS)"&key="$(echo $API_KEY_REDMINE) | python -mjson.tool > /tmp/${USER}/p$j.json
+			curl "https://"$(echo $URL)"/projects/"$j".json?include="$(echo $INCLUDE_PROJECTS)"&key="$(echo $API_KEY_REDMINE) | python -mjson.tool > /tmp/${USER}/p$j.json
 		done
 	else
 		ISSUE=$(echo "$1")
 		#echo ${API_KEY_REDMINE} ${ISSUE}
-		ISSUES=$(curl "http://"$(echo $URL)"/issues/"$(echo $ISSUE)".json?include="$(echo $INCLUDE_ISSUES)"&key="$(echo $API_KEY_REDMINE))
+		ISSUES=$(curl "https://"$(echo $URL)"/issues/"$(echo $ISSUE)".json?include="$(echo $INCLUDE_ISSUES)"&key="$(echo $API_KEY_REDMINE))
 		echo $ISSUES | python -mjson.tool > /tmp/${USER}/$(echo $ISSUE).json
 
 		ASSIGNED_TO_ID=$(cat /tmp/${USER}/$(echo $ISSUE).json | jq '.issue.assigned_to.id')
-		curl "http://"$(echo $URL)"/users/"$(echo ${ASSIGNED_TO_ID})".json?include="$(echo $INCLUDE_USERS)"&key="$(echo $API_KEY_REDMINE) > /tmp/${USER}/$(echo ${ASSIGNED_TO_ID}).json
+		curl "https://"$(echo $URL)"/users/"$(echo ${ASSIGNED_TO_ID})".json?include="$(echo $INCLUDE_USERS)"&key="$(echo $API_KEY_REDMINE) > /tmp/${USER}/$(echo ${ASSIGNED_TO_ID}).json
 
 		ISSUE_ID=$(cat /tmp/${USER}/$(echo $ISSUE).json | jq '.issue.id')
 		ASSIGNED_TO=$(cat /tmp/${USER}/$(echo $ISSUE).json | jq '.issue.assigned_to.name' | sed 's/\"//g')
