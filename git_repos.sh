@@ -132,15 +132,15 @@ if [ "${FRAMEWORK}" = thupan ]; then
 		mv -fv ${FRAMEWORK}_${REPOSITORIES}_files_${DATA}.zip ${HOME}/bkp
 	fi
 
-	git reset
+	git reset --hard
 	git checkout -f
 	git pull -u origin ${BRANCH}
 	git log -10 HEAD> public/log && echo>> public/log && echo Maquina e Data e Hora do Deploy:>> public/log && echo ${ORIGIN}>> public/log
 
 	if [ -f ${HOME}/bkp/${FRAMEWORK}_${REPOSITORIES}_files_${DATA}.zip ]; then unzip -o ${HOME}/bkp/${FRAMEWORK}_${REPOSITORIES}_files_${DATA}.zip; fi
 
-	sudo composer self-update
-	composer update
+	#sudo composer self-update
+	#composer update
 fi
 
 if [ "${FRAMEWORK}" = vo ]; then
@@ -157,7 +157,7 @@ if [ "${FRAMEWORK}" = vo ]; then
 		mv -fv ${FRAMEWORK}_${REPOSITORIES}_arquivos_${DATA}.zip ${HOME}/bkp
 	fi
 
-	git reset
+	git reset --hard
 	git checkout -f
 	git pull -u origin ${BRANCH}
 	git log -10 HEAD> log && echo>> log && echo Maquina e Data e Hora do Deploy:>> log && echo ${ORIGIN}>> log
@@ -298,7 +298,7 @@ else
 		echo ${DIR_WWW}
 		if [ -d ${DIR_WWW}/pmm/sistemas ]; then
 			cd ${DIR_WWW}/pmm/sistemas
-		else 
+		else
 			cd ${DIR_WWW}/pmm
 		fi
 		mkdir -p ${FRAMEWORK}
@@ -344,10 +344,10 @@ else
 
 		if [ -d ${DIR_WWW}/pmm/sistemas ]; then
 			cd ${DIR_WWW}/pmm/sistemas
-		else 
+		else
 			cd ${DIR_WWW}/pmm
 		fi
-		
+
 		ln -sf ${DIR_WWW}/${FRAMEWORK}/${REPOSITORIES}
 	fi
 fi

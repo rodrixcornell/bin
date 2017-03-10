@@ -3,6 +3,8 @@ umask 077
 
 #echo $0 $1 $# $* $@
 URL=redmine-dsti.manaus.am.gov.br
+URL_HOM=pericuma.manaus.am.gov.br
+URL_DEV=parnamirim.manaus.am.gov.br
 
 INCLUDE_USERS=memberships,groups
 INCLUDE_ISSUES=journals,children,relations,attachments,changesets,watchers
