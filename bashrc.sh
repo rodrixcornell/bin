@@ -89,7 +89,7 @@ fi
 
 # Oracle SET
 if [[ "which sqlplus" ]]; then
-	export TNS_ADMIN=${HOME}/network/admin
+	#export TNS_ADMIN=${HOME}/network/admin
 	export NLS_LANG=$(${HOME}/bin/nls_lang.sh)
 	[[ "which rlwrap" ]] && alias sqlplus='rlwrap -b "" -f ${HOME}/sql/dict.sql sqlplus'
 fi
