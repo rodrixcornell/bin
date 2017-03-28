@@ -10,17 +10,21 @@ INCLUDE_USERS=memberships,groups
 INCLUDE_ISSUES=journals,children,relations,attachments,changesets,watchers
 INCLUDE_PROJECTS=trackers,issue_categories,enabled_modules
 
-API_KEY_REDMINE=$(curl "https://"$(echo $URL)"/users/current.json" -u rodrigo.cabral:QWEpoi123@@ | jq '.user.api_key' | sed 's/\"//g')
-
 if [ ! -d /tmp/${USER} ];
 	then mkdir -p /tmp/${USER}
 fi
 
+if [ -d .git ];
+	then GIT_BRANCH=$(git branch -a 2>&- | grep "*" | sed -e "s/* //")
+fi
+
 if [ -z "$1" ]
 	then ISSUE=''
-		echo ${API_KEY_REDMINE} ${ISSUE}
+		#echo ${API_KEY_REDMINE} ${ISSUE}
+		#curl "https://redmine-dsti.manaus.am.gov.br/issues"$(echo $ISSUE)".json?include="$(echo $INCLUDE)"&key="$(echo $TOKEN) | python -mjson.tool
 		ISSUES=$(curl "https://"$(echo $URL)"/issues"$(echo $ISSUE)".json?include="$(echo $INCLUDE_ISSUES)"&key="$(echo $API_KEY_REDMINE))
 		echo $ISSUES | python -mjson.tool > /tmp/${USER}/issues.json
+		#cat /tmp/${USER}/issues.json | python -mjson.tool
 		for i in $(cat /tmp/${USER}/issues.json | jq '.issues[].id'); do
 			echo "Issue: #"$i
 			curl "https://"$(echo $URL)"/issues/"$i".json?include="$(echo $INCLUDE_ISSUES)"&key="$(echo $API_KEY_REDMINE) | python -mjson.tool > /tmp/${USER}/$(echo $ISSUE).json
@@ -31,9 +35,9 @@ if [ -z "$1" ]
 		done
 	else
 		ISSUE=$(echo "$1")
-		# ISSUES=$(curl "https://"$(echo $URL)"/issues/"$(echo $ISSUE)".json?include="$(echo $INCLUDE_ISSUES)"&key="$(echo $API_KEY_REDMINE))
-		# echo $ISSUES | python -mjson.tool > /tmp/${USER}/$(echo $ISSUE).json
-		curl "https://"$(echo $URL)"/issues/"$(echo $ISSUE)".json?include="$(echo $INCLUDE_ISSUES)"&key="$(echo $API_KEY_REDMINE) > /tmp/${USER}/$(echo $ISSUE).json
+		#echo ${API_KEY_REDMINE} ${ISSUE}
+		ISSUES=$(curl "https://"$(echo $URL)"/issues/"$(echo $ISSUE)".json?include="$(echo $INCLUDE_ISSUES)"&key="$(echo $API_KEY_REDMINE))
+		echo $ISSUES | python -mjson.tool > /tmp/${USER}/$(echo $ISSUE).json
 
 		ASSIGNED_TO_ID=$(cat /tmp/${USER}/$(echo $ISSUE).json | jq '.issue.assigned_to.id')
 		curl "https://"$(echo $URL)"/users/"$(echo ${ASSIGNED_TO_ID})".json?include="$(echo $INCLUDE_USERS)"&key="$(echo $API_KEY_REDMINE) > /tmp/${USER}/$(echo ${ASSIGNED_TO_ID}).json
@@ -51,19 +55,6 @@ if [ -z "$1" ]
 		UPDATED_ON=$(date -d $(cat /tmp/${USER}/$(echo $ISSUE).json | jq '.issue.updated_on' | sed 's/\"//g') "+%Y-%m-%d %H:%M:%S" 2>&- )
 		CLOSED_ON=$(date -d $(cat /tmp/${USER}/$(echo $ISSUE).json | jq '.issue.closed_on' | sed 's/\"//g') "+%Y-%m-%d %H:%M:%S" 2>&- )
 		echo -e "\r"
-
-		if [ -d .git ]; then
-			GIT_BRANCH=$(git branch -a 2>&- | grep "*" | sed -e "s/* //")
-			# echo -e "$?\r"
-			GIT_REFS=$(git branch --track $(echo ${BRANCH} $(git branch -a | grep -i /${BRANCH})))
-			GIT_REFS_RETURN=$(echo $?)
-
-			if [ ${GIT_REFS_RETURN} = 0 ];
-				then echo ${GIT_REFS}
-				else echo ${GIT_REFS}
-			fi
-		fi
-
 		[[ ${PARENT} ]] && [[ ${BRANCH} ]] && echo -e "Deploy #${ISSUE_ID} @30m Merged branch ${BRANCH} into ${GIT_BRANCH}\n"
 		[[ ${TRACKER} = 38 ]] && echo "Tarefa pai #"${PARENT}
 		echo "Adicionado por "${AUTHOR}

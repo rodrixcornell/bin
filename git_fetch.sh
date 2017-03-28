@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [ -z "$1" ]; then
-	for branch in $(git branch -a | grep remotes | grep -v HEAD | grep -v master); do
+	for branch in $(git branch -a | grep remotes | grep -v HEAD | grep -v master | grep -i refs); do
 		#echo ${branch#remotes/origin/} $branch
 		#echo ${branch#remotes/} ${branch#remotes/origin/}
 		git branch --track ${branch#remotes/origin/} $branch
