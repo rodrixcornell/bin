@@ -19,7 +19,7 @@ for banco in $bancos; do
   mysqldump --password=4dm1n53m4d --protocol=tcp --port=3306 --default-character-set=utf8 --single-transaction=TRUE --routines --events --comments --no-data ${banco} > ${targetDir}/${host}-${banco}-${dia}-structure.sql
   mysqldump --password=4dm1n53m4d --protocol=tcp --port=3306 --default-character-set=utf8 --single-transaction=TRUE --routines --events --comments --no-create-info=TRUE ${banco} > ${targetDir}/${host}-${banco}-${dia}-data.sql
 #  tar czvf ${targetDir}/${host}-${banco}-${dia}.tgz ${targetDir}/${host}-${banco}-${dia}.sql
-  gzip -v9 ${targetDir}/${host}-${banco}-${dia}*.sql
+  gzip -v9f ${targetDir}/${host}-${banco}-${dia}*.sql
 #  rm -f ${targetDir}/${host}-${banco}-${dia}.sql
   rm -f /tmp/${databaseFilename}
 done

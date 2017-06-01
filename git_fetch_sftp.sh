@@ -31,6 +31,6 @@ while true; do
 
 	#git_sftp.exp >/dev/null 2>&1
 	echo "Sleep Time: "$c" "$(date +%Y%m%d.%H%M%S.%N)
-	[[ "$c" -lt 30 ]] && sleep 30 || break
+	[[ "$c" -lt 20 ]] && sleep 15 || break
 	((c++))
 done
