@@ -10,17 +10,36 @@ if [[ ${PROJECT} ]]; then
 	GIT_BRANCH=$(git branch -a 2>&- | grep "*" | sed -e "s/* //")
 	SERVER=$(cat .git/config 2>&- | grep -i ${GIT_BRANCH} | grep -i fetch | column -tx | cut -d/ -f5)
 
+	case "${GIT_BRANCH}" in
+		master)
+			SERVER="apuau"
+		;;
+		ratify)
+			SERVER="cruxati"
+		;;
+		*)
+			SERVER="paranoa"
+		;;
+	esac
+
 	if [[ ${GIT_BRANCH} ]]; then
 		#statements
 		echo ${SERVER} ${PROJECT} ${GIT_BRANCH}
 sftp -prC deploy@${SERVER}<<EOF
-cd www/thupan/${PROJECT}/
+cd /var/www/thupan/${PROJECT}/
 mkdir vendor
 put -r vendor/
-mkdir public/assets/dist
-put -r public/assets/dist/ public/assets/
-mkdir public/assets/fonts
-put -r public/assets/fonts/ public/assets/
+pwd
+lpwd
+cd public/
+lcd public/
+mkdir assets
+cd assets/
+lcd assets/
+mkdir dist
+put -r dist/
+mkdir fonts
+put -r fonts/
 bye
 EOF
 	fi
