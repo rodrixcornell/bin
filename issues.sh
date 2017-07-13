@@ -4,7 +4,8 @@
 #
 umask 077
 
-DATA_HORA=$(/bin/date +%Y%m%d.%H%M%S.%N)
+# DATA_HORA=$(/bin/date +%Y%m%d.%H%M%S.%N)
+DATA_HORA=$(date +%Y-%m-%d\ %H:%M:%S)
 DATA=$(date +%Y-%m-%d)
 MENSAGEM_USO="
 Escreva o #ID da tarefa do Redmine.
@@ -20,6 +21,7 @@ OPÇÕES:
 	-h, --help        Mostra esta tela de ajuda e sai
 "
 URL=pericuma
+# URL=carius
 INCLUDE_USERS=memberships,groups
 INCLUDE_ISSUES=journals,children,relations,attachments,changesets,watchers
 INCLUDE_PROJECTS=trackers,issue_categories,enabled_modules
@@ -48,54 +50,69 @@ check_git ()
 
 get_user ()
 {
-	curl "https://${URL}.manaus.am.gov.br/users/current.json?include=${INCLUDE_USERS_}" -u ${LOGIN}:${PASSWORD} | jq '.' > /tmp/${USER}/${LOGIN}.json
-
-	if [[ ! -s /tmp/${USER}/${LOGIN}.json ]]; then
-		echo Opções Inválidas!;
-		exit 1;
+	if [ ! -s /tmp/${USER}/${LOGIN}.json ]; then
+		echo maior 0 $?
+		curl "https://${URL}.manaus.am.gov.br/users/current.json?include=${INCLUDE_USERS_}" -u ${LOGIN}:${PASSWORD} > /tmp/${USER}/${LOGIN}.json
+	else
+		echo menor 0 $?
+		# curl "https://${URL}.manaus.am.gov.br/users/current.json?include=${INCLUDE_USERS_}" -u ${LOGIN}:${PASSWORD} > /tmp/${USER}/${LOGIN}.json
 	fi
+
+	# if [ ! -s /tmp/${USER}/${LOGIN}.json ]; then
+	# 	echo maior 0 $?
+	# 	echo Opções Inválidas!;
+	# 	echo X-Redmine-API-Key não encontrada!;
+	# 	exit 1;
+	# fi
 
 	API_KEY_REDMINE=$(cat /tmp/${USER}/${LOGIN}.json | jq '.user.api_key' | sed 's/\"//g')
 	if [[ ${API_KEY_REDMINE} != 0 ]]; then
 		echo api key! ${API_KEY_REDMINE};
 	fi
 
-	cat -bs /tmp/${USER}/${LOGIN}.json
+	# cat -bs /tmp/${USER}/${LOGIN}.json
 }
 
 get_issue ()
 {
-	curl "https://${URL}.manaus.am.gov.br/issues/${ISSUE}.json?include=${INCLUDE_ISSUES_}" -H "X-Redmine-API-Key: ${API_KEY_REDMINE}" | jq '.' > /tmp/${USER}/${ISSUE}.json
-	cat -bs /tmp/${USER}/${ISSUE}.json
-	# curl "https://${URL}.manaus.am.gov.br/watchers/watch?object_id=${ISSUE}&object_type=issue" -H "X-Redmine-API-Key: ${API_KEY_REDMINE}" -H "Content-Type: application/json" -X POST  | jq '.' > /tmp/${USER}/${ISSUE}_watch.json
-	# cat -bs /tmp/${USER}/${ISSUE}_watch.json
+	curl "https://${URL}.manaus.am.gov.br/issues/${ISSUE}.json?include=${INCLUDE_ISSUES_}" -H "X-Redmine-API-Key: ${API_KEY_REDMINE}" > /tmp/${USER}/${ISSUE}.json
+	# cat -bs /tmp/${USER}/${ISSUE}.json
+
+	BRANCH=$(cat /tmp/${USER}/${ISSUE}.json | jq '.issue.custom_fields[] | select(.id==27) | .value' | sed 's/\"//g')
+	echo ${BRANCH}
 }
 
 put_issue ()
 {
-	ISSUE_PUT='{
-		"issue": {
-			"description": "Teste",
-			"status_id": 10,
-			"assigned_to_id": 3,
-			"watcher_user_ids": [
-				3
-			],
-			"notes": "Iniciando Merge...",
-			"done_ratio": 40,
-			"start_date": "'${DATA}'",
-			"custom_fields": [
-				{
-					"id": 23,
-					"value": "'${DATA}'"
-				}
-			]
-		}
-	}'
-	echo ${ISSUE_PUT} > /tmp/${USER}/${ISSUE}_put.json
-	cat -bs /tmp/${USER}/${ISSUE}_put.json
-	curl "https://${URL}.manaus.am.gov.br/issues/${ISSUE}.json" -H "X-Redmine-API-Key: ${API_KEY_REDMINE}" -H "Content-Type: application/json" -X PUT --data-binary @/tmp/${USER}/${ISSUE}_put.json | jq '.' > /tmp/${USER}/${ISSUE}_put.json
+	# ISSUE_PUT='{"issue":{"description":"...","status_id":2,"assigned_to_id":3,"notes":"Iniciando Merge...\r\n'${DATA_HORA}'","done_ratio":30,"start_date":"'${DATA}'","due_date":"","custom_fields":[{"id":23,"value":"'${DATA}'"},{"id":26,"value":"'${DATA}'"}]}}'
+	# echo ${ISSUE_PUT} > /tmp/${USER}/${ISSUE}_put.json
+	echo '{"issue":{"description":"...","status_id":2,"assigned_to_id":3,"notes":"Iniciando Merge...\r\n'${DATA_HORA}'","done_ratio":30,"start_date":"'${DATA}'","due_date":"","custom_fields":[{"id":23,"value":"'${DATA}'"},{"id":26,"value":"'${DATA}'"}]}}' > /tmp/${USER}/${ISSUE}_put.json
+	# cat -bs /tmp/${USER}/${ISSUE}_put.json
+	# echo "curl https://${URL}.manaus.am.gov.br/issues/${ISSUE}.json" -H "X-Redmine-API-Key: ${API_KEY_REDMINE}" -H "Content-Type: application/json" -X PUT --data-binary \'${ISSUE_PUT}\'
+	curl "https://${URL}.manaus.am.gov.br/issues/${ISSUE}.json" -H "X-Redmine-API-Key: ${API_KEY_REDMINE}" -H "Content-Type: application/json" -X PUT --data-binary @/tmp/${USER}/${ISSUE}_put.json > /tmp/${USER}/${ISSUE}_put2.json
+	# cat -bs /tmp/${USER}/${ISSUE}_put2.json
 }
+
+pull_branch ()
+{
+	echo -e "\r"
+	if [ -d .git ]; then
+		GIT_BRANCH=$(git branch -a 2>&- | grep "*" | sed -e "s/* //")
+		# echo ${GIT_BRANCH} branch atual
+		# echo -e "$?\r"
+		# echo $(git branch -a 2>&- | grep -i /${BRANCH})
+		GIT_REFS=$(git branch --track $(echo ${BRANCH} $(git branch -a 2>&- | grep -i /${BRANCH})))
+		# echo ${GIT_REFS}
+		GIT_REFS_RETURN=$(echo $?)
+
+		if [ ${GIT_REFS_RETURN} = 0 ];
+			then echo ${GIT_REFS}
+			else echo ${GIT_REFS}
+		fi
+	fi
+}
+
+
 #
 #
 #
@@ -153,3 +170,12 @@ get_issue
 echo ${URL} - ${ISSUE} - ${LOGIN}:${PASSWORD}
 
 put_issue
+pull_branch
+
+
+
+
+
+
+
+# .git/COMMIT_EDITMSG

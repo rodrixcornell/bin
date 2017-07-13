@@ -72,15 +72,16 @@ if [ -z "$1" ]
 		[[ ${AMBIENTE} ]] && echo "Ambiente: "${AMBIENTE}
 		echo -e "\r"
 
-		ASSIGNED_TO_MAIL=$(cat /tmp/${USER}/$(echo ${ASSIGNED_TO_ID}).json | jq '.user.mail' | sed 's/\"//g')
+		[[ ${CREATED_ON} ]] && echo "Criado: ${CREATED_ON}"
+		[[ ${UPDATED_ON} ]] && echo "Atualizado: ${UPDATED_ON}"
+		[[ ${CLOSED_ON} ]] && echo "Fechado: ${CLOSED_ON}"
+		echo -e "\r"
 
+		ASSIGNED_TO_MAIL=$(cat /tmp/${USER}/$(echo ${ASSIGNED_TO_ID}).json | jq '.user.mail' | sed 's/\"//g')
 		# echo "Signed-off-by: ${ASSIGNED_TO_ID}: ${ASSIGNED_TO} <${ASSIGNED_TO_MAIL}>"
 		[[ ${ASSIGNED_TO_MAIL} ]] && echo "Signed-off-by: ${ASSIGNED_TO} <${ASSIGNED_TO_MAIL}>" || echo "Signed-off-by: ${ASSIGNED_TO}"
 		echo -e "\r"
 
-		[[ ${CREATED_ON} ]] && echo "Criado: ${CREATED_ON}"
-		[[ ${UPDATED_ON} ]] && echo "Atualizado: ${UPDATED_ON}"
-		[[ ${CLOSED_ON} ]] && echo "Fechado: ${CLOSED_ON}"
-		echo -e "\r\n"
+		echo -e "\n"
 		exit 0
 fi
