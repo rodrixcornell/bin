@@ -5,57 +5,63 @@
 # echo $(users)_$(hostname)
 # ssh git@git 2>&- | column -tx | sed 's/\//\t/g' | awk '{ if ($2 == "vo" || $2 == "thupan") print $2"/"$3; }' > /tmp/log_$(date +%Y%m%d.%H%M%S.%N)
 
-cd ~/public_html
-for i in $(ssh git@git 2>&- | column -tx | sed 's/\//\t/g' | awk '{ if ($2 == "vo" || $2 == "thupan") print $2"/"$3; }');
-	do echo $i
+ssh git@git;
+if [ $(echo $?) == 0 ];
+then echo ok;
+	cd ~/public_html
+	for i in $(ssh git@git 2>&- | column -tx | sed 's/\//\t/g' | awk '{ if ($2 == "vo" || $2 == "thupan") print $2"/"$3; }');
+	do echo $i;
+
 		git clone -b master git@git:$i.git $i >/dev/null 2>&1
-		#[[ $? == 0 ]] && echo -e "Criado!" || echo -e "Já Existe! ou Error!"
-done
+	done
 
-cd ~/public_html
-for i in $(ls -r */*/.git | grep -v pmm | grep -i : | sed "s/\/.git://");
+	cd ~/public_html
+	for i in $(ls -r */*/.git | grep -v pmm | grep -i : | sed "s/\/.git://");
 	do echo $(pwd)/$i
 		cd $(pwd)/$i
-		git checkout .
-		git pull -f 2>&1
-		git gc --force 2>&1
+		git checkout . >/dev/null 2>&1
+		git pull -f >/dev/null 2>&1
+		git gc --force >/dev/null 2>&1
 		cd -
-done
+	done
 
-cd ~/public_html
-for i in $(ls -r vo); do echo $i; ln -sf $PWD/vo/$i $PWD/pmm/$i; done
+	mkdir -p ~/public_html/pmm/thupan
+	cd ~/public_html/pmm
+	for i in $(ls -r ~/public_html/vo); do pwd; echo $i; ln -sfvT ~/public_html/vo/$i $i; done
 
-cd ~/public_html
-mkdir -p pmm/thupan
-for i in $(ls -r thupan); do echo $i; ln -sf $PWD/thupan/$i/public $PWD/pmm/thupan/$i; done
+	cd ~/public_html/pmm/thupan
+	for i in $(ls -r ~/public_html/thupan); do pwd; echo $i; ln -sfvT ~/public_html/thupan/$i/public $i; done
 
-chmod g+w -R * >/dev/null 2>&1
+	cd ~/public_html
+	chmod g+w -R * >/dev/null 2>&1
 
-cd ~
+	cd ~
 
-cd /var/www
-for i in $(ssh git@git | column -tx | tr / \\t | awk '{ if ($2 != "this") if ($2 == "vo" || $2 == "thupan") print $2"/"$3; }');
-	do echo $i
-		git clone -b master git@git:"$i".git "$i"
-done
+	cd /var/www
+	for i in $(ssh git@git | column -tx | tr / \\t | awk '{ if ($2 != "this") if ($2 == "vo" || $2 == "thupan") print $2"/"$3; }');
+		do echo $i
+			git clone -b master git@git:"$i".git "$i"
+	done
 
-cd /var/www
-for i in $(ls -r */*/.git | grep -v pmm | grep -i : | sed "s/\/.git://");
+	cd /var/www
+	for i in $(ls -r */*/.git | grep -v pmm | grep -i : | sed "s/\/.git://");
 	do echo $(pwd)/$i
 		cd $(pwd)/$i
-		git checkout .
-		git pull -f 2>&1
-		git gc --force 2>&1
+		git checkout . >/dev/null 2>&1
+		git pull -f >/dev/null 2>&1
+		git gc --force >/dev/null 2>&1
 		cd -
-done
+	done
 
-cd /var/www
-for i in $(ls -r vo); do echo $i; ln -sf $PWD/vo/$i $PWD/pmm/$i; done
+	mkdir -p /var/www/pmm/thupan
+	cd /var/www/pmm
+	for i in $(ls -r /var/www/vo); do pwd; echo $i; ln -sfvT /var/www/vo/$i $i; done
 
-cd /var/www
-mkdir -p pmm/thupan
-for i in $(ls -r thupan); do echo $i; ln -sf $PWD/thupan/$i/public $PWD/pmm/thupan/$i; done
+	cd /var/www/pmm/thupan
+	for i in $(ls -r /var/www/thupan); do pwd; echo $i; ln -sfvT /var/www/thupan/$i/public $i; done
 
-chmod g+w -R * >/dev/null 2>&1
+	cd /var/www
+	chmod g+w -R * >/dev/null 2>&1
 
-cd ~ #>/dev/null 2>&1
+	cd ~
+fi
