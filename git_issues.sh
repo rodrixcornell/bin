@@ -65,7 +65,7 @@ if [ -z "$1" ]
 		fi
 
 		[[ ${PARENT} ]] && [[ ${BRANCH} ]] && echo -e "Deploy #${ISSUE_ID} @30m Merged branch ${BRANCH} into ${GIT_BRANCH}\n"
-		[[ ${TRACKER} = 38 ]] && echo "Tarefa pai #"${PARENT}
+		[[ ${TRACKER} = 38 ]] && echo "Tarefa pai Refs #"${PARENT}
 		echo "Adicionado por "${AUTHOR}
 		[[ ${BRANCH} ]] && echo "Branch: "${BRANCH}
 		echo "Executar Teste? "$(if [[ ${TESTAR} == 1 ]]; then echo Sim; else echo Não; fi)
