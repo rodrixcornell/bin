@@ -64,7 +64,7 @@ if [ -z "$1" ]
 			fi
 		fi
 
-		[[ ${PARENT} ]] && [[ ${BRANCH} ]] && echo -e "Deploy #${ISSUE_ID} @30m Merged branch ${BRANCH} into ${GIT_BRANCH}\n"
+		[[ ${PARENT} ]] && [[ ${BRANCH} ]] && echo -e "Merge branch '${BRANCH}' into ${GIT_BRANCH}\n - Deploy #${ISSUE_ID} @30m\n"
 		[[ ${TRACKER} = 38 ]] && echo "Tarefa pai Refs #"${PARENT}
 		echo "Adicionado por "${AUTHOR}
 		[[ ${BRANCH} ]] && echo "Branch: "${BRANCH}
