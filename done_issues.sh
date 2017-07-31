@@ -20,8 +20,8 @@ TEMP="/tmp/.${USER}"
 # PASSWORD=
 
 # URL=parnamirim
-# URL=pericuma
-URL=carius
+URL=pericuma
+# URL=carius
 INCLUDE_USERS=memberships,groups
 INCLUDE_ISSUES=journals,children,relations,attachments,changesets,watchers
 INCLUDE_PROJECTS=trackers,issue_categories,enabled_modules
