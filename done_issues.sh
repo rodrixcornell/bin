@@ -63,7 +63,6 @@ check_meld ()
 
 get_user ()
 {
-
 	reset
 
 	if [ ! -d ${TEMP} ]; then mkdir -p ${TEMP}; fi
@@ -119,14 +118,14 @@ get_issue ()
 	PARENT_ID=$(cat ${TEMP}/${ISSUE}.json | jq '.issue.parent.id')
 
 	BRANCH=$(cat ${TEMP}/${ISSUE}.json | jq '.issue.custom_fields[] | select(.id==27) | .value' | sed 's/\"//g')
-	BRANCH_NO_WHITESPACE="$(echo -e "${BRANCH}" | tr -d '[:space:]')"
+	BRANCH_NO_WHITESPACE=$(echo -e "${BRANCH}" | tr -d '[:space:]')
 	# echo -e "BRANCH_NO_WHITESPACE='${BRANCH_NO_WHITESPACE}'"
 	# echo -e "length(BRANCH_NO_WHITESPACE)==${#BRANCH_NO_WHITESPACE}"
 	BRANCH=${BRANCH_NO_WHITESPACE}
 
 	TESTAR=$(cat ${TEMP}/${ISSUE}.json | jq '.issue.custom_fields[] | select(.id==28) | .value' | sed 's/\"//g')
 	AMBIENTE_ID=$(cat ${TEMP}/${ISSUE}.json | jq '.issue.custom_fields[] | select(.id==21)' | jq '.id')
-	# AMBIENTE=$(cat ${TEMP}/${ISSUE}.json | jq '.issue.custom_fields[] | select(.id==21) | .value[]' | sed 's/\"//g' | xargs -d'\n' | sed 's/\ /\, /g')
+	# AMBIENTE=$(cat ${TEMP}/${ISSUE}.json | jq '.issue.custom_fields[] | select(.id==21) | .value[]' | sed 's/\"//g' | xargs -d'\n' | sed 's/\ /\,/g')
 	AMBIENTE=$(cat ${TEMP}/${ISSUE}.json | jq '.issue.custom_fields[] | select(.id==21) | .value[]' | xargs -d'\n')
 	CREATED_ON=$(date -d $(cat ${TEMP}/${ISSUE}.json | jq '.issue.created_on' | sed 's/\"//g') "+%Y-%m-%d %H:%M:%S" 2>&- )
 	UPDATED_ON=$(date -d $(cat ${TEMP}/${ISSUE}.json | jq '.issue.updated_on' | sed 's/\"//g') "+%Y-%m-%d %H:%M:%S" 2>&- )
@@ -137,47 +136,10 @@ get_parent_task ()
 {
 	curl "https://${URL}.manaus.am.gov.br/issues/${PARENT_ID}.json?include=${INCLUDE_ISSUES}" -H "X-Redmine-API-Key: ${API_KEY_REDMINE}" > ${TEMP}/${PARENT_ID}.json
 	# cat -bs ${TEMP}/${PARENT_ID}.json
-}
 
-pull_branch ()
-{
-	# echo -e "\r"
-	# set -xv
-	if [ -d .git ]; then
-		BRANCHS=("develop" "test" "ratify" "master")
-		for i in "${BRANCHS[@]}"; do echo $i; git checkout -f $i; git pull -f; git gc; done
-
-		AMBIENTES=($( echo ${AMBIENTE}  | sed 's/\"//g'))
-		# echo ${#AMBIENTES[@]}
-		for (( idx=${#AMBIENTES[@]}-1 ; idx>=0 ; idx-- ))
-			do #echo "${AMBIENTES[idx]}";
-			if [ ${AMBIENTES[idx]} == 'Produção' ]; then git checkout master; break; fi
-			if [ ${AMBIENTES[idx]} == 'Homologação' ]; then git checkout ratify; break; fi
-			if [ ${AMBIENTES[idx]} == 'Teste' ]; then git checkout test; break; fi
-		done
-
-		GIT_BRANCH=$(git branch -a 2>&- | grep "*" | sed -e "s/* //")
-		echo ${GIT_BRANCH} branch atual
-		git pull -f
-		# echo -e "$?\r"
-		# echo $(git branch -a 2>&- | grep -i /${BRANCH})
-		if [ ${BRANCH} ]; then
-			GIT_REFS=$(git branch --track $(echo ${BRANCH} $(git branch -a | grep -i /${BRANCH})) 2>&1)
-			# echo ${GIT_REFS}
-			GIT_REFS_RETURN=$(echo $?)
-
-			if [ ${GIT_REFS_RETURN} == 0 ];
-				then echo ${GIT_REFS}
-				# else echo ${GIT_REFS}
-				else echo fatal: Já existe uma ramificação com o nome \'${BRANCH}\'.
-			fi
-		fi
-
-		#
-		if [ ${GIT_BRANCH} == 'master' ]; then git tag ${GIT_BRANCH}-${DH_LOG}; git push origin --tags; fi
-	fi
-	# set +xv
-	# echo -e "\r"
+	SUBJECT=$(cat ${TEMP}/${PARENT_ID}.json | jq '.issue.subject' | sed 's/\"//g')
+	DESCRIPTION=$(cat ${TEMP}/${PARENT_ID}.json | jq '.issue.description' | sed 's/\"//g')
+	# ISSUE_ID=$(cat ${TEMP}/${ISSUE}.json | jq '.issue.id')
 }
 
 gitgui_msg ()
@@ -186,7 +148,7 @@ gitgui_msg ()
 	# MERGE_MSG=$(echo -e "\rMerge branch ${BRANCH} into ${GIT_BRANCH}\r\nDeploy #${ISSUE_ID} @20m\n\r\nTarefa pai Refs #${PARENT_ID}\r\nAdicionado por ${AUTHOR}\r\nBranch: ${BRANCH}\r\nExecutar Teste? $(if [[ ${TESTAR} == 1 ]]; then echo Sim; else echo Não; fi)\r\nAmbiente: $(echo ${AMBIENTE} | sed 's/\ /\, /g')\n\r\nCriado: ${CREATED_ON}\r\nAtualizado: ${UPDATED_ON}\r\nFechado: ${CLOSED_ON}\n\r\nSigned-off-by: ${ASSIGNED_TO} <${MAIL}>")
 	# echo ${MERGE_MSG} > .git/GITGUI_MSG
 
-	cat .git/GITGUI_MSG
+	# cat .git/GITGUI_MSG
 }
 
 put_issue ()
@@ -200,11 +162,50 @@ put_issue ()
 	curl "https://${URL}.manaus.am.gov.br/issues/${ISSUE}/watchers.json?user_id=25" -H "X-Redmine-API-Key: ${API_KEY_REDMINE}" -H "Content-Type: application/json" -X POST
 	curl "https://${URL}.manaus.am.gov.br/issues/${ISSUE}/watchers.json?user_id=77" -H "X-Redmine-API-Key: ${API_KEY_REDMINE}" -H "Content-Type: application/json" -X POST
 
-	echo '{"issue":{"description":"...","status_id":10,"assigned_to_id":'${USER_ID}',"notes":"Iniciando Merge do Branch '${BRANCH}'\r\n'${DATA_HORA}'","done_ratio":10,"start_date":"'${DATA}'","due_date":"","custom_fields":[{"id":23,"value":"'${DATA}'"},{"id":26,"value":"'${DATA}'"}]}}' > ${TEMP}/${ISSUE}_put.json
+	echo '{"issue":{"description":"...","status_id":3,"assigned_to_id":'${USER_ID}',"notes":"Finalizado Merge do Branch '${BRANCH}'\r\n'${DATA_HORA}'","done_ratio":100,"due_date":"'${DATA}'","custom_fields":[{"id":24,"value":"'${DATA}'"}]}}' > ${TEMP}/${ISSUE}_put.json
 	# cat -bs ${TEMP}/${ISSUE}_put.json
 
 	curl "https://${URL}.manaus.am.gov.br/issues/${ISSUE}.json" -H "X-Redmine-API-Key: ${API_KEY_REDMINE}" -H "Content-Type: application/json" -X PUT --data-binary @${TEMP}/${ISSUE}_put.json > ${TEMP}/${ISSUE}_put2.json
 	# cat -bs ${TEMP}/${ISSUE}_put2.json
+}
+
+post_issue ()
+{
+	# Tracker
+	# 01 - Executar Teste
+	# 44 - Validação com Usuário
+	# 18 - Feedback
+
+	# echo ${TESTAR}
+	if [ ${TESTAR} == 1 ];
+		then #echo Sim
+
+		AMBIENTES=($( echo ${AMBIENTE}  | sed 's/\"//g'))
+		# echo ${#AMBIENTES[@]}
+
+		# for i in ${AMBIENTES[@]};
+		# 	do echo ${i};
+		# 	if [ ${i} == 'Produção' ]; then SUBJECT_TRACKER="Notificar"; TRACKER_ID=18; fi
+		# 	if [ ${i} == 'Homologação' ]; then SUBJECT_TRACKER="Validar com Usuário"; TRACKER_ID=44; fi
+		# 	if [ ${i} == 'Teste' ]; then SUBJECT_TRACKER="Executar Teste"; TRACKER_ID=01; fi
+		# done
+
+		for (( idx=${#AMBIENTES[@]}-1 ; idx>=0 ; idx-- ))
+			do #echo "${AMBIENTES[idx]}";
+			if [ ${AMBIENTES[idx]} == 'Produção' ]; then SUBJECT_TRACKER="Notificar"; TRACKER_ID=18; break; fi
+			if [ ${AMBIENTES[idx]} == 'Homologação' ]; then SUBJECT_TRACKER="Validar com Usuário"; TRACKER_ID=44; break; fi
+			if [ ${AMBIENTES[idx]} == 'Teste' ]; then SUBJECT_TRACKER="Executar Teste"; TRACKER_ID=01; break; fi
+		done
+
+		NEW_SUBJECT="${SUBJECT_TRACKER} - ${SUBJECT}"
+		echo '{"issue":{"project_id":'${PROJETC_ID}',"tracker_id":'${TRACKER_ID}',"subject":"'${NEW_SUBJECT}'","description":"'${DESCRIPTION}'","status_id":1,"priority_id":'${PRIORITY_ID}',"assigned_to_id":9,"parent_issue_id":'${PARENT_ID}',"custom_fields":[{"id":27,"value":"'${BRANCH}'"},{"id":21,"value":['$(echo ${AMBIENTE} | sed 's/\ /\,/g')']},{"id":26,"value":"'${DATA}'"}],"watcher_user_ids":['${USER_ID}',15,16]}}' > ${TEMP}/post.json
+		# cat -bs ${TEMP}/post.json
+
+		echo curl "https://${URL}.manaus.am.gov.br/issues.json" -H "X-Redmine-API-Key: ${API_KEY_REDMINE}" -H "Content-Type: application/json" -X POST --data-binary @${TEMP}/post.json
+		POST=$(curl "https://${URL}.manaus.am.gov.br/issues.json" -H "X-Redmine-API-Key: ${API_KEY_REDMINE}" -H "Content-Type: application/json" -X POST --data-binary @${TEMP}/post.json)
+		NEW_ISSUE_ID=$(echo ${POST} | jq '.issue.id')
+		echo ${POST} > ${TEMP}/${NEW_ISSUE_ID}.json
+	fi
 }
 
 #
@@ -216,7 +217,7 @@ check_git
 check_meld
 
 get_user
-
+reset
 ISSUE=$(echo "$1" | tr A-Z a-z)
 
 if [ ${ISSUE} ];then
@@ -227,19 +228,11 @@ if [ ${ISSUE} ];then
 
 	# echo ${URL} - ${ISSUE} - ${LOGIN}:${PASSWORD}
 
-	pull_branch
 	gitgui_msg
 
+	post_issue
 
-	GIT_MERGE=$(git merge -m "$(cat .git/GITGUI_MSG)" ${BRANCH} 2>&1)
-	GIT_MERGE_RETURN=$(echo $?)
-
-	if [ ${GIT_MERGE_RETURN} == 0 ];
-		then echo ${GIT_MERGE_RETURN} Merge executado com Sucesso!
-		# ; git commit --amend;
-	else echo ${GIT_MERGE_RETURN} ${GIT_MERGE}
-		git status
-	fi
+	git branch -D ${BRANCH}
 
 else
 	echo Escreva o ID da tarefa do Redmine.
