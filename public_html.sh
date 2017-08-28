@@ -8,8 +8,8 @@
 ssh git@git;
 if [ $(echo $?) == 0 ];
 then echo ok;
-	mkdir -p ~/projetcs
-	cd ~/projetcs
+	mkdir -p ~/projects
+	cd ~/projects
 	for i in $(ssh git@git 2>&- | column -tx | tr / \\t | awk '{ if ($3 != "this") if ($4 == "") print $3; else print $3"/"$4; }');
 	#for i in $(ssh git@git 2>&- | column -tx | sed 's/\//\t/g' | awk '{ if ($2 == "vo" || $2 == "thupan") print $2"/"$3; }');
 		do echo $i
@@ -18,7 +18,7 @@ then echo ok;
 			#[[ $? == 0 ]] && echo -e "Criado!" || echo -e "Já Existe! ou Error!"
 	done
 
-	cd ~/projetcs
+	cd ~/projects
 	for i in $(ls -r */.git | grep -v pmm | grep -i : | sed "s/\/.git://");
 	do echo $(pwd)/$i
 		cd $(pwd)/$i
@@ -28,7 +28,7 @@ then echo ok;
 		cd -
 	done
 	
-	cd ~/projetcs
+	cd ~/projects
 	for i in $(ls -r */*/.git | grep -v pmm | grep -i : | sed "s/\/.git://");
 	do echo $(pwd)/$i
 		cd $(pwd)/$i
@@ -38,18 +38,18 @@ then echo ok;
 		cd -
 	done
 
-	cd ~/projetcs
+	cd ~/projects
 	#for i in $(ls -r */.git | grep -v pmm | grep -i : | sed "s/\/.git://"); do pwd; echo $i; zip -r $i\_$(date +%Y%m%d.%H%M%S.%N) $i; done
 	for i in $(ls -l | grep -i drwx | awk '{ print $9 }'); do echo $(pwd)/$i; zip -r $(date +%Y%m%d.%H%M%S.%N)_$i.zip $i; done
 
-	#mkdir -p ~/projetcs/pmm/thupan
-	#cd ~/projetcs/pmm
-	#for i in $(ls -r ~/projetcs/vo); do pwd; echo $i; ln -sfvT ~/projetcs/vo/$i $i; done
+	#mkdir -p ~/projects/pmm/thupan
+	#cd ~/projects/pmm
+	#for i in $(ls -r ~/projects/vo); do pwd; echo $i; ln -sfvT ~/projects/vo/$i $i; done
 
-	#cd ~/projetcs/pmm/thupan
-	#for i in $(ls -r ~/projetcs/thupan); do pwd; echo $i; ln -sfvT ~/projetcs/thupan/$i/public $i; done
+	#cd ~/projects/pmm/thupan
+	#for i in $(ls -r ~/projects/thupan); do pwd; echo $i; ln -sfvT ~/projects/thupan/$i/public $i; done
 
-	#cd ~/projetcs
+	#cd ~/projects
 	#chmod g+w -R *
 
 	cd ~
