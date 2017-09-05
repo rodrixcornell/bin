@@ -23,6 +23,7 @@ then echo ok;
 	do echo $(pwd)/$i
 		cd $(pwd)/$i
 		git checkout .
+		git tag $(git branch -a 2>&- | grep "*" | sed -e "s/* //")-$(date +%Y%m%d.%H%M%S.%N) ; git push origin --tags
 		git pull -f
 		git gc --force
 		cd -
@@ -33,6 +34,7 @@ then echo ok;
 	do echo $(pwd)/$i
 		cd $(pwd)/$i
 		git checkout .
+		git tag $(git branch -a 2>&- | grep "*" | sed -e "s/* //")-$(date +%Y%m%d.%H%M%S.%N) ; git push origin --tags
 		git pull -f
 		git gc --force
 		cd -
