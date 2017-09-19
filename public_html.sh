@@ -22,17 +22,19 @@ then echo ok;
 	for i in $(ls -r */.git | grep -v pmm | grep -i : | sed "s/\/.git://");
 	do echo $(pwd)/$i
 		cd $(pwd)/$i
+		git checkout master
 		git checkout .
 		git tag $(git branch -a 2>&- | grep "*" | sed -e "s/* //")-$(date +%Y%m%d.%H%M%S.%N) ; git push origin --tags
 		git pull -f
 		git gc --force
 		cd -
 	done
-	
+
 	cd ~/projects
 	for i in $(ls -r */*/.git | grep -v pmm | grep -i : | sed "s/\/.git://");
 	do echo $(pwd)/$i
 		cd $(pwd)/$i
+		git checkout master
 		git checkout .
 		git tag $(git branch -a 2>&- | grep "*" | sed -e "s/* //")-$(date +%Y%m%d.%H%M%S.%N) ; git push origin --tags
 		git pull -f
