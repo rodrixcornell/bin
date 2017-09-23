@@ -172,7 +172,8 @@ alias ident.me='curl ident.me'
 #curl v6.ident.me
 
 # Composer
-alias composer='composer --prefer-dist -vvv --profile'
+#alias composer='composer --prefer-dist -vvv --profile'
+alias composer='composer -vvv --profile'
 
 # KillAll
 alias kill_fox='killall firefox'
