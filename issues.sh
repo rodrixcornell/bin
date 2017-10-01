@@ -145,15 +145,18 @@ pull_branch ()
 	# set -xv
 	if [ -d .git ]; then
 		BRANCHS=("develop" "test" "ratify" "master")
-		for i in "${BRANCHS[@]}"; do echo $i; git checkout -f $i; git pull -f; git gc; done
+		for i in "${BRANCHS[@]}"; do echo $i; git checkout -f $i; git checkout -f . ; git pull -f; git gc; done
 
+		echo ${AMBIENTE}
 		AMBIENTES=($( echo ${AMBIENTE}  | sed 's/\"//g'))
-		# echo ${#AMBIENTES[@]}
-		for (( idx=${#AMBIENTES[@]}-1 ; idx>=0 ; idx-- ))
-			do #echo "${AMBIENTES[idx]}";
-			if [ ${AMBIENTES[idx]} == 'Produção' ]; then git checkout master; break; fi
-			if [ ${AMBIENTES[idx]} == 'Homologação' ]; then git checkout ratify; break; fi
-			if [ ${AMBIENTES[idx]} == 'Teste' ]; then git checkout test; break; fi
+		echo ${#AMBIENTES[@]}
+		# for (( idx=${#AMBIENTES[@]}-1 ; idx>=0 ; idx-- ))
+		for i in "${AMBIENTES[@]}"
+			do
+			echo "$i";
+			if [ $i == 'Produção' ]; then git checkout master; break; fi
+			if [ $i == 'Homologação' ]; then git checkout ratify; break; fi
+			if [ $i == 'Teste' ]; then git checkout test; break; fi
 		done
 
 		GIT_BRANCH=$(git branch -a 2>&- | grep "*" | sed -e "s/* //")
