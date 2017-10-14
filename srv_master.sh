@@ -23,6 +23,7 @@
 		git checkout . >/dev/null 2>&1
 		git pull -f >/dev/null 2>&1
 		git gc --force >/dev/null 2>&1
+		git log -10 HEAD > log
 		cd -
 	done
 
@@ -51,6 +52,7 @@
 	# 	git checkout . >/dev/null 2>&1
 	# 	git pull -f >/dev/null 2>&1
 	# 	git gc --force >/dev/null 2>&1
+	# 	git log -10 HEAD > log
 	# 	cd -
 	# done
 

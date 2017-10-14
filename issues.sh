@@ -144,17 +144,6 @@ pull_branch ()
 	# echo -e "\r"
 	# set -xv
 	if [ -d .git ]; then
-		BRANCHS=("develop" "test" "ratify" "master")
-		for i in "${BRANCHS[@]}"; do echo $i; git checkout -f $i; git pull -f; git gc; done
-
-		AMBIENTES=($( echo ${AMBIENTE}  | sed 's/\"//g'))
-		# echo ${#AMBIENTES[@]}
-		for (( idx=${#AMBIENTES[@]}-1 ; idx>=0 ; idx-- ))
-			do #echo "${AMBIENTES[idx]}";
-			if [ ${AMBIENTES[idx]} == 'Produção' ]; then git checkout master; break; fi
-			if [ ${AMBIENTES[idx]} == 'Homologação' ]; then git checkout ratify; break; fi
-			if [ ${AMBIENTES[idx]} == 'Teste' ]; then git checkout test; break; fi
-		done
 
 		GIT_BRANCH=$(git branch -a 2>&- | grep "*" | sed -e "s/* //")
 		echo ${GIT_BRANCH} branch atual
@@ -200,7 +189,7 @@ put_issue ()
 	curl "https://${URL}.manaus.am.gov.br/issues/${ISSUE}/watchers.json?user_id=25" -H "X-Redmine-API-Key: ${API_KEY_REDMINE}" -H "Content-Type: application/json" -X POST
 	curl "https://${URL}.manaus.am.gov.br/issues/${ISSUE}/watchers.json?user_id=77" -H "X-Redmine-API-Key: ${API_KEY_REDMINE}" -H "Content-Type: application/json" -X POST
 
-	echo '{"issue":{"description":"...","status_id":10,"assigned_to_id":'${USER_ID}',"notes":"Iniciando Merge do Branch '${BRANCH}'\r\n'${DATA_HORA}'","done_ratio":10,"start_date":"'${DATA}'","due_date":"","custom_fields":[{"id":23,"value":"'${DATA}'"},{"id":26,"value":"'${DATA}'"}]}}' > ${TEMP}/${ISSUE}_put.json
+	echo '{"issue":{"description":"...","status_id":10,"assigned_to_id":'${USER_ID}',"notes":"Iniciando Merge do Branch '${BRANCH}'\r\n'${DATA_HORA}'","done_ratio":10,"estimated_hours":0.33,"start_date":"'${DATA}'","due_date":"","custom_fields":[{"id":23,"value":"'${DATA}'"},{"id":26,"value":"'${DATA}'"}]}}' > ${TEMP}/${ISSUE}_put.json
 	# cat -bs ${TEMP}/${ISSUE}_put.json
 
 	curl "https://${URL}.manaus.am.gov.br/issues/${ISSUE}.json" -H "X-Redmine-API-Key: ${API_KEY_REDMINE}" -H "Content-Type: application/json" -X PUT --data-binary @${TEMP}/${ISSUE}_put.json > ${TEMP}/${ISSUE}_put2.json
@@ -227,6 +216,26 @@ if [ ${ISSUE} ];then
 
 	# echo ${URL} - ${ISSUE} - ${LOGIN}:${PASSWORD}
 
+	GIT_BRANCH=$(git branch -a 2>&- | grep "*" | sed -e "s/* //")
+
+	BRANCHS=("develop" "test" "ratify" "master")
+	for i in "${BRANCHS[@]}"; do echo $i; git checkout -f $i; git checkout -f . ; git pull -f; git gc; done
+
+	git checkout ${GIT_BRANCH}
+
+
+	# echo ${AMBIENTE}
+	# AMBIENTES=($( echo ${AMBIENTE}  | sed 's/\"//g'))
+	# echo ${#AMBIENTES[@]}
+	# for (( idx=${#AMBIENTES[@]}-1 ; idx>=0 ; idx-- ))
+	# for i in "${AMBIENTES[@]}"
+	# 	do
+	# 	# echo "$i";
+	# 	if [ $i == 'Produção' ]; then git checkout master; break; fi
+	# 	if [ $i == 'Homologação' ]; then git checkout ratify; break; fi
+	# 	# if [ $i == 'Teste' ]; then git checkout test; break; fi
+	# done
+
 	pull_branch
 	gitgui_msg
 
@@ -235,7 +244,12 @@ if [ ${ISSUE} ];then
 	GIT_MERGE_RETURN=$(echo $?)
 
 	if [ ${GIT_MERGE_RETURN} == 0 ];
-		then echo ${GIT_MERGE_RETURN} Merge executado com Sucesso!
+		then
+			echo ${GIT_MERGE_RETURN} Merge executado com Sucesso!
+			# sleep 2m
+			git push -u -f
+			sleep 2m
+			echo Execute done_issues.sh ${ISSUE}
 		# ; git commit --amend;
 	else echo ${GIT_MERGE_RETURN} ${GIT_MERGE}
 		git status

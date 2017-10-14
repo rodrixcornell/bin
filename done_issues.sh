@@ -180,22 +180,27 @@ post_issue ()
 	if [ ${TESTAR} == 1 ];
 		then #echo Sim
 
-		AMBIENTES=($( echo ${AMBIENTE}  | sed 's/\"//g'))
+		GIT_BRANCH=$(git branch -a 2>&- | grep "*" | sed -e "s/* //")
+		if [ ${GIT_BRANCH} == 'master' ]; then SUBJECT_TRACKER="Notificar"; TRACKER_ID=18; fi
+		if [ ${GIT_BRANCH} == 'ratify' ]; then SUBJECT_TRACKER="Validar com Usuário"; TRACKER_ID=44; fi
+		if [ ${GIT_BRANCH} == 'test' ]; then SUBJECT_TRACKER="Executar Teste"; TRACKER_ID=01; fi
+
+		# AMBIENTES=($( echo ${AMBIENTE}  | sed 's/\"//g'))
 		# echo ${#AMBIENTES[@]}
 
 		# for i in ${AMBIENTES[@]};
 		# 	do echo ${i};
 		# 	if [ ${i} == 'Produção' ]; then SUBJECT_TRACKER="Notificar"; TRACKER_ID=18; fi
 		# 	if [ ${i} == 'Homologação' ]; then SUBJECT_TRACKER="Validar com Usuário"; TRACKER_ID=44; fi
-		# 	if [ ${i} == 'Teste' ]; then SUBJECT_TRACKER="Executar Teste"; TRACKER_ID=01; fi
+		# 	# if [ ${i} == 'Teste' ]; then SUBJECT_TRACKER="Executar Teste"; TRACKER_ID=01; fi
 		# done
 
-		for (( idx=${#AMBIENTES[@]}-1 ; idx>=0 ; idx-- ))
-			do #echo "${AMBIENTES[idx]}";
-			if [ ${AMBIENTES[idx]} == 'Produção' ]; then SUBJECT_TRACKER="Notificar"; TRACKER_ID=18; break; fi
-			if [ ${AMBIENTES[idx]} == 'Homologação' ]; then SUBJECT_TRACKER="Validar com Usuário"; TRACKER_ID=44; break; fi
-			if [ ${AMBIENTES[idx]} == 'Teste' ]; then SUBJECT_TRACKER="Executar Teste"; TRACKER_ID=01; break; fi
-		done
+		# for (( idx=${#AMBIENTES[@]}-1 ; idx>=0 ; idx-- ))
+		# 	do #echo "${AMBIENTES[idx]}";
+		# 	if [ ${AMBIENTES[idx]} == 'Produção' ]; then SUBJECT_TRACKER="Notificar"; TRACKER_ID=18; break; fi
+		# 	if [ ${AMBIENTES[idx]} == 'Homologação' ]; then SUBJECT_TRACKER="Validar com Usuário"; TRACKER_ID=44; break; fi
+		# 	if [ ${AMBIENTES[idx]} == 'Teste' ]; then SUBJECT_TRACKER="Executar Teste"; TRACKER_ID=01; break; fi
+		# done
 
 		NEW_SUBJECT="${SUBJECT_TRACKER} - ${SUBJECT}"
 		echo '{"issue":{"project_id":'${PROJETC_ID}',"tracker_id":"'${TRACKER_ID}'","subject":"'${NEW_SUBJECT}'","description":"'${DESCRIPTION}'","status_id":1,"priority_id":'${PRIORITY_ID}',"assigned_to_id":9,"parent_issue_id":'${PARENT_ID}',"custom_fields":[{"id":27,"value":"'${BRANCH}'"},{"id":21,"value":['$(echo ${AMBIENTE} | sed 's/\ /\,/g')']},{"id":26,"value":"'${DATA}'"}],"watcher_user_ids":['${USER_ID}',15,16]}}' > ${TEMP}/post.json
