@@ -1,6 +1,5 @@
 #!/bin/bash
 
-#
 # ssh-keygen -t rsa -b 4096 -C $(users)@$(hostname).manaus.am.gov.br
 # echo $(users)_$(hostname)
 # ssh git@git 2>&- | column -tx | sed 's/\//\t/g' | awk '{ if ($2 == "vo" || $2 == "thupan") print $2"/"$3; }' > /tmp/log_$(date +%Y%m%d.%H%M%S.%N)
@@ -22,7 +21,7 @@ then echo ok;
 	for i in $(ls -r */.git | grep -v pmm | grep -i : | sed "s/\/.git://");
 	do echo $(pwd)/$i
 		cd $(pwd)/$i
-		git checkout master
+		git checkout master 2>&-
 		git checkout .
 		git tag $(git branch -a 2>&- | grep "*" | sed -e "s/* //")-$(date +%Y%m%d.%H%M%S.%N) ; git push origin --tags
 		git pull -f
@@ -34,7 +33,7 @@ then echo ok;
 	for i in $(ls -r */*/.git | grep -v pmm | grep -i : | sed "s/\/.git://");
 	do echo $(pwd)/$i
 		cd $(pwd)/$i
-		git checkout master
+		git checkout master 2>&-
 		git checkout .
 		git tag $(git branch -a 2>&- | grep "*" | sed -e "s/* //")-$(date +%Y%m%d.%H%M%S.%N) ; git push origin --tags
 		git pull -f
