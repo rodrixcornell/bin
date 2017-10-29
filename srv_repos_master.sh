@@ -26,7 +26,7 @@ cd ~
 	for i in $(ls -r *.git | grep -i : | sed "s/://");
 		do echo $(pwd)/$i
 			cd $(pwd)/$i
-			git fetch --all 2>&1
+			git fetch -q --all -p 2>&1
 			git gc 2>&1
 			cd -
 	done
@@ -35,7 +35,7 @@ cd ~
 	for i in $(ls -r */*.git | grep -i : | sed "s/://");
 		do echo $(pwd)/$i
 			cd $(pwd)/$i
-			git fetch --all 2>&1
+			git fetch -q --all -p 2>&1
 			git gc 2>&1
 			cd -
 	done
