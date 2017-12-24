@@ -15,7 +15,8 @@ mkdir -p ${targetDir}/${host}
 # mysql --host=cubatao --port=3306 --user=root --password=4dm1n53m4d -e 'show databases' > /tmp/${databaseFilename}
 mysql --host=${host} --port=3306 --user=root --password=4dm1n53m4d -e 'show databases' > /tmp/${host}-${dia}
 # bancos=`tail -n +2 /tmp/${databaseFilename} | grep -v information_schema | grep -v mysql | grep -v performance_schema | grep -v sys`
-bancos=`tail -n +2 /tmp/${host}-${dia} | grep -v information_schema | grep -v mysql | grep -v performance_schema | grep -v sys`
+# bancos=`tail -n +2 /tmp/${host}-${dia} | grep -v information_schema | grep -v mysql | grep -v performance_schema | grep -v sys`
+bancos=`tail -n +2 /tmp/${host}-${dia} | grep -v information_schema | grep -v performance_schema | grep -v sys`
 
 #Loop dump mysql
 for banco in $bancos; do
@@ -32,7 +33,7 @@ done
 host=divisa
 mkdir -p ${targetDir}/${host}
 mysql --host=${host} --port=3306 --user=root --password=4dm1n53m4d -e 'show databases' > /tmp/${host}-${dia}
-bancos=`tail -n +2 /tmp/${host}-${dia} | grep -v information_schema | grep -v mysql | grep -v performance_schema | grep -v sys`
+bancos=`tail -n +2 /tmp/${host}-${dia} | grep -v information_schema | grep -v performance_schema | grep -v sys`
 
 #Loop dump mysql
 for banco in $bancos; do
@@ -49,7 +50,7 @@ done
 host=jaragua
 mkdir -p ${targetDir}/${host}
 mysql --host=${host} --port=3306 --user=root --password=4dm1n53m4d -e 'show databases' > /tmp/${host}-${dia}
-bancos=`tail -n +2 /tmp/${host}-${dia} | grep -v information_schema | grep -v mysql | grep -v performance_schema | grep -v sys`
+bancos=`tail -n +2 /tmp/${host}-${dia} | grep -v information_schema | grep -v performance_schema | grep -v sys`
 
 #Loop dump mysql
 for banco in $bancos; do
