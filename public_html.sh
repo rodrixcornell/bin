@@ -91,7 +91,7 @@ then echo ok;
 	rm -rf W 2>&1
 	rm -rf *zip 2>&1
 	for i in $(ls -l | grep -i drwx | awk '{ print $9 }'); do echo $(pwd)/$i;
-	echo "zip -r $(date +%Y%m%d.%H%M%S.%N)_$i.zip $i"; zip -9r $(date +%Y%m%d.%H%M%S.%N)_$i.zip $i; done
+	echo "zip -9r $(date +%Y%m%d.%H%M%S.%N)_$i.zip $i"; done
 
 	rm -rf W 2>&1
 	cd ~
