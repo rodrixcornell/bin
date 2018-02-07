@@ -73,7 +73,7 @@ then echo ok;
 		do echo $(pwd)/$i
 			cd $(pwd)/$i
 			git fetch --all 2>&1
-			git gc 2>&1
+			git gc --aggressive 2>&1
 			cd -
 	done
 
@@ -83,14 +83,15 @@ then echo ok;
 		do echo $(pwd)/$i
 			cd $(pwd)/$i
 			git fetch --all 2>&1
-			git gc 2>&1
+			git gc --aggressive 2>&1
 			cd -
 	done
 
 	cd ~/repos/
 	rm -rf W 2>&1
-	for i in $(ls -l | grep -i drwx | awk '{ print $9 }'); do #echo $(pwd)/$i;
-	echo "zip -r $(date +%Y%m%d.%H%M%S.%N)_$i.zip $i"; done
+	rm -rf *zip 2>&1
+	for i in $(ls -l | grep -i drwx | awk '{ print $9 }'); do echo $(pwd)/$i;
+	echo "zip -r $(date +%Y%m%d.%H%M%S.%N)_$i.zip $i"; zip -9r $(date +%Y%m%d.%H%M%S.%N)_$i.zip $i; done
 
 	rm -rf W 2>&1
 	cd ~
