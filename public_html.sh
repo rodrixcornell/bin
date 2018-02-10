@@ -59,6 +59,7 @@ then echo ok;
 
 	mkdir -p ~/repos
 	cd ~/repos/
+	rm -rf W 2>&1
 	#[ -d ~/repos/ ] && rm -rfv ~/repos/* || echo no
 	for i in $(ssh git@git | column -tx | tr / \\t | awk '{ if ($3 != "this") if ($4 == "") print $3; else print $3"/"$4; }');
 		do echo $i
@@ -67,25 +68,31 @@ then echo ok;
 	done
 
 	cd ~/repos/
+	rm -rf W 2>&1
 	for i in $(ls -r *.git | grep -i : | sed "s/://");
 		do echo $(pwd)/$i
 			cd $(pwd)/$i
 			git fetch --all 2>&1
-			git gc 2>&1
+			git gc --aggressive 2>&1
 			cd -
 	done
 
 	cd ~/repos/
+	rm -rf W 2>&1
 	for i in $(ls -r */*.git | grep -i : | sed "s/://");
 		do echo $(pwd)/$i
 			cd $(pwd)/$i
 			git fetch --all 2>&1
-			git gc 2>&1
+			git gc --aggressive 2>&1
 			cd -
 	done
 
 	cd ~/repos/
-	for i in $(ls -l | grep -i drwx | awk '{ print $9 }'); do echo $(pwd)/$i; zip -r $(date +%Y%m%d.%H%M%S.%N)_$i.zip $i; done
+	rm -rf W 2>&1
+	rm -rf *zip 2>&1
+	for i in $(ls -l | grep -i drwx | awk '{ print $9 }'); do echo $(pwd)/$i;
+	echo "zip -9r $(date +%Y%m%d.%H%M%S.%N)_$i.zip $i"; done
 
+	rm -rf W 2>&1
 	cd ~
 fi
