@@ -139,9 +139,11 @@ alias grive-dry='grive --dry-run'
 ### Git
 alias g=git
 alias gk=gitk
-alias gkraken='gitkraken -p . '
+alias gitkraken='gitkraken -np . '
 #alias pull_push='git pull; git push'
 #complete -o bashdefault -o default -o nospace -F _git
+
+alias sublime='subl -n . '
 
 alias rar_m5='rar a -m5 -idp -y'
 alias chrome-beta-incognito-proxy='google-chrome-beta --incognito --proxy-server="http=172.19.10.1:3128"'
@@ -180,3 +182,4 @@ alias composer='composer -vvv --profile'
 alias kill_fox='killall firefox'
 alias kill_notes='killall xfce4-notes'
 alias kill_dropbox='killall dropbox'
+
