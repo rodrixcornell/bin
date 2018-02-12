@@ -81,7 +81,8 @@ alias ati_adapters='aticonfig --lsa'
 #      Enable/disable ACPI services. In the case of BIOS or kernel ACPI issues, ACPI services in the driver can be disabled through this option. The ACPI services are enabled by default.
 #  --acpi-display-switch=on|off
 #      Enable/disable display switching with ACPI methods on mobile platforms. This option is enabled by default.
-alias thermal2='echo; sensors; hddtemp /dev/sda; echo; aticonfig --odgt'
+alias thermal-ati='echo; sensors; hddtemp /dev/sda; echo; aticonfig --odgt'
+alias thermal2='echo; sensors; hddtemp /dev/sda; hddtemp /dev/sdb; echo'
 alias thermal='echo; sensors; hddtemp /dev/sda; echo'
 alias nano='nano -cimwT 4'
 alias nano_su='sudo nano -cimwT 4'
@@ -115,10 +116,14 @@ alias free='free -tlm'
 alias catn='cat -n'
 alias ln='ln -sfv'
 alias mount='mount | column -t'
+
 alias wget='wget -c -t0'
 alias wget-limit='wget -c --limit-rate=15000'
 alias wget-site='wget -r -erobots=off'
 alias wget-list='wget -i'
+alias curl-v='curl -v '
+alias curl-i='curl -i '
+
 alias grep='grep -y --color=auto'
 alias canal='gksu software-properties-gtk'
 alias lshw-gtk='gksu lshw-gtk'

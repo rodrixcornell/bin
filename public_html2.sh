@@ -57,17 +57,17 @@ then echo ok;
 
 	cd ~
 
-	mkdir -p /tmp/.repos
-	cd /tmp/.repos/
+	mkdir -p ~/repos
+	cd ~/repos/
 	rm -rf W 2>&1
-	#[ -d /tmp/.repos/ ] && rm -rfv /tmp/.repos/* || echo no
+	#[ -d ~/repos/ ] && rm -rfv ~/repos/* || echo no
 	for i in $(ssh git@git | column -tx | tr / \\t | awk '{ if ($3 != "this") if ($4 == "") print $3; else print $3"/"$4; }');
 		do echo $i
 			#git clone --mirror git@git:$i.git $i.git
 			git clone --mirror git@git:$i.git $i.git
 	done
 
-	cd /tmp/.repos/
+	cd ~/repos/
 	rm -rf W 2>&1
 	for i in $(ls -r *.git | grep -i : | sed "s/://");
 		do echo $(pwd)/$i
@@ -79,7 +79,7 @@ then echo ok;
 			cd -
 	done
 
-	cd /tmp/.repos/
+	cd ~/repos/
 	rm -rf W 2>&1
 	for i in $(ls -r */*.git | grep -i : | sed "s/://");
 		do echo $(pwd)/$i
@@ -91,18 +91,19 @@ then echo ok;
 			cd -
 	done
 
-	cd /tmp/.repos/
+	cd ~/repos/
 	rm -rf W 2>&1
 	rm -rf ~/repos/*zip 2>&1
 	for i in $(ls -l | grep -i drwx | awk '{ print $9 }'); do
 		echo $(pwd)/$i;
 		echo "zip -9r $(date +%Y%m%d.%H%M%S.%N)_$i.zip $i";
-		if [[ $i == 'vo' || $i == 'thupan' ]]; then
-			zip -9r ~/repos/$(date +%Y%m%d.%H%M%S.%N)_$i.zip $i;
-		fi
+		zip -9r $(date +%Y%m%d.%H%M%S.%N)_$i.zip $i;
+		# if [[ $i == 'vo' || $i == 'thupan' ]]; then
+		# 	zip -9r ~/repos/$(date +%Y%m%d.%H%M%S.%N)_$i.zip $i;
+		# fi
 	done
 
 	rm -rf W 2>&1
 	cd ~
-	#rm -rf /tmp/.repos 2>&1
+	#rm -rf ~/repos 2>&1
 fi
