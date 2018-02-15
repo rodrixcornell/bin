@@ -136,9 +136,11 @@ alias alien-rpm='sudo alien --scripts --to-rpm'
 #; sudo chown 1000:1000 *rpm'
 
 #alias gkedit='sudo gedit'
-alias griVe='grive -V'
-alias grive-f='grive -f'
-alias grive-dry='grive --dry-run'
+alias griVe='grive -VP -l ~/.grive-last-sync.log'
+alias grive-f='grive -fVP -l ~/.grive-last-sync.log'
+alias grive-dry='grive --dry-run -l ~/.grive-last-sync.log'
+alias grive-n='grive -nVP -l ~/.grive-last-sync.log'
+alias grive-u='grive -uVP -l ~/.grive-last-sync.log'
 
 ###############################################################################
 ### Git
