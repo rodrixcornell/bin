@@ -117,6 +117,7 @@ get_issue ()
 	ASSIGNED_TO_ID=$(cat ${TEMP}/${ISSUE}.json | jq '.issue.assigned_to.id')
 	ASSIGNED_TO=$(cat ${TEMP}/${ISSUE}.json | jq '.issue.assigned_to.name' | sed 's/\"//g')
 	PARENT_ID=$(cat ${TEMP}/${ISSUE}.json | jq '.issue.parent.id')
+	DESCRIPTION=$(cat ${TEMP}/${ISSUE}.json | jq '.issue.description' | sed 's/\"//g')
 
 	BRANCH=$(cat ${TEMP}/${ISSUE}.json | jq '.issue.custom_fields[] | select(.id==27) | .value' | sed 's/\"//g')
 	BRANCH_NO_WHITESPACE="$(echo -e "${BRANCH}" | tr -d '[:space:]')"
@@ -176,6 +177,7 @@ gitgui_msg ()
 	# echo ${MERGE_MSG} > .git/GITGUI_MSG
 
 	cat .git/GITGUI_MSG
+	NEW_DESCRIPTION=$(cat .git/GITGUI_MSG)
 }
 
 put_issue ()
@@ -189,7 +191,7 @@ put_issue ()
 	curl "https://${URL}.manaus.am.gov.br/issues/${ISSUE}/watchers.json?user_id=25" -H "X-Redmine-API-Key: ${API_KEY_REDMINE}" -H "Content-Type: application/json" -X POST
 	curl "https://${URL}.manaus.am.gov.br/issues/${ISSUE}/watchers.json?user_id=77" -H "X-Redmine-API-Key: ${API_KEY_REDMINE}" -H "Content-Type: application/json" -X POST
 
-	echo '{"issue":{"description":"...","status_id":10,"assigned_to_id":'${USER_ID}',"notes":"Iniciando Merge do Branch '${BRANCH}'\r\n'${DATA_HORA}'","done_ratio":10,"estimated_hours":0.33,"start_date":"'${DATA}'","due_date":"","custom_fields":[{"id":23,"value":"'${DATA}'"},{"id":26,"value":"'${DATA}'"}]}}' > ${TEMP}/${ISSUE}_put.json
+	echo '{"issue":{"description":"'${NEW_DESCRIPTION}'","status_id":10,"assigned_to_id":'${USER_ID}',"notes":"Iniciando Merge do Branch '${BRANCH}'\r\n'${DATA_HORA}'\r\n\r\n<pre>'${DESCRIPTION}'</pre>","done_ratio":10,"estimated_hours":0.33,"start_date":"'${DATA}'","due_date":"","custom_fields":[{"id":23,"value":"'${DATA}'"},{"id":26,"value":"'${DATA}'"}]}}' > ${TEMP}/${ISSUE}_put.json
 	# cat -bs ${TEMP}/${ISSUE}_put.json
 
 	curl "https://${URL}.manaus.am.gov.br/issues/${ISSUE}.json" -H "X-Redmine-API-Key: ${API_KEY_REDMINE}" -H "Content-Type: application/json" -X PUT --data-binary @${TEMP}/${ISSUE}_put.json > ${TEMP}/${ISSUE}_put2.json
@@ -210,6 +212,7 @@ ISSUE=$(echo "$1" | tr A-Z a-z)
 
 if [ ${ISSUE} ];then
 
+	get_issue
 	put_issue
 	get_issue
 	get_parent_task

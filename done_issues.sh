@@ -162,7 +162,7 @@ put_issue ()
 	curl "https://${URL}.manaus.am.gov.br/issues/${ISSUE}/watchers.json?user_id=25" -H "X-Redmine-API-Key: ${API_KEY_REDMINE}" -H "Content-Type: application/json" -X POST
 	curl "https://${URL}.manaus.am.gov.br/issues/${ISSUE}/watchers.json?user_id=77" -H "X-Redmine-API-Key: ${API_KEY_REDMINE}" -H "Content-Type: application/json" -X POST
 
-	echo '{"issue":{"description":"...","status_id":3,"assigned_to_id":'${USER_ID}',"notes":"Finalizado Merge do Branch '${BRANCH}'\r\n'${DATA_HORA}'","done_ratio":100,"due_date":"'${DATA}'","custom_fields":[{"id":24,"value":"'${DATA}'"}]}}' > ${TEMP}/${ISSUE}_put.json
+	echo '{"issue":{"description":"'${NEW_DESCRIPTION}'","status_id":3,"assigned_to_id":'${USER_ID}',"notes":"Finalizado Merge do Branch '${BRANCH}'\r\n'${DATA_HORA}'","done_ratio":100,"due_date":"'${DATA}'","custom_fields":[{"id":24,"value":"'${DATA}'"}]}}' > ${TEMP}/${ISSUE}_put.json
 	# cat -bs ${TEMP}/${ISSUE}_put.json
 
 	curl "https://${URL}.manaus.am.gov.br/issues/${ISSUE}.json" -H "X-Redmine-API-Key: ${API_KEY_REDMINE}" -H "Content-Type: application/json" -X PUT --data-binary @${TEMP}/${ISSUE}_put.json > ${TEMP}/${ISSUE}_put2.json
@@ -211,6 +211,7 @@ post_issue ()
 		POST=$(curl "https://${URL}.manaus.am.gov.br/issues.json" -H "X-Redmine-API-Key: ${API_KEY_REDMINE}" -H "Content-Type: application/json" -X POST --data-binary @${TEMP}/post.json)
 		NEW_ISSUE_ID=$(echo ${POST} | jq '.issue.id')
 		echo ${POST} | jq '.issue.id'
+		echo "https://${URL}.manaus.am.gov.br/issues/${NEW_ISSUE_ID}"
 		echo ${POST} > ${TEMP}/${NEW_ISSUE_ID}.json
 	fi
 }

@@ -1,0 +1,10 @@
+deb http://archive.canonical.com/ubuntu trusty partner
+# deb http://archive.canonical.com/ubuntu trusty-updates partner
+# deb http://archive.canonical.com/ubuntu trusty-backports partner
+# deb http://archive.canonical.com/ubuntu trusty-security partner
+deb http://archive.canonical.com/ubuntu trusty-proposed partner
+deb-src http://archive.canonical.com/ubuntu trusty partner
+# deb-src http://archive.canonical.com/ubuntu trusty-updates partner
+# deb-src http://archive.canonical.com/ubuntu trusty-backports partner
+# deb-src http://archive.canonical.com/ubuntu trusty-security partner
+deb-src http://archive.canonical.com/ubuntu trusty-proposed partner
