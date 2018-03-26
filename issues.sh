@@ -37,6 +37,28 @@ check_curl ()
 	fi
 }
 
+check_jq ()
+{
+	echo "Checking for jq..."
+	if command -v jq > /dev/null; then
+		echo "Detected jq..."
+	else
+		echo "Installing jq..."
+		sudo -E apt-get install -q -y jq
+	fi
+}
+
+check_dialog ()
+{
+	echo "Checking for dialog..."
+	if command -v dialog > /dev/null; then
+		echo "Detected dialog..."
+	else
+		echo "Installing dialog..."
+		sudo -E apt-get install -q -y dialog
+	fi
+}
+
 check_git ()
 {
 	echo "Checking for git..."
@@ -203,6 +225,8 @@ put_issue ()
 #
 
 check_curl
+check_jq
+check_dialog
 check_git
 check_meld
 
