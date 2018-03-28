@@ -2,8 +2,8 @@
 
 cd $(pwd)
 
-rm -rf composer.lock bower_components node_modules vendor
-. resources/scripts/build.sh
+#rm -rf composer.lock bower_components node_modules vendor
+#. resources/scripts/build.sh
 
 FRAMEWORK=$([[ $(cat .git/config 2>&- | grep -i :thupan) ]] && echo thupan || echo vo)
 PROJECT=$(cat .git/config 2>&- | grep -i :thupan | cut -d/ -f2 | cut -d. -f1)

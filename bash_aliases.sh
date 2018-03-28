@@ -182,6 +182,10 @@ alias ident.me='curl ident.me'
 #curl v4.ident.me
 #curl v6.ident.me
 
+# Previsão do tempo
+# curl wttr.in/:help
+alias tempo='curl -4 http://wttr.in/manaus?lang=pt'
+
 # Composer
 #alias composer='composer --prefer-dist -vvv --profile'
 alias composer='composer -vvv --profile'
