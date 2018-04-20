@@ -43,6 +43,13 @@ mkdir dist
 put -r dist/
 mkdir fonts
 put -r fonts/
+cd ..
+lcd ..
+mkdir images
+cd images/
+lcd images/
+mkdir pmm
+put -r pmm/
 bye
 EOF
 	fi
