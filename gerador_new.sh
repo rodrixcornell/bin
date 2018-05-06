@@ -29,7 +29,7 @@ if [ ! -d ${repack} ]; then mkdir -p ${repack}; fi
 
 echo ${repack}/${origin}
 dpkg --get-selections | awk '{if ($2=="install") print $1}' > ${repack}/${origin}_packages.list
-cat ${repack}/${origin}_packages.list | awk '{ print "sudo -E dpkg-repack " $1 " && sudo -E chown 1000:1000 " $1 "*" }' > ${repack}/${origin}_repack.sh
+cat ${repack}/${origin}_packages.list | awk '{ print "sudo -E dpkg-repack " $1 }' > ${repack}/${origin}_repack.sh
 cat ${repack}/${origin}_packages.list | awk '{ print "sudo -E apt-get install -y --force-yes " $1 }' > ${repack}/${origin}_install.sh
 
 rm ${repack}/${origin}_packages.list
