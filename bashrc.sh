@@ -77,25 +77,25 @@ esac
 # fi
 
 # RVM SET
-if [[ ! "${rvm_path}" ]]; then
-	[[ -s $HOME/.rvm/scripts/rvm ]] && source $HOME/.rvm/scripts/rvm
-	[[ -s /etc/profile.d/rvm.sh ]] && . /etc/profile.d/rvm.sh
-fi
+#if [[ ! "${rvm_path}" ]]; then
+#	[[ -s $HOME/.rvm/scripts/rvm ]] && source $HOME/.rvm/scripts/rvm
+#	[[ -s /etc/profile.d/rvm.sh ]] && . /etc/profile.d/rvm.sh
+#fi
 
 # MySQL SET
-if [[ "which mysql" ]]; then
-	[[ "which rlwrap" ]] && alias mysql='rlwrap -b "" -f ${HOME}/sql/dict.sql mysql'
-fi
+#if [[ "which mysql" ]]; then
+#	[[ "which rlwrap" ]] && alias mysql='rlwrap -b "" -f ${HOME}/sql/dict.sql mysql'
+#fi
 
 # Oracle SET
-if [[ "which sqlplus" ]]; then
-	#export TNS_ADMIN=${HOME}/network/admin
-	export NLS_LANG=$(${HOME}/bin/nls_lang.sh)
-	[[ "which rlwrap" ]] && alias sqlplus='rlwrap -b "" -f ${HOME}/sql/dict.sql sqlplus'
-fi
+#if [[ "which sqlplus" ]]; then
+#	#export TNS_ADMIN=${HOME}/network/admin
+#	export NLS_LANG=$(${HOME}/bin/nls_lang.sh)
+#	[[ "which rlwrap" ]] && alias sqlplus='rlwrap -b "" -f ${HOME}/sql/dict.sql sqlplus'
+#fi
 
 # Token Redmine
-export API_KEY_REDMINE="d47f7578450e0b0b2a9e8d6a458290871f5ad03a"
+#export API_KEY_REDMINE="d47f7578450e0b0b2a9e8d6a458290871f5ad03a"
 
 # my include bashrc.sh if it exists
 #if [ -f ~/bin/bash_aliases.sh ]; then
