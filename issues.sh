@@ -267,7 +267,8 @@ if [ ${ISSUE} ];then
 	gitgui_msg
 
 
-	GIT_MERGE=$(git merge -m "$(cat .git/GITGUI_MSG)" ${BRANCH} 2>&1)
+	# GIT_MERGE=$(git merge -m "$(cat .git/GITGUI_MSG)" ${BRANCH} 2>&1)
+	GIT_MERGE=$(git merge -m "$(cat .git/GITGUI_MSG)" --no-ff ${BRANCH})
 	GIT_MERGE_RETURN=$(echo $?)
 
 	if [ ${GIT_MERGE_RETURN} == 0 ];
