@@ -40,7 +40,14 @@ lpwd
 cd public/
 lcd public/
 mkdir assets
-put -r assets/
+cd assets/
+lcd assets/
+mkdir dist
+put -r dist/
+mkdir fonts
+put -r fonts/
+cd ..
+lcd ..
 mkdir images
 cd images/
 lcd images/
