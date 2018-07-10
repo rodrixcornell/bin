@@ -206,7 +206,7 @@ post_issue ()
 		# done
 
 		NEW_SUBJECT="${SUBJECT_TRACKER} - ${SUBJECT}"
-		echo '{"issue":{"project_id":'${PROJETC_ID}',"tracker_id":"'${TRACKER_ID}'","subject":"'${NEW_SUBJECT}'","description":"'${AUTHOR}'\n'${DESCRIPTION}'\n\n_'${AUTHOR_PARENT}'\n\t'${DESCRIPTION_PARENT}'_","status_id":1,"priority_id":'${PRIORITY_ID}',"assigned_to_id":9,"parent_issue_id":'${PARENT_ID}',"custom_fields":[{"id":27,"value":"'${BRANCH}'"},{"id":21,"value":['$(echo ${AMBIENTE} | sed 's/\ /\,/g')']},{"id":26,"value":"'${DATA}'"}]}}' > ${TEMP}/post.json
+		echo '{"issue":{"project_id":'${PROJETC_ID}',"tracker_id":"'${TRACKER_ID}'","subject":"'${NEW_SUBJECT}'","description":"'${AUTHOR}'\n'${DESCRIPTION}'\n\n'${AUTHOR_PARENT}'\n\t'${DESCRIPTION_PARENT}'","status_id":1,"priority_id":'${PRIORITY_ID}',"assigned_to_id":9,"parent_issue_id":'${PARENT_ID}',"custom_fields":[{"id":27,"value":"'${BRANCH}'"},{"id":21,"value":['$(echo ${AMBIENTE} | sed 's/\ /\,/g')']},{"id":26,"value":"'${DATA}'"}]}}' > ${TEMP}/post.json
 		# echo '{"issue":{"project_id":'${PROJETC_ID}',"tracker_id":"'${TRACKER_ID}'","subject":"'${NEW_SUBJECT}'","description":"'${DESCRIPTION}'","status_id":1,"priority_id":'${PRIORITY_ID}',"assigned_to_id":9,"parent_issue_id":'${PARENT_ID}',"custom_fields":[{"id":27,"value":"'${BRANCH}'"},{"id":21,"value":['$(echo ${AMBIENTE} | sed 's/\ /\,/g')']},{"id":26,"value":"'${DATA}'"}],"watcher_user_ids":['${USER_ID}',15,16]}}' > ${TEMP}/post.json
 		cat -bs ${TEMP}/post.json
 
