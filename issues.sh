@@ -37,6 +37,28 @@ check_curl ()
 	fi
 }
 
+check_jq ()
+{
+	echo "Checking for jq..."
+	if command -v jq > /dev/null; then
+		echo "Detected jq..."
+	else
+		echo "Installing jq..."
+		sudo -E apt-get install -q -y jq
+	fi
+}
+
+check_dialog ()
+{
+	echo "Checking for dialog..."
+	if command -v dialog > /dev/null; then
+		echo "Detected dialog..."
+	else
+		echo "Installing dialog..."
+		sudo -E apt-get install -q -y dialog
+	fi
+}
+
 check_git ()
 {
 	echo "Checking for git..."
@@ -80,7 +102,8 @@ get_user ()
 
 
 	# if [ $(cat ${PASSWORD_REMINE}) >= 0 ]; then dialog --passwordbox "Digite a senha Redmine" 0 0 2> ${PASSWORD_REMINE}; fi
-	if [ ! $(cat ${PASSWORD_REMINE}) ]; then dialog --inputbox "Digite a senha Redmine" 0 0 2> ${PASSWORD_REMINE}; fi
+	# if [ ! $(cat ${PASSWORD_REMINE}) ]; then dialog --inputbox "Digite a senha Redmine" 0 0 2> ${PASSWORD_REMINE}; fi
+	if [ ! $(cat ${PASSWORD_REMINE}) ]; then dialog --passwordbox "Digite a senha Redmine" 0 0 2> ${PASSWORD_REMINE}; fi
 
 	clear
 	[ ! $(cat ${PASSWORD_REMINE}) ] && echo ok
@@ -117,6 +140,7 @@ get_issue ()
 	ASSIGNED_TO_ID=$(cat ${TEMP}/${ISSUE}.json | jq '.issue.assigned_to.id')
 	ASSIGNED_TO=$(cat ${TEMP}/${ISSUE}.json | jq '.issue.assigned_to.name' | sed 's/\"//g')
 	PARENT_ID=$(cat ${TEMP}/${ISSUE}.json | jq '.issue.parent.id')
+	DESCRIPTION=$(cat ${TEMP}/${ISSUE}.json | jq '.issue.description' | sed 's/\"//g')
 
 	BRANCH=$(cat ${TEMP}/${ISSUE}.json | jq '.issue.custom_fields[] | select(.id==27) | .value' | sed 's/\"//g')
 	BRANCH_NO_WHITESPACE="$(echo -e "${BRANCH}" | tr -d '[:space:]')"
@@ -171,11 +195,12 @@ pull_branch ()
 
 gitgui_msg ()
 {
-	echo -e "Merge branch ${BRANCH} into ${GIT_BRANCH}\r\nDeploy #${ISSUE_ID} @20m\n\r\nTarefa pai Refs #${PARENT_ID}\r\nAdicionado por ${AUTHOR}\r\nBranch: ${BRANCH}\r\nExecutar Teste? $(if [[ ${TESTAR} == 1 ]]; then echo Sim; else echo Não; fi)\r\nAmbiente: $(echo ${AMBIENTE} | sed 's/\ /\, /g')\n\r\nCriado: ${CREATED_ON}\r\nAtualizado: ${UPDATED_ON}\r\nFechado: ${CLOSED_ON}\n\r\nSigned-off-by: ${ASSIGNED_TO} <${MAIL}>" > .git/GITGUI_MSG
+	echo -e "Merge branch ${BRANCH} into ${GIT_BRANCH}\r\nDeploy #${ISSUE_ID} @15m\n\r\nTarefa pai Refs #${PARENT_ID}\r\nAdicionado por ${AUTHOR}\r\nBranch: ${BRANCH}\r\nExecutar Teste? $(if [[ ${TESTAR} == 1 ]]; then echo Sim; else echo Não; fi)\r\nAmbiente: $(echo ${AMBIENTE} | sed 's/\ /\, /g')\n\r\nCriado: ${CREATED_ON}\r\nAtualizado: ${UPDATED_ON}\r\nFechado: ${CLOSED_ON}\n\r\nSigned-off-by: ${ASSIGNED_TO} <${MAIL}>" > .git/GITGUI_MSG
 	# MERGE_MSG=$(echo -e "\rMerge branch ${BRANCH} into ${GIT_BRANCH}\r\nDeploy #${ISSUE_ID} @20m\n\r\nTarefa pai Refs #${PARENT_ID}\r\nAdicionado por ${AUTHOR}\r\nBranch: ${BRANCH}\r\nExecutar Teste? $(if [[ ${TESTAR} == 1 ]]; then echo Sim; else echo Não; fi)\r\nAmbiente: $(echo ${AMBIENTE} | sed 's/\ /\, /g')\n\r\nCriado: ${CREATED_ON}\r\nAtualizado: ${UPDATED_ON}\r\nFechado: ${CLOSED_ON}\n\r\nSigned-off-by: ${ASSIGNED_TO} <${MAIL}>")
 	# echo ${MERGE_MSG} > .git/GITGUI_MSG
 
 	cat .git/GITGUI_MSG
+	NEW_DESCRIPTION=$(cat .git/GITGUI_MSG)
 }
 
 put_issue ()
@@ -189,7 +214,8 @@ put_issue ()
 	curl "https://${URL}.manaus.am.gov.br/issues/${ISSUE}/watchers.json?user_id=25" -H "X-Redmine-API-Key: ${API_KEY_REDMINE}" -H "Content-Type: application/json" -X POST
 	curl "https://${URL}.manaus.am.gov.br/issues/${ISSUE}/watchers.json?user_id=77" -H "X-Redmine-API-Key: ${API_KEY_REDMINE}" -H "Content-Type: application/json" -X POST
 
-	echo '{"issue":{"description":"...","status_id":10,"assigned_to_id":'${USER_ID}',"notes":"Iniciando Merge do Branch '${BRANCH}'\r\n'${DATA_HORA}'","done_ratio":10,"estimated_hours":0.33,"start_date":"'${DATA}'","due_date":"","custom_fields":[{"id":23,"value":"'${DATA}'"},{"id":26,"value":"'${DATA}'"}]}}' > ${TEMP}/${ISSUE}_put.json
+	# echo '{"issue":{"description":"'${NEW_DESCRIPTION}'","status_id":10,"assigned_to_id":'${USER_ID}',"notes":"Iniciando Merge do Branch '${BRANCH}'\r\n'${DATA_HORA}'\r\n\r\n<pre>'${DESCRIPTION}'</pre>","done_ratio":10,"estimated_hours":0.33,"start_date":"'${DATA}'","due_date":"","custom_fields":[{"id":23,"value":"'${DATA}'"},{"id":26,"value":"'${DATA}'"}]}}' > ${TEMP}/${ISSUE}_put.json
+	echo '{"issue":{"status_id":10,"assigned_to_id":'${USER_ID}',"notes":"Iniciando Merge do Branch '${BRANCH}'\r\n'${DATA_HORA}'\r\n\r\n<pre>'${DESCRIPTION}'</pre>","done_ratio":10,"estimated_hours":0.33,"start_date":"'${DATA}'","due_date":"","custom_fields":[{"id":23,"value":"'${DATA}'"},{"id":26,"value":"'${DATA}'"}]}}' > ${TEMP}/${ISSUE}_put.json
 	# cat -bs ${TEMP}/${ISSUE}_put.json
 
 	curl "https://${URL}.manaus.am.gov.br/issues/${ISSUE}.json" -H "X-Redmine-API-Key: ${API_KEY_REDMINE}" -H "Content-Type: application/json" -X PUT --data-binary @${TEMP}/${ISSUE}_put.json > ${TEMP}/${ISSUE}_put2.json
@@ -201,6 +227,8 @@ put_issue ()
 #
 
 check_curl
+check_jq
+check_dialog
 check_git
 check_meld
 
@@ -210,6 +238,7 @@ ISSUE=$(echo "$1" | tr A-Z a-z)
 
 if [ ${ISSUE} ];then
 
+	get_issue
 	put_issue
 	get_issue
 	get_parent_task
@@ -241,6 +270,7 @@ if [ ${ISSUE} ];then
 
 
 	GIT_MERGE=$(git merge -m "$(cat .git/GITGUI_MSG)" ${BRANCH} 2>&1)
+	# GIT_MERGE=$(git merge -m "$(cat .git/GITGUI_MSG)" --no-ff ${BRANCH})
 	GIT_MERGE_RETURN=$(echo $?)
 
 	if [ ${GIT_MERGE_RETURN} == 0 ];

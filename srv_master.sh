@@ -10,11 +10,8 @@
 # then echo ok;
 	cd ~/projects
 	# for i in $(ssh git@git 2>&- | column -tx | sed 's/\//\t/g' | awk '{ if ($2 == "vo" || $2 == "thupan") print $2"/"$3; }');
-	for i in $(ssh git@git 2>&- | column -tx | sed 's/\//\t/g' | awk '{ if ($3 == "vo" || $3 == "thupan") print $3"/"$4; }');
-	do echo $i;
-
-		git clone -b master git@git:$i.git $i >/dev/null 2>&1
-	done
+	for i in $(ssh git@git 2>&- | column -tx | sed 's/\//\t/g' | awk '{ if ($3 == "vo" || $3 == "thupan" || $3 == "slim") print $3"/"$4; }');
+	do echo $i; git clone -b master git@git:$i.git $i >/dev/null 2>&1; done
 
 	cd ~/projects
 	for i in $(ls -r */*/.git | grep -v pmm | grep -i : | sed "s/\/.git://");

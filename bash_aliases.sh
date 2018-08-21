@@ -81,7 +81,8 @@ alias ati_adapters='aticonfig --lsa'
 #      Enable/disable ACPI services. In the case of BIOS or kernel ACPI issues, ACPI services in the driver can be disabled through this option. The ACPI services are enabled by default.
 #  --acpi-display-switch=on|off
 #      Enable/disable display switching with ACPI methods on mobile platforms. This option is enabled by default.
-alias thermal2='echo; sensors; hddtemp /dev/sda; echo; aticonfig --odgt'
+alias thermal-ati='echo; sensors; hddtemp /dev/sda; echo; aticonfig --odgt'
+alias thermal2='echo; sensors; hddtemp /dev/sda; hddtemp /dev/sdb; echo'
 alias thermal='echo; sensors; hddtemp /dev/sda; echo'
 alias nano='nano -cimwT 4'
 alias nano_su='sudo nano -cimwT 4'
@@ -115,10 +116,14 @@ alias free='free -tlm'
 alias catn='cat -n'
 alias ln='ln -sfv'
 alias mount='mount | column -t'
+
 alias wget='wget -c -t0'
 alias wget-limit='wget -c --limit-rate=15000'
 alias wget-site='wget -r -erobots=off'
 alias wget-list='wget -i'
+alias curl-v='curl -v '
+alias curl-i='curl -i '
+
 alias grep='grep -y --color=auto'
 alias canal='gksu software-properties-gtk'
 alias lshw-gtk='gksu lshw-gtk'
@@ -131,17 +136,23 @@ alias alien-rpm='sudo alien --scripts --to-rpm'
 #; sudo chown 1000:1000 *rpm'
 
 #alias gkedit='sudo gedit'
-alias griVe='grive -V'
-alias grive-f='grive -f'
-alias grive-dry='grive --dry-run'
+alias griVe='grive -VP -l ~/.grive-last-sync.log'
+alias grive-f='grive -fVP -l ~/.grive-last-sync.log'
+alias grive-dry='grive --dry-run -l ~/.grive-last-sync.log'
+alias grive-n='grive -nVP -l ~/.grive-last-sync.log'
+alias grive-u='grive -uVP -l ~/.grive-last-sync.log'
 
 ###############################################################################
 ### Git
 alias g=git
 alias gk=gitk
-alias gkraken='gitkraken -p . '
+alias gitkraken='gitkraken -np . '
 #alias pull_push='git pull; git push'
 #complete -o bashdefault -o default -o nospace -F _git
+
+alias sublime='subl -np . '
+alias mscode='code --log debug --disable-gpu -na . '
+alias vscode='code --log debug --disable-gpu -na . '
 
 alias rar_m5='rar a -m5 -idp -y'
 alias chrome-beta-incognito-proxy='google-chrome-beta --incognito --proxy-server="http=172.19.10.1:3128"'
@@ -172,6 +183,10 @@ alias ident.me='curl ident.me'
 #curl v4.ident.me
 #curl v6.ident.me
 
+# Previsão do tempo
+# curl wttr.in/:help
+alias tempo='curl -4 http://wttr.in/manaus?lang=pt'
+
 # Composer
 #alias composer='composer --prefer-dist -vvv --profile'
 alias composer='composer -vvv --profile'
@@ -180,3 +195,4 @@ alias composer='composer -vvv --profile'
 alias kill_fox='killall firefox'
 alias kill_notes='killall xfce4-notes'
 alias kill_dropbox='killall dropbox'
+

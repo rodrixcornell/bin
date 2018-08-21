@@ -1,0 +1,11 @@
+# deb http://ftp.osuosl.org/pub/mariadb/repo/5.2/ubuntu trusty main
+# deb http://ftp.osuosl.org/pub/mariadb/repo/5.5/ubuntu trusty main
+
+#
+# deb http://ftp.ddg.lth.se/mariadb/repo/5.5/ubuntu trusty main
+# deb-src http://ftp.ddg.lth.se/mariadb/repo/5.5/ubuntu trusty main
+
+# MariaDB 5.5 repository list
+# https://downloads.mariadb.org/mariadb/repositories
+# deb http://mirrors.fe.up.pt/pub/mariadb/repo/5.5/ubuntu trusty main
+# deb-src http://mirrors.fe.up.pt/pub/mariadb/repo/5.5/ubuntu trusty main
