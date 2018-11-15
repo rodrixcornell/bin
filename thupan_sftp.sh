@@ -20,6 +20,9 @@ if [[ ${PROJECT} ]]; then
         ratify)
             SERVER="cruxati"
         ;;
+        training)
+            SERVER="caiua"
+        ;;
         *)
             SERVER="paranoa"
         ;;
