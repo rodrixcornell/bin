@@ -4,7 +4,7 @@
 # echo $(users)_$(hostname)
 # ssh git@git 2>&- | column -tx | sed 's/\//\t/g' | awk '{ if ($2 == "vo" || $2 == "thupan") print $2"/"$3; }' > /tmp/log_$(date +%Y%m%d.%H%M%S.%N)
 
-ssh git@git;
+ssh git@git info;
 if [ $(echo $?) == 0 ];
 then echo ok;
 	# mkdir -p ~/projects
