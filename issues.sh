@@ -171,7 +171,8 @@ pull_branch ()
 
 		GIT_BRANCH=$(git branch -a 2>&- | grep "*" | sed -e "s/* //")
 		echo ${GIT_BRANCH} branch atual
-		git pull -f
+		git fetch --all
+		# git pull -f
 		# echo -e "$?\r"
 		# echo $(git branch -a 2>&- | grep -i /${BRANCH})
 		if [ ${BRANCH} ]; then

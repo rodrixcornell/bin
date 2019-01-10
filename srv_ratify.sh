@@ -5,14 +5,13 @@
 # echo $(users)_$(hostname)
 # ssh git@git 2>&- | column -tx | sed 's/\//\t/g' | awk '{ if ($2 == "vo" || $2 == "thupan") print $2"/"$3; }' > /tmp/log_$(date +%Y%m%d.%H%M%S.%N)
 
-ssh git@git;
-if [ $(echo $?) == 0 ];
-then echo ok;
+# ssh git@git;
+# if [ $(echo $?) == 0 ];
+# then echo ok;
 	cd ~/public_html
-	for i in $(ssh git@git 2>&- | column -tx | sed 's/\//\t/g' | awk '{ if ($2 == "vo" || $2 == "thupan") print $2"/"$3; }');
+	for i in $(ssh git@git | column -tx | tr / \\t | awk '{ if ($2 != "this") if ($2 == "vo" || $2 == "thupan" || $2 == "php-src") print $2"/"$3; }');
 		do echo $i
-			git clone -b ratify git@git:$i.git $i >/dev/null 2>&1
-			#[[ $? == 0 ]] && echo -e "Criado!" || echo -e "Já Existe! ou Error!"
+			git clone -b ratify git@git:"$i".git "$i"
 	done
 
 	cd ~/public_html
@@ -20,8 +19,11 @@ then echo ok;
 	do echo $(pwd)/$i
 		cd $(pwd)/$i
 		git checkout . >/dev/null 2>&1
-		git pull -f >/dev/null 2>&1
+		# git pull -f >/dev/null 2>&1
+		git fetch  >/dev/null 2>&1
+		git reset --hard origin/ratify  >/dev/null 2>&1
 		git gc --force >/dev/null 2>&1
+		git log -10 HEAD > log
 		cd -
 	done
 
@@ -38,7 +40,7 @@ then echo ok;
 	cd ~
 
 	cd /var/www
-	for i in $(ssh git@git | column -tx | tr / \\t | awk '{ if ($2 != "this") if ($2 == "vo" || $2 == "thupan") print $2"/"$3; }');
+	for i in $(ssh git@git | column -tx | tr / \\t | awk '{ if ($2 != "this") if ($2 == "vo" || $2 == "thupan" || $2 == "php-src") print $2"/"$3; }');
 		do echo $i
 			git clone -b ratify git@git:"$i".git "$i"
 	done
@@ -48,13 +50,17 @@ then echo ok;
 	do echo $(pwd)/$i
 		cd $(pwd)/$i
 		git checkout . >/dev/null 2>&1
-		git pull -f >/dev/null 2>&1
+		# git pull -f >/dev/null 2>&1
+		git fetch  >/dev/null 2>&1
+		git reset --hard origin/ratify  >/dev/null 2>&1
 		git gc --force >/dev/null 2>&1
+		git log -10 HEAD > log
 		cd -
 	done
 
 	mkdir -p /var/www/pmm/thupan
 	cd /var/www/pmm
+	for i in $(ls -r /var/www/php-src); do pwd; echo $i; ln -sfvT /var/www/php-src/$i/public $i; done
 	for i in $(ls -r /var/www/vo); do pwd; echo $i; ln -sfvT /var/www/vo/$i $i; done
 
 	cd /var/www/pmm/thupan
@@ -64,4 +70,4 @@ then echo ok;
 	chmod g+w -R * >/dev/null 2>&1
 
 	cd ~
-fi
+# fi
