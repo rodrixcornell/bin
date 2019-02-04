@@ -150,7 +150,7 @@ alias gitkraken='gitkraken -np . '
 #alias pull_push='git pull; git push'
 #complete -o bashdefault -o default -o nospace -F _git
 
-alias sublime='sublime_text -np . '
+alias sublime='subl -np . '
 alias mscode='code --log debug --disable-gpu -nra . '
 alias vscode='code --log debug --disable-gpu -nra . '
 
