@@ -74,8 +74,8 @@ then echo ok;
 			cd $(pwd)/$i
 			git fetch --all 2>&1
 			git gc --aggressive 2>&1
-			git push -u bitbuket --all 2>&1
-			git push -u bitbuket --tag 2>&1
+			git push -u gitlab --all 2>&1
+			git push -u gitlab --tags 2>&1
 			cd -
 	done
 
@@ -86,8 +86,8 @@ then echo ok;
 			cd $(pwd)/$i
 			git fetch --all 2>&1
 			git gc --aggressive 2>&1
-			git push -u bitbuket --all 2>&1
-			git push -u bitbuket --tag 2>&1
+			git push -u gitlab --all 2>&1
+			git push -u gitlab --tags 2>&1
 			cd -
 	done
 
