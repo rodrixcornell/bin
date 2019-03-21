@@ -75,7 +75,7 @@ then echo ok;
 			git fetch --all 2>&1
 			git gc --aggressive 2>&1
 			git push -u gitlab --all 2>&1
-			git push -u gitlab --tag 2>&1
+			git push -u gitlab --tags 2>&1
 			cd -
 	done
 
@@ -87,7 +87,7 @@ then echo ok;
 			git fetch --all 2>&1
 			git gc --aggressive 2>&1
 			git push -u gitlab --all 2>&1
-			git push -u gitlab --tag 2>&1
+			git push -u gitlab --tags 2>&1
 			cd -
 	done
 
