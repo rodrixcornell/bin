@@ -168,27 +168,37 @@ pull_branch ()
 	# echo -e "\r"
 	# set -xv
 	if [ -d .git ]; then
-
 		GIT_BRANCH=$(git branch -a 2>&- | grep "*" | sed -e "s/* //")
-		echo ${GIT_BRANCH} branch atual
+		echo branch atual: ${GIT_BRANCH}
 		git fetch --all
 		# git pull -f
 		# echo -e "$?\r"
 		# echo $(git branch -a 2>&- | grep -i /${BRANCH})
-		if [ ${BRANCH} ]; then
-			GIT_REFS=$(git branch --track $(echo ${BRANCH} $(git branch -a | grep -i /${BRANCH})) 2>&1)
-			# echo ${GIT_REFS}
-			GIT_REFS_RETURN=$(echo $?)
 
-			if [ ${GIT_REFS_RETURN} == 0 ];
-				then echo ${GIT_REFS}
-				# else echo ${GIT_REFS}
-				else echo fatal: Já existe uma ramificação com o nome \'${BRANCH}\'.
+		if [ ${BRANCH} ]; then
+			BRANCH_ORIGIN=$(git branch -a | grep -i /${BRANCH})
+			BRANCH_ORIGIN_RETURN=$(echo $?)
+			if [ ${BRANCH_ORIGIN_RETURN} != 0 ]; then echo fatal: o \'${BRANCH}\' não existe na origem.;
+			else echo true ${BRANCH_ORIGIN};
+				GIT_REFS=$(git branch --track $(echo ${BRANCH} $(git branch -a | grep -i /${BRANCH})) 2>&1);
+				GIT_REFS_RETURN=$(echo $?);
+				if [ ${GIT_REFS_RETURN} != 0 ]; then echo fatal: Já existe uma ramificação com o nome \'${BRANCH}\'.; else echo ${GIT_REFS}; fi
+
+				# para capturar dados do branch origin
+				git checkout -q -f ${BRANCH}
+				# parent hash
+				PARENT_HASH=$(git cat-file -p HEAD | grep -i parent | sed 's/parent /commit:/g');
+				# echo $PARENT_HASH;
+				# modificados
+				git diff --stat HEAD~1 > .git/FILE_CHANGED
+				# cat .git/FILE_CHANGED
+				# retornando para o processo de deploy
+				git checkout -q -f ${GIT_BRANCH}
 			fi
 		fi
 
-		#
-		if [ ${GIT_BRANCH} == 'master' ]; then git tag ${GIT_BRANCH}-${DH_LOG}; git push origin --tags; fi
+		# geração de tag de controle de verção
+		if [ ${GIT_BRANCH} == 'master' ]; then git tag -a ${GIT_BRANCH}-${DH_LOG} -m "version ${GIT_BRANCH}-${DH_LOG}"; git push origin --tags; fi
 	fi
 	# set +xv
 	# echo -e "\r"
@@ -196,7 +206,7 @@ pull_branch ()
 
 gitgui_msg ()
 {
-	echo -e "Merge branch ${BRANCH} into ${GIT_BRANCH}\r\nDeploy #${ISSUE_ID} @15m\n\r\nTarefa pai Refs #${PARENT_ID}\r\nAdicionado por ${AUTHOR}\r\nBranch: ${BRANCH}\r\nExecutar Teste? $(if [[ ${TESTAR} == 1 ]]; then echo Sim; else echo Não; fi)\r\nAmbiente: $(echo ${AMBIENTE} | sed 's/\ /\, /g')\n\r\nCriado: ${CREATED_ON}\r\nAtualizado: ${UPDATED_ON}\r\nFechado: ${CLOSED_ON}\n\r\nSigned-off-by: ${ASSIGNED_TO} <${MAIL}>" > .git/GITGUI_MSG
+	echo -e "Merge branch ${BRANCH} into ${GIT_BRANCH}\r\nDeploy #${ISSUE_ID} @15m\n\r\nTarefa pai Refs #${PARENT_ID}\r\nAdicionado por ${AUTHOR}\r\nBranch: ${BRANCH}\r\nExecutar Teste? $(if [[ ${TESTAR} == 1 ]]; then echo Sim; else echo Não; fi)\r\nAmbiente: $(echo ${AMBIENTE} | sed 's/\ /\, /g')\n\r\nAplicado no conjunto de alterações\r${PARENT_HASH}\n\r\n<pre>\r$(cat .git/FILE_CHANGED)\r</pre>\n\r\nCriado: ${CREATED_ON}\r\nAtualizado: ${UPDATED_ON}\r\nFechado: ${CLOSED_ON}\n\r\nSigned-off-by: ${ASSIGNED_TO} <${MAIL}>" > .git/GITGUI_MSG
 	# MERGE_MSG=$(echo -e "\rMerge branch ${BRANCH} into ${GIT_BRANCH}\r\nDeploy #${ISSUE_ID} @20m\n\r\nTarefa pai Refs #${PARENT_ID}\r\nAdicionado por ${AUTHOR}\r\nBranch: ${BRANCH}\r\nExecutar Teste? $(if [[ ${TESTAR} == 1 ]]; then echo Sim; else echo Não; fi)\r\nAmbiente: $(echo ${AMBIENTE} | sed 's/\ /\, /g')\n\r\nCriado: ${CREATED_ON}\r\nAtualizado: ${UPDATED_ON}\r\nFechado: ${CLOSED_ON}\n\r\nSigned-off-by: ${ASSIGNED_TO} <${MAIL}>")
 	# echo ${MERGE_MSG} > .git/GITGUI_MSG
 
@@ -227,6 +237,10 @@ put_issue ()
 #
 #
 
+# debug
+# echo -e "\r"
+# set -xv
+
 check_curl
 check_jq
 check_dialog
@@ -250,10 +264,10 @@ if [ ${ISSUE} ];then
 
 	BRANCHS=("test" "ratify" "master")
 	# for i in "${BRANCHS[@]}"; do echo $i; git checkout -f $i; git checkout -f . ; git pull -f; git gc; done
-	for i in "${BRANCHS[@]}"; do echo $i; git checkout -f $i; git checkout -f -- . ; git reset --hard origin/$i ; git gc; done
+	# for i in "${BRANCHS[@]}"; do echo $i; git checkout -f $i; git checkout -f -- . ; git reset --hard origin/$i ; git gc; done
+	for i in "${BRANCHS[@]}"; do echo $i; git fetch --all ; git reset --hard origin/$i ; git gc --aggressive; done
 
-	git checkout ${GIT_BRANCH}
-
+	git checkout -q -f ${GIT_BRANCH}
 
 	# echo ${AMBIENTE}
 	# AMBIENTES=($( echo ${AMBIENTE}  | sed 's/\"//g'))
@@ -270,29 +284,29 @@ if [ ${ISSUE} ];then
 	pull_branch
 	gitgui_msg
 
+	# processo de MERGE
+	if [ ${BRANCH_ORIGIN_RETURN} != 0 ]; then echo fatal: o \'${BRANCH}\' não existe na origem.;
+	else echo true ${BRANCH_ORIGIN};
 
-	GIT_MERGE=$(git merge -m "$(cat .git/GITGUI_MSG)" ${BRANCH} 2>&1)
-	# GIT_MERGE=$(git merge -m "$(cat .git/GITGUI_MSG)" --no-ff ${BRANCH})
-	GIT_MERGE_RETURN=$(echo $?)
-
-	if [ ${GIT_MERGE_RETURN} == 0 ];
-		then
-			echo ${GIT_MERGE_RETURN} Merge executado com Sucesso!
+		GIT_MERGE=$(git merge -m "$(cat .git/GITGUI_MSG)" --no-ff ${BRANCH} 2>&1);
+		GIT_MERGE_RETURN=$(echo $?);
+		if [ ${GIT_MERGE_RETURN} == 0 ]; then
+			echo ${GIT_MERGE_RETURN} Merge executado com Sucesso!;
 			# sleep 2m
-			git push -u -f
-			sleep 2m
-			echo Execute done_issues.sh ${ISSUE}
-		# ; git commit --amend;
-	else echo ${GIT_MERGE_RETURN} ${GIT_MERGE}
-		git status
+			git push -u -f ;
+			sleep 2m ;
+			echo Execute done_issues.sh ${ISSUE} ;
+			# ; git commit --amend;
+		else echo ${GIT_MERGE_RETURN} ${GIT_MERGE} ;
+			git status ;
+		fi
 	fi
-
-else
-	echo Escreva o ID da tarefa do Redmine.
+else echo Escreva o ID da tarefa do Redmine. ;
 fi
 
-
-
+# /debug
+# set +xv
+# echo -e "\r"
 
 # .git/COMMIT_EDITMSG
 # .git/GITGUI_MSG
