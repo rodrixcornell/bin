@@ -5,8 +5,8 @@ cd $(pwd)
 #rm -rf composer.lock bower_components node_modules vendor
 #. resources/scripts/build.sh
 
-FRAMEWORK=$([[ $(cat .git/config 2>&- | grep -i :thupan) ]] && echo thupan || echo vo)
-PROJECT=$(cat .git/config 2>&- | grep -i :thupan | cut -d/ -f2 | cut -d. -f1)
+FRAMEWORK=$([[ $(cat .git/config 2>&- | grep -i thupan) ]] && echo thupan || echo vo)
+PROJECT=$(cat .git/config 2>&- | grep -i thupan | cut -d/ -f6 | cut -d. -f1)
 
 if [[ ${PROJECT} ]]; then
     #statements
@@ -38,6 +38,10 @@ sftp -prC deploy@${SERVER}<<EOF
 cd /var/www/thupan/${PROJECT}/
 mkdir vendor
 put -r vendor/
+mkdir node_modules
+put -r node_modules/
+mkdir bower_components
+put -r bower_components/
 pwd
 lpwd
 cd public/
@@ -54,3 +58,4 @@ EOF
     fi
 fi
 
+ssh deploy@${SERVER} "cd /var/www/thupan/${PROJECT}/ && node_modules/gulp/bin/./gulp.js"
