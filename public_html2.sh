@@ -96,10 +96,10 @@ then echo ok;
 	rm -rf ~/repos/*zip 2>&1
 	for i in $(ls -l | grep -i drwx | awk '{ print $9 }'); do
 		echo $(pwd)/$i;
-		echo "zip -9r $(date +%Y%m%d.%H%M%S.%N)_$i.zip $i";
-		zip -9r $(date +%Y%m%d.%H%M%S.%N)_$i.zip $i;
+		echo "zip -9r $(date +%Y%m%d-%H%M%S-%N)_${HOSTNAME}_$i.zip  $i";
+		zip -9r $(date +%Y%m%d-%H%M%S-%N)_${HOSTNAME}_$i.zip  $i;
 		# if [[ $i == 'vo' || $i == 'thupan' ]]; then
-		# 	zip -9r ~/repos/$(date +%Y%m%d.%H%M%S.%N)_$i.zip $i;
+		# 	zip -9r ~/repos/$(date +%Y%m%d-%H%M%S-%N)_${HOSTNAME}_$i.zip $i;
 		# fi
 	done
 
