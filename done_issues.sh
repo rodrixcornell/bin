@@ -204,9 +204,11 @@ post_issue ()
 		# 	if [ ${AMBIENTES[idx]} == 'Homologação' ]; then SUBJECT_TRACKER="Validar com Usuário"; TRACKER_ID=44; break; fi
 		# 	if [ ${AMBIENTES[idx]} == 'Teste' ]; then SUBJECT_TRACKER="Executar Teste"; TRACKER_ID=01; break; fi
 		# done
-
+		
+		AMBIENTE_DESCRICAO=$(cat ${TEMP}/${ISSUE}.json | jq '.issue.custom_fields[] | select(.id==21) | .value[]' | xargs -d'\n' | sed 's/\"//g')
+		
 		NEW_SUBJECT="${SUBJECT_TRACKER} - ${SUBJECT}"
-		echo '{"issue":{"project_id":'${PROJETC_ID}',"tracker_id":"'${TRACKER_ID}'","subject":"'${NEW_SUBJECT}'","description":"'${AUTHOR}'\n'${DESCRIPTION}'\n\n'${AUTHOR_PARENT}'\n\t'${DESCRIPTION_PARENT}'","status_id":1,"priority_id":'${PRIORITY_ID}',"assigned_to_id":9,"parent_issue_id":'${PARENT_ID}',"custom_fields":[{"id":27,"value":"'${BRANCH}'"},{"id":21,"value":['$(echo ${AMBIENTE} | sed 's/\ /\,/g')']},{"id":26,"value":"'${DATA}'"}]}}' > ${TEMP}/post.json
+		echo '{"issue":{"project_id":'${PROJETC_ID}',"tracker_id":"'${TRACKER_ID}'","subject":"'${NEW_SUBJECT}'","description":"Descrição da solicitação de deploy criada por '${AUTHOR}':\n'${DESCRIPTION}'\nAmbientes atualizados: '${AMBIENTE_DESCRICAO}'\n\nDescrição da tarefa atribuída ao programador criada por '${AUTHOR_PARENT}':\n\t'${DESCRIPTION_PARENT}'","status_id":1,"priority_id":'${PRIORITY_ID}',"assigned_to_id":9,"parent_issue_id":'${PARENT_ID}',"custom_fields":[{"id":27,"value":"'${BRANCH}'"},{"id":21,"value":['$(echo ${AMBIENTE} | sed 's/\ /\,/g')']},{"id":26,"value":"'${DATA}'"}]}}' > ${TEMP}/post.json
 		# echo '{"issue":{"project_id":'${PROJETC_ID}',"tracker_id":"'${TRACKER_ID}'","subject":"'${NEW_SUBJECT}'","description":"'${DESCRIPTION}'","status_id":1,"priority_id":'${PRIORITY_ID}',"assigned_to_id":9,"parent_issue_id":'${PARENT_ID}',"custom_fields":[{"id":27,"value":"'${BRANCH}'"},{"id":21,"value":['$(echo ${AMBIENTE} | sed 's/\ /\,/g')']},{"id":26,"value":"'${DATA}'"}],"watcher_user_ids":['${USER_ID}',15,16]}}' > ${TEMP}/post.json
 		cat -bs ${TEMP}/post.json
 
