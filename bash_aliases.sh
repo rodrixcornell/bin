@@ -191,6 +191,9 @@ alias tempo='curl -4 http://wttr.in/manaus?lang=pt'
 #alias composer='composer --prefer-dist -vvv --profile'
 alias composer='composer -vvv --profile'
 
+# Laravel 
+alias artisan='artisan -vvv'
+
 # KillAll
 alias kill_fox='killall firefox'
 alias kill_notes='killall xfce4-notes'
