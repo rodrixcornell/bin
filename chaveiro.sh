@@ -1,4 +1,4 @@
 #!/bin/bash
 
-gpg --keyserver pgpkeys.mit.edu --recv-key $1
-gpg -a --export $1 | apt-key add -
+sudo -E gpg --keyserver pgpkeys.mit.edu --recv-key $1
+sudo -E gpg -a --export $1 | sudo -E apt-key add -
