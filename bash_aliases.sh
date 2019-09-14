@@ -155,6 +155,7 @@ alias mscode='code --log debug --disable-gpu -nra . '
 alias vscode='code --log debug --disable-gpu -nra . '
 
 alias rar_m5='rar a -m5 -idp -y'
+alias chromium-browser-proxy='chromium-browser --proxy-server='$(echo $http_proxy | sed 's/http:\/\///;s/\///')
 alias chrome-beta-incognito-proxy='google-chrome-beta --incognito --proxy-server="http=172.19.10.1:3128"'
 alias chrome-beta-proxy='google-chrome-beta --proxy-server="http=172.19.10.1:3128"'
 alias youtube-dl-proxy='youtube-dl --proxy "http://172.19.10.20:3128/"'
@@ -182,6 +183,7 @@ alias icanhazip.com='curl icanhazip.com'
 alias ident.me='curl ident.me'
 #curl v4.ident.me
 #curl v6.ident.me
+alias ip='ip -c'
 
 # Previsão do tempo
 # curl wttr.in/:help
@@ -191,7 +193,7 @@ alias tempo='curl -4 http://wttr.in/manaus?lang=pt'
 #alias composer='composer --prefer-dist -vvv --profile'
 alias composer='composer -vvv --profile'
 
-# Laravel 
+# Laravel
 alias artisan='artisan -vvv'
 
 # KillAll
