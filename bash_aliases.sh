@@ -150,9 +150,10 @@ alias gitkraken='gitkraken -np . '
 #alias pull_push='git pull; git push'
 #complete -o bashdefault -o default -o nospace -F _git
 
-alias sublime='subl -np . '
-alias mscode='code --log debug --disable-gpu -nra . '
-alias vscode='code --log debug --disable-gpu -nra . '
+alias sublime_new='subl -n'
+alias sublime='subl -aw . '
+alias mscode='code --log debug --disable-gpu -wnra . '
+alias vscode='code --log -wnra . '
 
 alias rar_m5='rar a -m5 -idp -y'
 alias chromium-browser-proxy='chromium-browser --proxy-server='$(echo $http_proxy | sed 's/http:\/\///;s/\///')
@@ -200,4 +201,5 @@ alias artisan='artisan -vvv'
 alias kill_fox='killall firefox'
 alias kill_notes='killall xfce4-notes'
 alias kill_dropbox='killall dropbox'
+alias kill_chrome='killall chrome'
 
