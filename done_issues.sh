@@ -87,7 +87,7 @@ get_user ()
 	# sleep 5
 
 
-	curl -# "https://${URL}.manaus.am.gov.br/users/current.json?include=${INCLUDE_USERS}" -u ${LOGIN}:${PASSWORD} > ${TEMP}/${LOGIN}.json
+	curl -k -# "https://${URL}.manaus.am.gov.br/users/current.json?include=${INCLUDE_USERS}" -u ${LOGIN}:${PASSWORD} > ${TEMP}/${LOGIN}.json
 	# cat -bs ${TEMP}/${LOGIN}.json
 	if [ ! "$(cat ${TEMP}/${LOGIN}.json)" ]; then
 		echo "Usuário ou Senha Errado!\n"
@@ -104,7 +104,7 @@ get_user ()
 
 get_issue ()
 {
-	curl -# "https://${URL}.manaus.am.gov.br/issues/${ISSUE}.json?include=${INCLUDE_ISSUES}" -H "X-Redmine-API-Key: ${API_KEY_REDMINE}" > ${TEMP}/${ISSUE}.json
+	curl -k -# "https://${URL}.manaus.am.gov.br/issues/${ISSUE}.json?include=${INCLUDE_ISSUES}" -H "X-Redmine-API-Key: ${API_KEY_REDMINE}" > ${TEMP}/${ISSUE}.json
 	# cat -bs ${TEMP}/${ISSUE}.json
 
 	ISSUE_ID=$(cat ${TEMP}/${ISSUE}.json | jq '.issue.id')
@@ -135,7 +135,7 @@ get_issue ()
 
 get_parent_task ()
 {
-	curl -# "https://${URL}.manaus.am.gov.br/issues/${PARENT_ID}.json?include=${INCLUDE_ISSUES}" -H "X-Redmine-API-Key: ${API_KEY_REDMINE}" > ${TEMP}/${PARENT_ID}.json
+	curl -k -# "https://${URL}.manaus.am.gov.br/issues/${PARENT_ID}.json?include=${INCLUDE_ISSUES}" -H "X-Redmine-API-Key: ${API_KEY_REDMINE}" > ${TEMP}/${PARENT_ID}.json
 	# cat -bs ${TEMP}/${PARENT_ID}.json
 
 	SUBJECT=$(cat ${TEMP}/${PARENT_ID}.json | jq '.issue.subject' | sed 's/\"//g')
@@ -155,20 +155,20 @@ gitgui_msg ()
 
 put_issue ()
 {
-	curl -# "https://${URL}.manaus.am.gov.br/sys/fetch_changesets?key=8aMjkoLLk40jTBaSTOai"
+	curl -k -# "https://${URL}.manaus.am.gov.br/sys/fetch_changesets?key=8aMjkoLLk40jTBaSTOai"
 
-	curl -# "https://${URL}.manaus.am.gov.br/issues/${ISSUE}/watchers.json?user_id=${USER_ID}" -H "X-Redmine-API-Key: ${API_KEY_REDMINE}" -H "Content-Type: application/json" -X POST
-	curl -# "https://${URL}.manaus.am.gov.br/issues/${ISSUE}/watchers.json?user_id=3" -H "X-Redmine-API-Key: ${API_KEY_REDMINE}" -H "Content-Type: application/json" -X POST
-	curl -# "https://${URL}.manaus.am.gov.br/issues/${ISSUE}/watchers.json?user_id=15" -H "X-Redmine-API-Key: ${API_KEY_REDMINE}" -H "Content-Type: application/json" -X POST
-	curl -# "https://${URL}.manaus.am.gov.br/issues/${ISSUE}/watchers.json?user_id=18" -H "X-Redmine-API-Key: ${API_KEY_REDMINE}" -H "Content-Type: application/json" -X POST
-	curl -# "https://${URL}.manaus.am.gov.br/issues/${ISSUE}/watchers.json?user_id=25" -H "X-Redmine-API-Key: ${API_KEY_REDMINE}" -H "Content-Type: application/json" -X POST
-	curl -# "https://${URL}.manaus.am.gov.br/issues/${ISSUE}/watchers.json?user_id=77" -H "X-Redmine-API-Key: ${API_KEY_REDMINE}" -H "Content-Type: application/json" -X POST
+	curl -k -# "https://${URL}.manaus.am.gov.br/issues/${ISSUE}/watchers.json?user_id=${USER_ID}" -H "X-Redmine-API-Key: ${API_KEY_REDMINE}" -H "Content-Type: application/json" -X POST
+	curl -k -# "https://${URL}.manaus.am.gov.br/issues/${ISSUE}/watchers.json?user_id=3" -H "X-Redmine-API-Key: ${API_KEY_REDMINE}" -H "Content-Type: application/json" -X POST
+	curl -k -# "https://${URL}.manaus.am.gov.br/issues/${ISSUE}/watchers.json?user_id=15" -H "X-Redmine-API-Key: ${API_KEY_REDMINE}" -H "Content-Type: application/json" -X POST
+	curl -k -# "https://${URL}.manaus.am.gov.br/issues/${ISSUE}/watchers.json?user_id=18" -H "X-Redmine-API-Key: ${API_KEY_REDMINE}" -H "Content-Type: application/json" -X POST
+	curl -k -# "https://${URL}.manaus.am.gov.br/issues/${ISSUE}/watchers.json?user_id=25" -H "X-Redmine-API-Key: ${API_KEY_REDMINE}" -H "Content-Type: application/json" -X POST
+	curl -k -# "https://${URL}.manaus.am.gov.br/issues/${ISSUE}/watchers.json?user_id=77" -H "X-Redmine-API-Key: ${API_KEY_REDMINE}" -H "Content-Type: application/json" -X POST
 
 	# echo '{"issue":{"description":"'${NEW_DESCRIPTION}'","status_id":3,"assigned_to_id":'${USER_ID}',"notes":"Finalizado Merge do Branch '${BRANCH}'\r\n'${DATA_HORA}'","done_ratio":100,"due_date":"'${DATA}'","custom_fields":[{"id":24,"value":"'${DATA}'"}]}}' > ${TEMP}/${ISSUE}_put.json
 	echo '{"issue":{"status_id":3,"assigned_to_id":'${USER_ID}',"notes":"Finalizado Merge do Branch '${BRANCH}'\r\n'${DATA_HORA}'","done_ratio":100,"due_date":"'${DATA}'","custom_fields":[{"id":24,"value":"'${DATA}'"}]}}' > ${TEMP}/${ISSUE}_put.json
 	# cat -bs ${TEMP}/${ISSUE}_put.json
 
-	curl -# "https://${URL}.manaus.am.gov.br/issues/${ISSUE}.json" -H "X-Redmine-API-Key: ${API_KEY_REDMINE}" -H "Content-Type: application/json" -X PUT --data-binary @${TEMP}/${ISSUE}_put.json > ${TEMP}/${ISSUE}_put2.json
+	curl -k -# "https://${URL}.manaus.am.gov.br/issues/${ISSUE}.json" -H "X-Redmine-API-Key: ${API_KEY_REDMINE}" -H "Content-Type: application/json" -X PUT --data-binary @${TEMP}/${ISSUE}_put.json > ${TEMP}/${ISSUE}_put2.json
 	# cat -bs ${TEMP}/${ISSUE}_put2.json
 }
 
@@ -204,16 +204,16 @@ post_issue ()
 		# 	if [ ${AMBIENTES[idx]} == 'Homologação' ]; then SUBJECT_TRACKER="Validar com Usuário"; TRACKER_ID=44; break; fi
 		# 	if [ ${AMBIENTES[idx]} == 'Teste' ]; then SUBJECT_TRACKER="Executar Teste"; TRACKER_ID=01; break; fi
 		# done
-		
+
 		AMBIENTE_DESCRICAO=$(cat ${TEMP}/${ISSUE}.json | jq '.issue.custom_fields[] | select(.id==21) | .value[]' | xargs -d'\n' | sed 's/\"//g')
-		
+
 		NEW_SUBJECT="${SUBJECT_TRACKER} - ${SUBJECT}"
 		echo '{"issue":{"project_id":'${PROJETC_ID}',"tracker_id":"'${TRACKER_ID}'","subject":"'${NEW_SUBJECT}'","description":"Descrição da solicitação de deploy criada por '${AUTHOR}':\n<pre>'${DESCRIPTION}'</pre>\nAmbientes atualizados: '${AMBIENTE_DESCRICAO}'\n\nDescrição da tarefa atribuída ao programador criada por '${AUTHOR_PARENT}':\n<pre>'${DESCRIPTION_PARENT}'</pre>","status_id":1,"priority_id":'${PRIORITY_ID}',"assigned_to_id":9,"parent_issue_id":'${PARENT_ID}',"custom_fields":[{"id":27,"value":"'${BRANCH}'"},{"id":21,"value":['$(echo ${AMBIENTE} | sed 's/\ /\,/g')']},{"id":26,"value":"'${DATA}'"}]}}' > ${TEMP}/post.json
 		# echo '{"issue":{"project_id":'${PROJETC_ID}',"tracker_id":"'${TRACKER_ID}'","subject":"'${NEW_SUBJECT}'","description":"'${DESCRIPTION}'","status_id":1,"priority_id":'${PRIORITY_ID}',"assigned_to_id":9,"parent_issue_id":'${PARENT_ID}',"custom_fields":[{"id":27,"value":"'${BRANCH}'"},{"id":21,"value":['$(echo ${AMBIENTE} | sed 's/\ /\,/g')']},{"id":26,"value":"'${DATA}'"}],"watcher_user_ids":['${USER_ID}',15,16]}}' > ${TEMP}/post.json
 		cat -bs ${TEMP}/post.json
 
-		echo -e "curl \"https://${URL}.manaus.am.gov.br/issues.json\" -H \"X-Redmine-API-Key: ${API_KEY_REDMINE}\" -H \"Content-Type: application/json\" -X POST --data-binary @${TEMP}/post.json"
-		POST=$(curl -# "https://${URL}.manaus.am.gov.br/issues.json" -H "X-Redmine-API-Key: ${API_KEY_REDMINE}" -H "Content-Type: application/json" -X POST --data-binary @${TEMP}/post.json)
+		echo -e "curl -k \"https://${URL}.manaus.am.gov.br/issues.json\" -H \"X-Redmine-API-Key: ${API_KEY_REDMINE}\" -H \"Content-Type: application/json\" -X POST --data-binary @${TEMP}/post.json"
+		POST=$(curl -k -# "https://${URL}.manaus.am.gov.br/issues.json" -H "X-Redmine-API-Key: ${API_KEY_REDMINE}" -H "Content-Type: application/json" -X POST --data-binary @${TEMP}/post.json)
 		NEW_ISSUE_ID=$(echo ${POST} | jq '.issue.id')
 		echo ${POST} | jq '.issue.id'
 		echo "https://${URL}.manaus.am.gov.br/issues/${NEW_ISSUE_ID}"
