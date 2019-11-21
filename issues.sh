@@ -1,6 +1,6 @@
 #!/bin/bash
 # -vx
-#
+# {"issues":[],"total_count":0,"offset":0,"limit":25}
 # {"array":[1,2,3],"boolean":true,"null":null,"number":123,"object":{"a":"b","c":"d","e":"f"},"string":"Hello World"}
 #
 umask 077
