@@ -146,7 +146,7 @@ alias grive-u='grive -uVP -l ~/.grive-last-sync.log'
 ### Git
 alias g=git
 alias gk=gitk
-alias gitkraken='gitkraken -np . '
+alias gitkraken='gitkraken -p .'
 #alias pull_push='git pull; git push'
 #complete -o bashdefault -o default -o nospace -F _git
 
