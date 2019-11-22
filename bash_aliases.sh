@@ -84,8 +84,8 @@ alias ati_adapters='aticonfig --lsa'
 alias thermal-ati='echo; sensors; hddtemp /dev/sda; echo; aticonfig --odgt'
 alias thermal2='echo; sensors; hddtemp /dev/sda; hddtemp /dev/sdb; echo'
 alias thermal='echo; sensors; hddtemp /dev/sda; echo'
-alias nano='nano -cimwT 4'
-alias nano_su='sudo nano -cimwT 4'
+alias nano='nano -cimwT4'
+alias nano_su='sudo nano -cimwT4'
 alias find_su='sudo find'
 alias mousepad_su='sudo mousepad'
 
@@ -150,15 +150,17 @@ alias gitkraken='gitkraken -p .'
 #alias pull_push='git pull; git push'
 #complete -o bashdefault -o default -o nospace -F _git
 
-alias sublime_new='subl -n'
 alias sublime='subl -aw . '
+alias sublime_new='subl -naw . '
 alias mscode='code --log debug --disable-gpu -wnra . '
 alias vscode='code --log -wnra . '
 
 alias rar_m5='rar a -m5 -idp -y'
+
 alias chromium-browser-proxy='chromium-browser --proxy-server='$(echo $http_proxy | sed 's/http:\/\///;s/\///')
-alias chrome-beta-incognito-proxy='google-chrome-beta --incognito --proxy-server="http=172.19.10.1:3128"'
-alias chrome-beta-proxy='google-chrome-beta --proxy-server="http=172.19.10.1:3128"'
+alias chrome-incognito-proxy='google-chrome --incognito --proxy-auto-detect'
+alias chrome-proxy='google-chrome --proxy-auto-detect'
+
 alias youtube-dl-proxy='youtube-dl --proxy "http://172.19.10.20:3128/"'
 alias youtube-dl-list='youtube-dl -a'
 
