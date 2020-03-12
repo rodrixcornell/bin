@@ -150,10 +150,10 @@ alias gitkraken='gitkraken -p .'
 #alias pull_push='git pull; git push'
 #complete -o bashdefault -o default -o nospace -F _git
 
-alias sublime='subl -aw . '
-alias sublime_new='subl -naw . '
-alias mscode='code --log debug --disable-gpu -wnra . '
-alias vscode='code --log -wnra . '
+alias sublime='subl -anw . '
+alias sublime_new='subl -anw . '
+alias mscode='code --log debug --disable-gpu -anrw . '
+alias vscode='code --log -anrw . '
 
 alias rar_m5='rar a -m5 -idp -y'
 
