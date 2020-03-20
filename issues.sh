@@ -208,7 +208,7 @@ pull_branch ()
 gitgui_msg ()
 {
 	echo -e "Merge branch ${BRANCH} into ${GIT_BRANCH}\r\nDeploy #${ISSUE_ID} @15m\n\nTarefa pai Refs #${PARENT_ID}\nAdicionado por ${AUTHOR}\nBranch: ${BRANCH}\nExecutar Teste? $(if [[ ${TESTAR} == 1 ]]; then echo Sim; else echo Não; fi)\nAmbiente: $(echo ${AMBIENTE} | sed 's/\ /\, /g')\n\nAplicado no conjunto de alterações\n${PARENT_HASH}\n\n<pre>\n$(cat .git/FILE_CHANGED)\n</pre>\n\nCriado: ${CREATED_ON}\nAtualizado: ${UPDATED_ON}\nFechado: ${CLOSED_ON}\n\nSigned-off-by: ${ASSIGNED_TO} <${MAIL}>" > .git/GITGUI_MSG
-	# MERGE_MSG=$(echo -e "\rMerge branch ${BRANCH} into ${GIT_BRANCH}\r\nDeploy #${ISSUE_ID} @20m\n\r\nTarefa pai Refs #${PARENT_ID}\r\nAdicionado por ${AUTHOR}\r\nBranch: ${BRANCH}\r\nExecutar Teste? $(if [[ ${TESTAR} == 1 ]]; then echo Sim; else echo Não; fi)\r\nAmbiente: $(echo ${AMBIENTE} | sed 's/\ /\, /g')\n\r\nCriado: ${CREATED_ON}\r\nAtualizado: ${UPDATED_ON}\r\nFechado: ${CLOSED_ON}\n\r\nSigned-off-by: ${ASSIGNED_TO} <${MAIL}>")
+	# MERGE_MSG=$(echo -e "\rMerge branch ${BRANCH} into ${GIT_BRANCH}\r\nDeploy #${ISSUE_ID} @20m\n\r\nTarefa pai Refs #${PARENT_ID}\r\nAdicionado por ${AUTHOR}\r\nBranch: ${BRANCH}\r\nExecutar Teste? $(if [[ ${TESTAR} == 1 ]]; then echo Sim; else echo Não; fi)\r\nAmbiente: $(echo ${AMBIENTE} | sed 's/\ /\, /g')\n\r\nCriado: ${CREATED_ON}\r\nAtualizado: ${UPDATED_ON}\r\nFechado: ${CLOSED_ON}\n\r\n${ASSIGNED_TO} <${MAIL}>")
 	# echo ${MERGE_MSG} > .git/GITGUI_MSG
 
 	cat .git/GITGUI_MSG
