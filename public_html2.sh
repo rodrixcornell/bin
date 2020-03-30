@@ -1,5 +1,7 @@
 #!/bin/bash
 
+sudo -E mount /dev/sdb2 /media/rodrigocabral/xt-linux -t ext3 -o nosuid,nodev,nofail,x-gvfs-show
+
 # ssh-keygen -t rsa -b 4096 -C $(users)@$(hostname).manaus.am.gov.br
 # echo $(users)_$(hostname)
 # ssh git@git 2>&- | column -tx | sed 's/\//\t/g' | awk '{ if ($2 == "vo" || $2 == "thupan") print $2"/"$3; }' > /tmp/log_$(date +%Y%m%d.%H%M%S.%N)
@@ -107,3 +109,4 @@ then echo ok;
 	cd ~
 	#rm -rf ~/repos 2>&1
 fi
+
