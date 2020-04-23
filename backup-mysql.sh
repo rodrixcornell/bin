@@ -23,8 +23,8 @@ for host in $hosts; do
   rm -rf ${targetDir}/${host}/* 2>&1
   for banco in $bancos; do
     echo Backup Atual: $banco
-    mysqldump --host=${host} --port=3306 --user=root --password=4dm1n53m4d --protocol=tcp --default-character-set=utf8 --single-transaction=TRUE --routines --events --comments --no-data ${banco} > ${targetDir}/${host}/${banco}-${dia}-structure.sql
-    mysqldump --host=${host} --port=3306 --user=root --password=4dm1n53m4d --protocol=tcp --default-character-set=utf8 --single-transaction=TRUE --routines --events --comments --no-create-info=TRUE ${banco} > ${targetDir}/${host}/${banco}-${dia}-data.sql
+    mysqldump --host=${host} --port=3306 --user=root --password=4dm1n53m4d --protocol=tcp --default-character-set=utf8 --single-transaction=TRUE --routines --events --comments --no-data ${banco} > ${targetDir}/${host}/${banco}-${dia}-00-structure.sql
+    mysqldump --host=${host} --port=3306 --user=root --password=4dm1n53m4d --protocol=tcp --default-character-set=utf8 --single-transaction=TRUE --routines --events --comments --no-create-info=TRUE ${banco} > ${targetDir}/${host}/${banco}-${dia}-01-data.sql
   #  tar czvf ${targetDir}/${host}-${banco}-${dia}.tgz ${targetDir}/${host}-${banco}-${dia}.sql
     gzip -v9f ${targetDir}/${host}/${banco}-${dia}*.sql
   #  rm -f ${targetDir}/${host}-${banco}-${dia}.sql

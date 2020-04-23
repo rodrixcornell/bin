@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sudo -E mount /dev/sdb2 /media/rodrigocabral/xt-linux -t ext3 -o nosuid,nodev,nofail,x-gvfs-show
+#sudo -E mount /dev/sdb2 /media/rodrigocabral/xt-linux -t ext3 -o nosuid,nodev,nofail,x-gvfs-show
 
 # ssh-keygen -t rsa -b 4096 -C $(users)@$(hostname).manaus.am.gov.br
 # echo $(users)_$(hostname)
