@@ -16,7 +16,7 @@ alias apttualiza='sudo apt update && sudo apt upgrade'
 alias aptpesquisa='sudo apt search'
 alias aptlimpa='sudo apt-get -y autoremove && sudo apt-get -y autoclean'
 alias apt-f-limpa='sudo rm /var/lib/apt/lists/* ; sudo rm /var/lib/apt/lists/partial/* ; sudo apt-get -f install ; sudo apt-get clean ; sudo apt update'
-alias apt-f='sudo apt-get -f install ; sudo apt-get clean ; sudo apt update'
+alias apt-f='sudo apt-get -f install ; sudo apt-get clean ; sudo apt update ; sudo apt list --upgradable'
 
 #alias nautilusQuit='nautilus -q; nautilus -q'
 
@@ -94,8 +94,10 @@ alias hell_reboot='sudo init 6'
 alias desligar='sudo halt'
 alias reiniciar='sudo reboot'
 
+alias sudo='sudo -E'
 #alias ll='clear && ls -alhF'
 alias ll='ls -alhF'
+alias ll_su='sudo ls -alhF'
 alias la='ls -A'
 alias l='ls -CF'
 alias cls='clear'
@@ -205,3 +207,5 @@ alias kill_notes='killall xfce4-notes'
 alias kill_dropbox='killall dropbox'
 alias kill_chrome='killall chrome'
 
+# Docker & Podman
+#alias docker=podman
