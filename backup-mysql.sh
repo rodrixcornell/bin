@@ -14,7 +14,9 @@ hosts='cubatao divisa jaragua ararangua'
 for host in $hosts; do
   mkdir -p ${targetDir}/${host}
   # mysql --host=cubatao --port=3306 --user=root --password=4dm1n53m4d -e 'show databases' > /tmp/${databaseFilename}
-  mysql --host=${host} --port=3306 --user=root --password=4dm1n53m4d -e 'show databases' > /tmp/${host}-${dia}
+  # mysql --host=${host} --port=3306 --user=root --password=4dm1n53m4d -e 'show databases' > /tmp/${host}-${dia}
+  # mysql --host=${host} --port=3306 --user=root --password=4dm1n53m4d -e 'show SCHEMAS' > /tmp/${host}-${dia}
+  mysql --host=${host} --port=3306 --user=root --password=4dm1n53m4d -e 'SELECT schema_name FROM information_schema.schemata order by schema_name desc' > /tmp/${host}-${dia}
   # bancos=`tail -n +2 /tmp/${databaseFilename} | grep -v information_schema | grep -v mysql | grep -v performance_schema | grep -v sys`
   # bancos=`tail -n +2 /tmp/${host}-${dia} | grep -v information_schema | grep -v mysql | grep -v performance_schema | grep -v sys`
   bancos=`tail -n +2 /tmp/${host}-${dia} | grep -v information_schema | grep -v performance_schema | grep -v sys`
