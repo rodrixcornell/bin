@@ -11,7 +11,9 @@ dia=`date +%Y%m%d`
 #echo $deleteOldfiles
 
 hosts='cubatao divisa jaragua ararangua'
-hosts='jaragua'
+hosts='ararangua'
+#hosts='cubatao divisa jaragua'
+#hosts='jaragua'
 for host in $hosts; do
   mkdir -p ${targetDir}/${host}
   # mysql --host=cubatao --port=3306 --user=root --password=4dm1n53m4d -e 'show databases' > /tmp/${databaseFilename}
