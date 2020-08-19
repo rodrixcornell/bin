@@ -195,8 +195,9 @@ alias ip='ip -c'
 alias tempo='curl -4 http://wttr.in/manaus?lang=pt'
 
 # Composer
+alias composer-nocache='composer --verbose --no-cache --profile'
+alias composer='composer --verbose --profile'
 #alias composer='composer --prefer-dist -vvv --profile'
-alias composer='composer -vvv --profile'
 
 # Laravel
 alias artisan='artisan -vvv'
