@@ -153,6 +153,7 @@ alias gitkraken='gitkraken -p .'
 #complete -o bashdefault -o default -o nospace -F _git
 
 alias sublime='subl -naw .'
+alias text-sublime='subl -naw .'
 alias merge-sublime='sublime_merge -n .'
 alias mscode='code --log debug --disable-gpu -nawr . '
 alias vscode='code --log -nawr . '
