@@ -11,3 +11,7 @@ sudo -E rm -rf /etc/apt/apt.conf
 
 sudo -E rm -rf /etc/profile.d/proxy.sh
 
+sudo -E rm -rf /etc/systemd/system/docker.service.d
+sudo -E systemctl daemon-reload
+sudo -E systemctl restart docker
+sudo -E systemctl show --property Environment docker

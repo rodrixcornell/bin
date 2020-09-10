@@ -21,3 +21,13 @@ export {https,http,ftp,socks,all}_proxy=\"${http_proxy}\"
 " | sudo -E tee /etc/profile.d/proxy.sh ; source /etc/profile.d/proxy.sh
 
 source /etc/profile.d/proxy.sh
+
+sudo -E mkdir -p /etc/systemd/system/docker.service.d
+echo '[Service]
+Environment="HTTP_PROXY='$http_proxy'"
+Environment="HTTPS_PROXY='$https_proxy'"
+Environment="NO_PROXY='$no_proxy'"
+' | sudo -E tee /etc/systemd/system/docker.service.d/http_proxy.conf
+sudo -E systemctl daemon-reload
+sudo -E systemctl restart docker
+sudo -E systemctl show --property Environment docker
