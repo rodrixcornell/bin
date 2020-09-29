@@ -1,4 +1,4 @@
-#!/bin/sh
+#!//usr/bin/env bash
 # remontti.com.br
 PATH="/bin:/usr/bin:/usr/local/bin"
 
