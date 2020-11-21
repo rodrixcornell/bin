@@ -1,4 +1,4 @@
 #!/bin/bash
 
-dropbox status
+while true; do dropbox status; sleep 2s; clear; done
 

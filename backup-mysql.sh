@@ -12,7 +12,7 @@ dia=`date +%Y%m%d`
 
 hosts='cubatao divisa jaragua ararangua'
 hosts='ararangua'
-hosts='cubatao divisa jaragua'
+#hosts='cubatao divisa jaragua'
 #hosts='jaragua'
 for host in $hosts; do
   mkdir -p ${targetDir}/${host}
