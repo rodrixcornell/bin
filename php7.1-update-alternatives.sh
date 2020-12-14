@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-PHP_VERSION_MIN=7.3
+PHP_VERSION_MIN=7.1
 
 if [ $(lsb_release -si) = Ubuntu ];
 	then echo -e $(lsb_release -si)
