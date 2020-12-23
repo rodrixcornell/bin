@@ -20,3 +20,18 @@ sudo -E rm -rf /etc/systemd/system/docker.service.d
 sudo -E systemctl daemon-reload
 sudo -E systemctl restart docker
 # sudo -E systemctl show --property Environment docker
+
+
+echo -e "write-out=\\\n" | tee ~/.curlrc
+
+echo -e "continue = on
+tries = 0
+server-response = on
+localencoding = UTF-8
+remoteencoding = UTF-8" | tee ~/.wgetrc
+
+npm config delete https-proxy
+npm config delete http-proxy
+npm config delete ftp-proxy
+npm config delete proxy
+cat ~/.npmrc
