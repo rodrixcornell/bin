@@ -21,7 +21,8 @@ TEMP="/tmp/.${USER}"
 
 # URL=parnamirim
 # URL=pericuma
-URL=carius
+# URL=carius
+URL=redmine-dsti
 INCLUDE_USERS=memberships,groups
 INCLUDE_ISSUES=journals,children,relations,attachments,changesets,watchers
 INCLUDE_PROJECTS=trackers,issue_categories,enabled_modules
