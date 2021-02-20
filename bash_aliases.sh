@@ -84,8 +84,8 @@ alias ati_adapters='aticonfig --lsa'
 alias thermal-ati='echo; sensors; hddtemp /dev/sda; echo; aticonfig --odgt'
 alias thermal2='echo; sensors; hddtemp /dev/sda; hddtemp /dev/sdb; echo'
 alias thermal='echo; sensors; hddtemp /dev/sda; echo'
-alias nano='nano -cimwT4'
-alias nano_su='sudo nano -cimwT4'
+#alias nano='nano -cimwT4'
+#alias nano_su='sudo nano -cimwT4'
 alias find_su='sudo find'
 alias mousepad_su='sudo mousepad'
 
@@ -152,11 +152,11 @@ alias gitkraken='gitkraken -p .'
 #alias pull_push='git pull; git push'
 #complete -o bashdefault -o default -o nospace -F _git
 
-alias sublime='subl -naw .'
-alias text-sublime='subl -naw .'
-alias merge-sublime='sublime_merge -n .'
-alias mscode='code --log debug --disable-gpu -nawr . '
-alias vscode='code --log -nawr . '
+alias sublime='subl -nw .'
+alias text-sublime='sublime_text --new-window --wait .'
+alias merge-sublime='sublime_merge --launch-or-new-window .'
+alias mscode='code --log debug --disable-gpu -nwr . '
+alias vscode='code --log -nwr . '
 
 alias rar_m5='rar a -m5 -idp -y'
 
