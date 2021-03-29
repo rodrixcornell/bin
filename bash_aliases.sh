@@ -86,6 +86,7 @@ alias thermal2='echo; sensors; hddtemp /dev/sda; hddtemp /dev/sdb; echo'
 alias thermal='echo; sensors; hddtemp /dev/sda; echo'
 #alias nano='nano -cimwT4'
 #alias nano_su='sudo nano -cimwT4'
+alias nano_su='sudo -E nano'
 alias find_su='sudo find'
 alias mousepad_su='sudo mousepad'
 

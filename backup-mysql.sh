@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # set -xv
-targetDir=~/dumps
+targetDir=~/dumps/MySQL
 dia=`date +%Y%m%d`
 
 #Delete old files?
