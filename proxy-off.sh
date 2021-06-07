@@ -3,8 +3,8 @@
 echo "Hello World!!!";
 echo "Proxy Off!!!";
 
+export no_proxy="localhost,10.0.0.0/8,127.0.0.0/8,172.16.0.0/12,192.168.0.0/16,169.254.0.0/16,*.dsis-1265071,*.pmm,*.manaus.am.gov.br"
 export {https,http,ftp,socks,all}_proxy=""
-export no_proxy="localhost, 0.0.0.0, 10.0.0.0/8, 127.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16"
 unset {https,http,ftp,socks,all,no}_proxy
 
 git config --global --unset https.proxy

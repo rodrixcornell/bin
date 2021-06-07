@@ -50,6 +50,10 @@ alias wlan1_speed='speedometer -tx wlan1 -rx wlan1'
 alias wlan2_speed='speedometer -tx wlan2 -rx wlan2'
 alias wlp3s0_speed='speedometer -tx wlp3s0 -rx wlp3s0'
 
+alias enp1s0f0_tcptrack='sudo -E tcptrack -i enp1s0f0 -p'
+alias enp1s0f0_iftop='sudo -E iftop -i enp1s0f0 -nPp'
+alias enp1s0f0_speed='speedometer -tx enp1s0f0 -rx enp1s0f0'
+
 alias pkill='sudo pkill -9'
 
 #sudo t50 --flood --turbo -S  172.19.10.15 --dport=445

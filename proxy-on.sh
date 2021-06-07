@@ -3,11 +3,11 @@
 echo "Hello World!!!";
 echo "Proxy On!!!";
 
-export {https,http,ftp,socks,all}_proxy="http://172.19.10.1:3128"
+export no_proxy="localhost,10.0.0.0/8,127.0.0.0/8,172.16.0.0/12,192.168.0.0/16,169.254.0.0/16,*.dsis-1265071,*.pmm,*.manaus.am.gov.br,*backend,*database"
+export {https,http,ftp,socks,all}_proxy="http://172.18.1.101:3128"
 #export {https,http,ftp,socks,all}_proxy="http://172.19.5.1:3128/"
-#export no_proxy="localhost,0.0.0.0,10.0.0.0/8,127.0.0.0/8,172.16.0.0/12,192.168.0.0/16,*.manaus.am.gov.br"
-export no_proxy="localhost,10.0.0.0/8,127.0.0.0/8,172.16.0.0/12,192.168.0.0/16"
 
+git config --global url."https://github.com/".insteadOf git://github.com/
 git config --global https.proxy "${http_proxy}"
 git config --global https.sslVerify false
 git config --global http.proxy "${http_proxy}"
