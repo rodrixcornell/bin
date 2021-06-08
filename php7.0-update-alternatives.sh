@@ -21,7 +21,7 @@ if command -v php${PHP_VERSION_MIN} > /dev/null; then
 	echo "Detected php${PHP_VERSION_MIN}..."
 else
 	echo "Installing php${PHP_VERSION_MIN}..."
-	sudo -E apt install -q -y php${PHP_VERSION_MIN}-{cli,dev,mbstring,sqlite,xml} && \
+	sudo -E apt install -q -y php${PHP_VERSION_MIN}-{cli,dev,mbstring,mysql,sqlite*,xml} && \
 	sudo -E apt autoclean -y && \
 	sudo -E apt autoremove -y
 fi
