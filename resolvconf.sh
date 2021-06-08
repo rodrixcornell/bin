@@ -37,10 +37,10 @@ nameserver 2804:10:10::20
 ###
 # Net & Claro
 #
-nameserver 181.213.132.2
-nameserver 181.213.132.3
-nameserver 2804:14d:1:0:181:213:132:2
+#nameserver 181.213.132.2
+#nameserver 181.213.132.3
+#nameserver 2804:14d:1:0:181:213:132:2
 # Too many DNS servers configured, the following entries may be ignored.
-nameserver 2804:14d:1:0:181:213:132:3
+#nameserver 2804:14d:1:0:181:213:132:3
 "; \
 } | sudo -E tee /etc/resolv.conf
